@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS Audit - PRS Iceland</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <style>
+        body {
+            background: #1a1a1a;
+            color: #fff;
+            font-family: monospace;
+            padding: 2rem;
+        }
+        .audit-section {
+            margin: 2rem 0;
+            padding: 1rem;
+            border: 1px solid #444;
+            background: #2a2a2a;
+        }
+        .audit-section h3 {
+            margin-top: 0;
+            color: #4A5F4E;
+        }
+        .css-var {
+            display: inline-block;
+            margin: 0.25rem;
+            padding: 0.25rem 0.5rem;
+            background: #333;
+            border-radius: 3px;
+            font-size: 0.875rem;
+        }
+        .duplicate {
+            background: #B91C1C;
+            color: white;
+        }
+        pre {
+            overflow-x: auto;
+            background: #1a1a1a;
+            padding: 1rem;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>CSS Audit Report - PRS Iceland</h1>
+    <div id="audit-date"></div>
+    
+    <div class="audit-section">
+        <h3>Loaded Stylesheets</h3>
+        <div id="stylesheet-list"></div>
+    </div>
+    
+    <div class="audit-section">
+        <h3>CSS Variables Analysis</h3>
+        <div id="css-variables"></div>
+    </div>
+    
+    <div class="audit-section">
+        <h3>Color Usage</h3>
+        <div id="color-analysis"></div>
+    </div>
+    
+    <div class="audit-section">
+        <h3>Duplicate Selectors</h3>
+        <div id="duplicate-selectors"></div>
+    </div>
+    
+    <script>
+        // Set audit date
+        document.getElementById('audit-date').textContent = `Audit Date: ${new Date().toLocaleString()}`;
+        
+        // Analyze loaded stylesheets
+        const sheets = [...document.styleSheets];
+        const sheetInfo = sheets.map((sheet, idx) => {
+            try {
+                const href = sheet.href || 'Inline Styles';
+                const rules = sheet.cssRules ? sheet.cssRules.length : 0;
+                return `${idx + 1}. ${href.split('/').pop()} - ${rules} rules`;
+            } catch(e) {
+                return `${idx + 1}. ${sheet.href} - Access denied`;
+            }
+        });
+        document.getElementById('stylesheet-list').innerHTML = `<pre>${sheetInfo.join('\n')}</pre>`;
+        
+        // Analyze CSS Variables
+        const cssVars = new Map();
+        const computedStyles = getComputedStyle(document.documentElement);
+        
+        // Extract all CSS variables from all stylesheets
+        sheets.forEach(sheet => {
+            try {
+                [...sheet.cssRules].forEach(rule => {
+                    if (rule.style && rule.cssText.includes('--')) {
+                        const matches = rule.cssText.match(/--[\w-]+:\s*[^;]+/g);
+                        if (matches) {
+                            matches.forEach(match => {
+                                const [name, value] = match.split(':').map(s => s.trim());
+                                if (!cssVars.has(name)) cssVars.set(name, []);
+                                cssVars.get(name).push({
+                                    value: value.replace(';', ''),
+                                    source: sheet.href ? sheet.href.split('/').pop() : 'inline',
+                                    selector: rule.selectorText
+                                });
+                            });
+                        }
+                    }
+                });
+            } catch(e) {}
+        });
+        
+        // Display CSS variables with duplicates highlighted
+        let varHtml = '<h4>CSS Variables (Duplicates in Red)</h4>';
+        const sortedVars = [...cssVars.entries()].sort((a, b) => a[0].localeCompare(b[0]));
+        
+        sortedVars.forEach(([name, definitions]) => {
+            const isDuplicate = definitions.length > 1;
+            varHtml += `<div class="css-var ${isDuplicate ? 'duplicate' : ''}">`;
+            varHtml += `<strong>${name}</strong>: `;
+            if (isDuplicate) {
+                varHtml += `<br>Defined ${definitions.length} times:<br>`;
+                definitions.forEach(def => {
+                    varHtml += `&nbsp;&nbsp;• ${def.value} (${def.source})<br>`;
+                });
+            } else {
+                varHtml += `${definitions[0].value} (${definitions[0].source})`;
+            }
+            varHtml += '</div>';
+        });
+        document.getElementById('css-variables').innerHTML = varHtml;
+        
+        // Analyze color usage
+        const colors = new Map();
+        const colorRegex = /#[0-9A-Fa-f]{3,6}|rgb\([^)]+\)|rgba\([^)]+\)|var\(--[\w-]+\)/g;
+        
+        sheets.forEach(sheet => {
+            try {
+                [...sheet.cssRules].forEach(rule => {
+                    if (rule.cssText) {
+                        const matches = rule.cssText.match(colorRegex);
+                        if (matches) {
+                            matches.forEach(color => {
+                                if (!colors.has(color)) colors.set(color, 0);
+                                colors.set(color, colors.get(color) + 1);
+                            });
+                        }
+                    }
+                });
+            } catch(e) {}
+        });
+        
+        // Display color analysis
+        let colorHtml = '<h4>Most Used Colors</h4>';
+        const sortedColors = [...colors.entries()].sort((a, b) => b[1] - a[1]).slice(0, 20);
+        sortedColors.forEach(([color, count]) => {
+            const isVar = color.startsWith('var(');
+            const displayColor = isVar ? computedStyles.getPropertyValue(color.slice(4, -1)) : color;
+            colorHtml += `<div style="display: inline-block; margin: 0.25rem;">`;
+            colorHtml += `<span style="display: inline-block; width: 20px; height: 20px; background: ${displayColor}; vertical-align: middle; margin-right: 0.5rem; border: 1px solid #666;"></span>`;
+            colorHtml += `${color} (${count}x)</div><br>`;
+        });
+        document.getElementById('color-analysis').innerHTML = colorHtml;
+        
+        // Find duplicate selectors
+        const selectors = new Map();
+        sheets.forEach((sheet, sheetIdx) => {
+            try {
+                [...sheet.cssRules].forEach(rule => {
+                    if (rule.selectorText) {
+                        if (!selectors.has(rule.selectorText)) {
+                            selectors.set(rule.selectorText, []);
+                        }
+                        selectors.get(rule.selectorText).push({
+                            source: sheet.href ? sheet.href.split('/').pop() : 'inline',
+                            sheetIndex: sheetIdx
+                        });
+                    }
+                });
+            } catch(e) {}
+        });
+        
+        // Display duplicates
+        let dupHtml = '<h4>Selectors Defined Multiple Times</h4><pre>';
+        const duplicates = [...selectors.entries()]
+            .filter(([_, sources]) => sources.length > 1)
+            .sort((a, b) => b[1].length - a[1].length);
+            
+        duplicates.slice(0, 20).forEach(([selector, sources]) => {
+            dupHtml += `${selector} - ${sources.length} times:\n`;
+            sources.forEach(src => {
+                dupHtml += `  • ${src.source}\n`;
+            });
+            dupHtml += '\n';
+        });
+        dupHtml += '</pre>';
+        document.getElementById('duplicate-selectors').innerHTML = dupHtml;
+        
+        // Log summary to console
+        console.log('=== CSS AUDIT SUMMARY ===');
+        console.log(`Total stylesheets: ${sheets.length}`);
+        console.log(`Total CSS variables: ${cssVars.size}`);
+        console.log(`Duplicate variables: ${[...cssVars.values()].filter(v => v.length > 1).length}`);
+        console.log(`Unique colors: ${colors.size}`);
+        console.log(`Duplicate selectors: ${duplicates.length}`);
+    </script>
+</body>
+</html>
