@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Header Component Test - PRS Iceland</title>
+    
+    <!-- Clean CSS Architecture -->
+    <link rel="stylesheet" href="../css/clean/main-clean.css">
+    
+    <style>
+        /* Test styles */
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .test-section {
+            margin-bottom: 40px;
+            padding: 20px;
+            background: var(--dark-700, #1c1f26);
+            border-radius: 8px;
+        }
+        
+        .test-section h2 {
+            color: var(--gray-100, #fff);
+            margin-bottom: 20px;
+        }
+        
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .color-swatch {
+            padding: 20px;
+            border-radius: 4px;
+            text-align: center;
+            color: white;
+            font-size: 14px;
+        }
+        
+        .variable-list {
+            display: grid;
+            gap: 10px;
+        }
+        
+        .variable-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 14px;
+            color: var(--gray-300, #d1d5db);
+        }
+        
+        .status-good { color: var(--success, #10b981); }
+        .status-bad { color: var(--danger, #ef4444); }
+    </style>
+</head>
+<body>
+    <!-- Test Header Component -->
+    <header class="header">
+        <div class="header-container">
+            <a href="/" class="header-logo">
+                <img src="../images/prs-logo.svg" alt="PRS Iceland">
+            </a>
+            <nav class="header-nav">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link current-page">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">About</a>
+                        <ul class="nav-dropdown">
+                            <li><a href="#" class="nav-dropdown-link">Our Story</a></li>
+                            <li><a href="#" class="nav-dropdown-link">Team</a></li>
+                            <li><a href="#" class="nav-dropdown-link">Mission</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Tournaments</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Contact</a>
+                    </li>
+                </ul>
+            </nav>
+            <button class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <div class="test-container">
+        <div class="test-section">
+            <h2>Header Component Migration Test</h2>
+            <p style="color: var(--gray-300);">This page tests the new clean header component against the design system variables.</p>
+        </div>
+
+        <div class="test-section">
+            <h2>Color Variables Used</h2>
+            <div class="test-grid">
+                <div class="color-swatch" style="background: var(--dark-900)">
+                    --dark-900
+                </div>
+                <div class="color-swatch" style="background: var(--dark-700)">
+                    --dark-700
+                </div>
+                <div class="color-swatch" style="background: var(--accent-primary)">
+                    --accent-primary
+                </div>
+                <div class="color-swatch" style="background: var(--gray-400)">
+                    --gray-400
+                </div>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h2>CSS Variable Status</h2>
+            <div class="variable-list" id="variable-check"></div>
+        </div>
+
+        <div class="test-section">
+            <h2>Header Features Checklist</h2>
+            <ul style="color: var(--gray-300);">
+                <li>✓ Fixed position header</li>
+                <li>✓ Logo with proper inversion for dark theme</li>
+                <li>✓ Navigation with hover states</li>
+                <li>✓ Current page indicator</li>
+                <li>✓ Dropdown menu support</li>
+                <li>✓ Mobile menu toggle (resize to test)</li>
+                <li>✓ Uses CSS variables from design system</li>
+                <li>✓ No !important declarations needed</li>
+                <li>✓ Clean, maintainable code structure</li>
+            </ul>
+        </div>
+
+        <div class="test-section">
+            <h2>Performance Improvements</h2>
+            <ul style="color: var(--gray-300);">
+                <li><span class="status-good">✓</span> Removed all animation cruft</li>
+                <li><span class="status-good">✓</span> Eliminated !important overrides</li>
+                <li><span class="status-good">✓</span> Using CSS variables for consistency</li>
+                <li><span class="status-good">✓</span> Cleaner class naming (.header instead of #header-outer)</li>
+                <li><span class="status-good">✓</span> Better mobile implementation</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Check CSS variables
+        const variableCheck = document.getElementById('variable-check');
+        const criticalVars = [
+            '--dark-900',
+            '--dark-700',
+            '--accent-primary',
+            '--gray-100',
+            '--gray-400',
+            '--header-height',
+            '--z-fixed',
+            '--transition-fast'
+        ];
+
+        const computedStyles = getComputedStyle(document.documentElement);
+        
+        criticalVars.forEach(varName => {
+            const value = computedStyles.getPropertyValue(varName).trim();
+            const item = document.createElement('div');
+            item.className = 'variable-item';
+            item.innerHTML = `
+                <span>${varName}</span>
+                <span class="${value ? 'status-good' : 'status-bad'}">
+                    ${value || 'MISSING'}
+                </span>
+            `;
+            variableCheck.appendChild(item);
+        });
+
+        // Mobile menu toggle
+        const mobileToggle = document.querySelector('.mobile-menu-toggle');
+        const headerNav = document.querySelector('.header-nav');
+        
+        mobileToggle?.addEventListener('click', () => {
+            mobileToggle.classList.toggle('active');
+            headerNav.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
