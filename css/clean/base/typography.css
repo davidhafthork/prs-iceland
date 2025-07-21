@@ -1,0 +1,271 @@
+/* ========================================
+   TYPOGRAPHY - Consolidated Text Styles
+   PRS Iceland Design System
+   ======================================== */
+
+/* Base body typography */
+body {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    font-weight: var(--font-normal);
+    line-height: var(--leading-normal);
+    color: var(--gray-200);
+    background-color: var(--dark-900);
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: var(--font-bold);
+    line-height: var(--leading-tight);
+    color: var(--gray-100);
+    margin-bottom: var(--space-sm);
+}
+
+h1 {
+    font-size: var(--text-4xl);
+    font-weight: var(--font-extrabold);
+    letter-spacing: -0.02em;
+}
+
+h2 {
+    font-size: var(--text-3xl);
+    font-weight: var(--font-bold);
+    letter-spacing: -0.01em;
+}
+
+h3 {
+    font-size: var(--text-2xl);
+    font-weight: var(--font-semibold);
+}
+
+h4 {
+    font-size: var(--text-xl);
+    font-weight: var(--font-semibold);
+}
+
+h5 {
+    font-size: var(--text-lg);
+    font-weight: var(--font-medium);
+}
+
+h6 {
+    font-size: var(--text-base);
+    font-weight: var(--font-medium);
+}
+
+/* Paragraphs */
+p {
+    color: var(--gray-300);
+    line-height: var(--leading-relaxed);
+    margin-bottom: var(--space-md);
+}
+
+/* Lead paragraph */
+.lead {
+    font-size: var(--text-lg);
+    color: var(--gray-200);
+    line-height: var(--leading-relaxed);
+}
+
+/* Links */
+a {
+    color: var(--accent-primary);
+    text-decoration: none;
+    transition: color var(--transition-base);
+}
+
+a:hover {
+    color: var(--accent-hover);
+}
+
+a:active {
+    color: var(--accent-dark);
+}
+
+/* Lists */
+ul, ol {
+    margin-bottom: var(--space-md);
+    padding-left: var(--space-lg);
+    color: var(--gray-300);
+}
+
+li {
+    margin-bottom: var(--space-xs);
+}
+
+/* Nested lists */
+ul ul, ol ol, ul ol, ol ul {
+    margin-top: var(--space-xs);
+    margin-bottom: var(--space-xs);
+}
+
+/* Definition lists */
+dl {
+    margin-bottom: var(--space-md);
+}
+
+dt {
+    font-weight: var(--font-semibold);
+    color: var(--gray-100);
+    margin-bottom: var(--space-xs);
+}
+
+dd {
+    color: var(--gray-300);
+    margin-left: var(--space-lg);
+    margin-bottom: var(--space-sm);
+}
+
+/* Blockquotes */
+blockquote {
+    border-left: 4px solid var(--accent-primary);
+    padding-left: var(--space-md);
+    margin: var(--space-lg) 0;
+    color: var(--gray-300);
+    font-style: italic;
+}
+
+blockquote cite {
+    display: block;
+    margin-top: var(--space-sm);
+    color: var(--gray-400);
+    font-size: var(--text-sm);
+    font-style: normal;
+}
+
+/* Preformatted text */
+pre {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    background-color: var(--dark-800);
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    overflow-x: auto;
+    margin-bottom: var(--space-md);
+    color: var(--gray-200);
+}
+
+code {
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+    background-color: var(--dark-700);
+    padding: 0.125em 0.375em;
+    border-radius: var(--radius-sm);
+    color: var(--accent-light);
+}
+
+pre code {
+    background-color: transparent;
+    padding: 0;
+    font-size: inherit;
+    color: inherit;
+}
+
+/* Inline text elements */
+strong, b {
+    font-weight: var(--font-bold);
+    color: var(--gray-100);
+}
+
+em, i {
+    font-style: italic;
+}
+
+small {
+    font-size: var(--text-sm);
+    color: var(--gray-400);
+}
+
+mark {
+    background-color: var(--accent-primary);
+    color: var(--gray-100);
+    padding: 0.125em 0.25em;
+}
+
+del {
+    text-decoration: line-through;
+    color: var(--gray-500);
+}
+
+ins {
+    text-decoration: underline;
+    color: var(--success);
+}
+
+/* Abbreviations */
+abbr[title] {
+    text-decoration: underline dotted;
+    cursor: help;
+}
+
+/* Horizontal rules */
+hr {
+    border: none;
+    border-top: 1px solid var(--dark-500);
+    margin: var(--space-2xl) 0;
+}
+
+/* Text utilities */
+.text-xs { font-size: var(--text-xs); }
+.text-sm { font-size: var(--text-sm); }
+.text-base { font-size: var(--text-base); }
+.text-lg { font-size: var(--text-lg); }
+.text-xl { font-size: var(--text-xl); }
+.text-2xl { font-size: var(--text-2xl); }
+.text-3xl { font-size: var(--text-3xl); }
+.text-4xl { font-size: var(--text-4xl); }
+
+.font-normal { font-weight: var(--font-normal); }
+.font-medium { font-weight: var(--font-medium); }
+.font-semibold { font-weight: var(--font-semibold); }
+.font-bold { font-weight: var(--font-bold); }
+.font-extrabold { font-weight: var(--font-extrabold); }
+
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-justify { text-align: justify; }
+
+.text-white { color: var(--gray-100); }
+.text-gray { color: var(--gray-300); }
+.text-muted { color: var(--gray-400); }
+.text-primary { color: var(--accent-primary); }
+.text-success { color: var(--success); }
+.text-warning { color: var(--warning); }
+.text-danger { color: var(--danger); }
+
+.uppercase { text-transform: uppercase; }
+.lowercase { text-transform: lowercase; }
+.capitalize { text-transform: capitalize; }
+.normal-case { text-transform: none; }
+
+.italic { font-style: italic; }
+.not-italic { font-style: normal; }
+
+.leading-none { line-height: var(--leading-none); }
+.leading-tight { line-height: var(--leading-tight); }
+.leading-normal { line-height: var(--leading-normal); }
+.leading-relaxed { line-height: var(--leading-relaxed); }
+
+/* Truncate text */
+.truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Line clamp */
+.line-clamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.line-clamp-3 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+}

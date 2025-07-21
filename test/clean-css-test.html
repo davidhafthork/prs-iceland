@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clean CSS Test - PRS Iceland</title>
+    
+    <!-- Test the new clean CSS structure -->
+    <link rel="stylesheet" href="../css/clean/main-clean.css">
+    
+    <style>
+        /* Test helpers */
+        .test-section {
+            padding: var(--space-xl) var(--space-lg);
+            margin-bottom: var(--space-lg);
+            background: var(--dark-800);
+            border-radius: var(--radius-lg);
+        }
+        
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--space-md);
+            margin: var(--space-lg) 0;
+        }
+        
+        .color-swatch {
+            padding: var(--space-md);
+            border-radius: var(--radius-md);
+            text-align: center;
+            border: 1px solid var(--dark-500);
+        }
+        
+        .variable-test {
+            font-family: var(--font-mono);
+            font-size: var(--text-sm);
+            color: var(--gray-400);
+            margin-top: var(--space-xs);
+        }
+    </style>
+</head>
+<body>
+    <div style="max-width: 1200px; margin: 0 auto; padding: var(--space-xl);">
+        <h1>Clean CSS Test Page</h1>
+        <p class="lead">Testing the new consolidated CSS variable system and base styles.</p>
+        
+        <!-- Typography Test -->
+        <section class="test-section">
+            <h2>Typography Test</h2>
+            <h1>Heading 1 - Display Title</h1>
+            <h2>Heading 2 - Section Title</h2>
+            <h3>Heading 3 - Subsection</h3>
+            <h4>Heading 4 - Card Title</h4>
+            <h5>Heading 5 - Small Title</h5>
+            <h6>Heading 6 - Label</h6>
+            
+            <p>This is a regular paragraph with <strong>bold text</strong>, <em>italic text</em>, and a <a href="#">link to test</a>. The paragraph uses proper text hierarchy and spacing.</p>
+            
+            <p class="lead">This is a lead paragraph with larger, more prominent text for introductions.</p>
+            
+            <blockquote>
+                "This is a blockquote to test quote styling with proper indentation and emphasis."
+                <cite>— Citation Source</cite>
+            </blockquote>
+            
+            <pre><code>// Code block test
+const theme = {
+    dark: 'var(--dark-900)',
+    accent: 'var(--accent-primary)'
+};</code></pre>
+        </section>
+        
+        <!-- Color System Test -->
+        <section class="test-section">
+            <h2>Color System</h2>
+            
+            <h3>Dark Theme Scale</h3>
+            <div class="color-grid">
+                <div class="color-swatch" style="background: var(--dark-900);">
+                    <strong>Dark 900</strong>
+                    <div class="variable-test">--dark-900</div>
+                </div>
+                <div class="color-swatch" style="background: var(--dark-800);">
+                    <strong>Dark 800</strong>
+                    <div class="variable-test">--dark-800</div>
+                </div>
+                <div class="color-swatch" style="background: var(--dark-700);">
+                    <strong>Dark 700</strong>
+                    <div class="variable-test">--dark-700</div>
+                </div>
+                <div class="color-swatch" style="background: var(--dark-600);">
+                    <strong>Dark 600</strong>
+                    <div class="variable-test">--dark-600</div>
+                </div>
+                <div class="color-swatch" style="background: var(--dark-500);">
+                    <strong>Dark 500</strong>
+                    <div class="variable-test">--dark-500</div>
+                </div>
+            </div>
+            
+            <h3>Accent Colors</h3>
+            <div class="color-grid">
+                <div class="color-swatch" style="background: var(--accent-primary); color: white;">
+                    <strong>Primary</strong>
+                    <div class="variable-test">--accent-primary</div>
+                </div>
+                <div class="color-swatch" style="background: var(--accent-hover); color: white;">
+                    <strong>Hover</strong>
+                    <div class="variable-test">--accent-hover</div>
+                </div>
+                <div class="color-swatch" style="background: var(--accent-light); color: black;">
+                    <strong>Light</strong>
+                    <div class="variable-test">--accent-light</div>
+                </div>
+                <div class="color-swatch" style="background: var(--accent-dark); color: white;">
+                    <strong>Dark</strong>
+                    <div class="variable-test">--accent-dark</div>
+                </div>
+            </div>
+            
+            <h3>Semantic Colors</h3>
+            <div class="color-grid">
+                <div class="color-swatch" style="background: var(--success); color: white;">
+                    <strong>Success</strong>
+                    <div class="variable-test">--success</div>
+                </div>
+                <div class="color-swatch" style="background: var(--warning); color: black;">
+                    <strong>Warning</strong>
+                    <div class="variable-test">--warning</div>
+                </div>
+                <div class="color-swatch" style="background: var(--danger); color: white;">
+                    <strong>Danger</strong>
+                    <div class="variable-test">--danger</div>
+                </div>
+                <div class="color-swatch" style="background: var(--info); color: white;">
+                    <strong>Info</strong>
+                    <div class="variable-test">--info</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Spacing Test -->
+        <section class="test-section">
+            <h2>Spacing System</h2>
+            <div style="display: flex; align-items: flex-end; gap: var(--space-md);">
+                <div style="background: var(--accent-primary); width: 50px; height: calc(var(--space-xs) * 10);">
+                    <div style="text-align: center; margin-top: var(--space-xs); color: white; font-size: var(--text-xs);">xs</div>
+                </div>
+                <div style="background: var(--accent-primary); width: 50px; height: calc(var(--space-sm) * 10);">
+                    <div style="text-align: center; margin-top: var(--space-xs); color: white; font-size: var(--text-xs);">sm</div>
+                </div>
+                <div style="background: var(--accent-primary); width: 50px; height: calc(var(--space-md) * 10);">
+                    <div style="text-align: center; margin-top: var(--space-xs); color: white; font-size: var(--text-xs);">md</div>
+                </div>
+                <div style="background: var(--accent-primary); width: 50px; height: calc(var(--space-lg) * 10);">
+                    <div style="text-align: center; margin-top: var(--space-xs); color: white; font-size: var(--text-xs);">lg</div>
+                </div>
+                <div style="background: var(--accent-primary); width: 50px; height: calc(var(--space-xl) * 10);">
+                    <div style="text-align: center; margin-top: var(--space-xs); color: white; font-size: var(--text-xs);">xl</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Variable Check -->
+        <section class="test-section">
+            <h2>CSS Variable Status</h2>
+            <div id="variable-check"></div>
+        </section>
+    </div>
+    
+    <script>
+        // Check if CSS variables are loaded
+        const checkVariables = () => {
+            const root = document.documentElement;
+            const computedStyle = getComputedStyle(root);
+            
+            const variables = [
+                '--dark-900',
+                '--accent-primary',
+                '--font-body',
+                '--space-lg',
+                '--transition-base'
+            ];
+            
+            const results = variables.map(varName => {
+                const value = computedStyle.getPropertyValue(varName);
+                return {
+                    name: varName,
+                    value: value || 'NOT FOUND',
+                    status: value ? '✅' : '❌'
+                };
+            });
+            
+            const html = results.map(r => 
+                `<div style="margin: var(--space-xs) 0;">
+                    ${r.status} <code>${r.name}</code>: <strong>${r.value}</strong>
+                </div>`
+            ).join('');
+            
+            document.getElementById('variable-check').innerHTML = html;
+        };
+        
+        checkVariables();
+    </script>
+</body>
+</html>

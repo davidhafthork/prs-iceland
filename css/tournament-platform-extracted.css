@@ -1,0 +1,559 @@
+/* Tournament Platform Inline Styles */
+/* Extracted from pages/index.html for better maintainability */
+
+/* Override font to match PRS research */
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Tournament Data Section */
+.data-section {
+    background: #0a0a0a;
+    padding: 80px 0;
+    position: relative;
+}
+
+.data-tabs {
+    display: flex;
+    gap: 2px;
+    margin-bottom: 40px;
+    background: #1a1a1a;
+    padding: 4px;
+    border-radius: 8px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.data-tab {
+    flex: 1;
+    padding: 12px 24px;
+    background: transparent;
+    border: none;
+    color: #888;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.data-tab:hover {
+    color: #fff;
+}
+
+.data-tab.active {
+    background: #2a2a2a;
+    color: #fff;
+}
+
+.data-content {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.data-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(10px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+/* Standings Table */
+.standings-table {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    background: #1a1a1a;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+
+.standings-filters {
+    padding: 20px;
+    background: #222;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.filter-group {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.filter-group label {
+    color: #888;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.filter-group select {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background: #222;
+    color: #888;
+    font-weight: 600;
+    text-align: left;
+    padding: 16px 20px;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid #333;
+}
+
+th.numeric {
+    text-align: right;
+}
+
+td {
+    padding: 16px 20px;
+    border-bottom: 1px solid #252525;
+    color: #ccc;
+    font-size: 15px;
+}
+
+td.numeric {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+
+tr:hover {
+    background: #252525;
+}
+
+.rank {
+    font-weight: 600;
+    color: #fff;
+}
+
+.rank.gold { 
+    color: #FFD700; 
+}
+
+.rank.silver { 
+    color: #C0C0C0; 
+}
+
+.rank.bronze { 
+    color: #CD7F32; 
+}
+
+.points {
+    font-weight: 600;
+    color: #4CAF50;
+}
+
+/* Registration CTA */
+.registration-banner {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+    padding: 60px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.registration-banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('../images/grid-pattern.svg') repeat;
+    opacity: 0.05;
+}
+
+.registration-content {
+    position: relative;
+    z-index: 1;
+}
+
+.registration-title {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: #fff;
+}
+
+.registration-subtitle {
+    font-size: 18px;
+    color: #888;
+    margin-bottom: 32px;
+}
+
+.registration-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-primary {
+    background: #4CAF50;
+    color: #fff;
+    padding: 16px 32px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-primary:hover {
+    background: #45a049;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: #fff;
+    padding: 16px 32px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 2px solid #333;
+}
+
+.btn-secondary:hover {
+    border-color: #555;
+    background: #1a1a1a;
+}
+
+/* Latest News Section */
+.news-section {
+    background: #0f0f0f;
+    padding: 80px 0;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.section-title {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: #fff;
+}
+
+.section-subtitle {
+    font-size: 18px;
+    color: #888;
+}
+
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 32px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.news-card {
+    background: #1a1a1a;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.news-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+}
+
+.news-image {
+    position: relative;
+    padding-bottom: 56.25%;
+    overflow: hidden;
+}
+
+.news-image img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.news-badge {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: rgba(76, 175, 80, 0.9);
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.news-content {
+    padding: 24px;
+}
+
+.news-date {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+.news-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #fff;
+    line-height: 1.4;
+}
+
+.news-excerpt {
+    color: #888;
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+.news-link {
+    color: #4CAF50;
+    font-weight: 500;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: gap 0.3s ease;
+}
+
+.news-link:hover {
+    gap: 10px;
+}
+
+/* Enhanced Navigation */
+nav ul li {
+    position: relative;
+}
+
+nav ul li > a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #4CAF50;
+    transition: width 0.3s ease;
+}
+
+nav ul li:hover > a::after {
+    width: 100%;
+}
+
+nav .sub-menu {
+    min-width: 280px;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 8px 0;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+}
+
+nav .sub-menu li a {
+    padding: 12px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav .sub-menu li a:hover {
+    background: #252525;
+}
+
+.menu-badge {
+    background: #4CAF50;
+    color: #fff;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+/* Fix gallery section */
+.gallery-section {
+    background: #1a1a1a;
+    padding: 80px 0;
+}
+
+.gallery-section .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    text-align: center !important;
+}
+
+/* Force all children to respect centering */
+.gallery-section * {
+    text-align: inherit;
+}
+
+.gallery-header {
+    text-align: center !important;
+    margin-bottom: 60px;
+    width: 100% !important;
+    display: block !important;
+    position: relative !important;
+    left: 0 !important;
+    right: 0 !important;
+    transform: none !important;
+    float: none !important;
+    clear: both !important;
+}
+
+.gallery-header h2 {
+    font-size: 36px !important;
+    font-weight: 700 !important;
+    color: #fff !important;
+    margin: 0 auto !important;
+    text-align: center !important;
+    display: block !important;
+    width: 100% !important;
+    position: relative !important;
+    left: 0 !important;
+    right: 0 !important;
+    transform: none !important;
+    padding: 0 !important;
+    opacity: 1 !important; /* Fix: Override opacity: 0 from gallery.css */
+    animation: none !important; /* Fix: Remove animation that might be causing issues */
+}
+
+.gallery-carousel {
+    position: relative;
+}
+
+.gallery-viewport {
+    position: relative;
+    height: 600px;
+    overflow: hidden;
+    margin: 0 auto;
+    cursor: grab;
+}
+
+.gallery-viewport:active {
+    cursor: grabbing;
+}
+
+/* Stack-based gallery styles */
+.gallery-slider {
+    position: relative;
+    height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gallery-cell {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    z-index: 0;
+}
+
+.gallery-cell.active {
+    opacity: 1;
+    z-index: 10;
+    transform: translate(-50%, -50%);
+}
+
+.gallery-cell.prev {
+    transform: translate(-150%, -50%);
+    opacity: 0.3;
+    z-index: 5;
+}
+
+.gallery-cell.next {
+    transform: translate(50%, -50%);
+    opacity: 0.3;
+    z-index: 5;
+}
+
+.gallery-cell img {
+    display: block;
+    max-height: 600px;
+    max-width: 90vw;
+    height: auto;
+    width: auto;
+    object-fit: contain;
+}
+
+.gallery-progress {
+    position: relative;
+    max-width: 300px;
+    height: 2px;
+    margin: 40px auto 0;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.gallery-progress-bar {
+    position: absolute;
+    height: 100%;
+    background: #4CAF50;
+    transition: transform 0.5s ease;
+}
+
+/* Fix hero image display */
+.hero.hero-split .hero-bg {
+    height: 100% !important;
+    transform: none !important;
+}
+
+/* Responsive Tables */
+@media (max-width: 768px) {
+    .standings-table {
+        border-radius: 0;
+    }
+    
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    
+    .news-grid {
+        grid-template-columns: 1fr;
+        padding: 0 20px;
+    }
+}
