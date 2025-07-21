@@ -1,0 +1,156 @@
+/* ========================================
+   CSS VARIABLES - Single Source of Truth
+   PRS Iceland Design System
+   
+   Consolidated from:
+   - cohesive-design-system.css
+   - base.css
+   - color-fix-override.css
+   - final-design-fix.css
+   ======================================== */
+
+:root {
+    /* ==========  COLOR SYSTEM ========== */
+    
+    /* Dark Theme Scale */
+    --dark-900: #0A0B0E;      /* Pure black - main backgrounds */
+    --dark-800: #13151A;      /* Slightly lighter - sections */
+    --dark-700: #1C1F26;      /* Card backgrounds */
+    --dark-600: #252932;      /* Elevated surfaces */
+    --dark-500: #2E333E;      /* Borders, dividers */
+    
+    /* Gray Scale - Text Hierarchy */
+    --gray-100: #FFFFFF;      /* Pure white - headings */
+    --gray-200: #F0F1F3;      /* Body text on dark */
+    --gray-300: #D1D5DB;      /* Secondary text */
+    --gray-400: #9CA3AF;      /* Muted text */
+    --gray-500: #6B7280;      /* Disabled text */
+    --gray-600: #4B5563;      /* Very muted */
+    
+    /* Primary Accent Colors */
+    --accent-primary: #3B82F6;     /* Bright blue - main accent */
+    --accent-hover: #2563EB;       /* Darker blue - hover state */
+    --accent-light: #60A5FA;       /* Light blue - highlights */
+    --accent-dark: #1E40AF;        /* Dark blue - pressed state */
+    --accent-subtle: #1E3A8A;      /* Very dark blue - subtle uses */
+    
+    /* Semantic Colors */
+    --success: #10B981;       /* Green - success states */
+    --warning: #F59E0B;       /* Amber - warnings */
+    --danger: #EF4444;        /* Red - errors/danger */
+    --info: #3B82F6;          /* Blue - information */
+    
+    /* Legacy Aliases (for backward compatibility) */
+    --primary-color: var(--accent-primary);
+    --dark-bg: var(--dark-900);
+    --text-light: var(--gray-200);
+    --text-dark: var(--gray-100);
+    
+    /* ========== TYPOGRAPHY ========== */
+    
+    /* Font Families */
+    --font-display: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Consolas', monospace;
+    
+    /* Font Sizes - Using clamp for responsive scaling */
+    --text-xs: clamp(0.75rem, 1.5vw, 0.875rem);
+    --text-sm: clamp(0.875rem, 2vw, 1rem);
+    --text-base: clamp(1rem, 2.5vw, 1.125rem);
+    --text-lg: clamp(1.125rem, 3vw, 1.25rem);
+    --text-xl: clamp(1.25rem, 3.5vw, 1.5rem);
+    --text-2xl: clamp(1.5rem, 4vw, 2rem);
+    --text-3xl: clamp(2rem, 5vw, 3rem);
+    --text-4xl: clamp(2.5rem, 6vw, 4rem);
+    
+    /* Font Weights */
+    --font-normal: 400;
+    --font-medium: 500;
+    --font-semibold: 600;
+    --font-bold: 700;
+    --font-extrabold: 800;
+    
+    /* Line Heights */
+    --leading-none: 1;
+    --leading-tight: 1.2;
+    --leading-normal: 1.6;
+    --leading-relaxed: 1.8;
+    
+    /* ========== SPACING ========== */
+    
+    /* Spacing Scale */
+    --space-xs: 0.5rem;       /* 8px */
+    --space-sm: 1rem;         /* 16px */
+    --space-md: 1.5rem;       /* 24px */
+    --space-lg: 2rem;         /* 32px */
+    --space-xl: 3rem;         /* 48px */
+    --space-2xl: 4rem;        /* 64px */
+    --space-3xl: 6rem;        /* 96px */
+    
+    /* ========== LAYOUT ========== */
+    
+    /* Container */
+    --container-max: 1200px;
+    --container-padding: var(--space-lg);
+    
+    /* Header */
+    --header-height: 80px;
+    --header-height-scrolled: 60px;
+    
+    /* ========== EFFECTS ========== */
+    
+    /* Transitions */
+    --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.6);
+    --shadow-glow: 0 0 20px rgba(59, 130, 246, 0.3);
+    
+    /* Border Radius */
+    --radius-sm: 0.25rem;     /* 4px */
+    --radius-md: 0.5rem;      /* 8px */
+    --radius-lg: 0.75rem;     /* 12px */
+    --radius-xl: 1rem;        /* 16px */
+    --radius-full: 9999px;    /* Full round */
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, var(--dark-900) 0%, var(--dark-800) 100%);
+    --gradient-accent: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-dark) 100%);
+    --gradient-subtle: linear-gradient(180deg, rgba(59, 130, 246, 0.05) 0%, transparent 100%);
+    
+    /* Z-Index Scale */
+    --z-base: 0;
+    --z-dropdown: 10;
+    --z-sticky: 20;
+    --z-fixed: 30;
+    --z-modal-backdrop: 40;
+    --z-modal: 50;
+    --z-popover: 60;
+    --z-tooltip: 70;
+}
+
+/* ========== RESPONSIVE OVERRIDES ========== */
+@media (max-width: 768px) {
+    :root {
+        /* Adjust spacing for mobile */
+        --space-xs: 0.375rem;   /* 6px */
+        --space-sm: 0.75rem;    /* 12px */
+        --space-md: 1rem;       /* 16px */
+        --space-lg: 1.5rem;     /* 24px */
+        --space-xl: 2rem;       /* 32px */
+        --space-2xl: 3rem;      /* 48px */
+        --space-3xl: 4rem;      /* 64px */
+        
+        /* Adjust header */
+        --header-height: 60px;
+        --header-height-scrolled: 50px;
+        
+        /* Adjust container */
+        --container-padding: var(--space-md);
+    }
+}
