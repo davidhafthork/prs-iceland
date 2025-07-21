@@ -23,9 +23,9 @@ This is a recreation of the PRS Iceland (Precision Rifle Series Iceland) website
 ## Structure
 
 ```
-prs-iceland-improved/
-├── index.html       # Main HTML file with embedded styles and scripts
-└── README.md        # This file
+prs-iceland/
+├── pages/index.html       # Main HTML file with embedded styles and scripts
+└── docs/README.md        # This file
 ```
 
 ## Features Implemented
