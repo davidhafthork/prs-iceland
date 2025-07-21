@@ -1,0 +1,48 @@
+/* Main CSS File - Import all component styles */
+
+/* NEW: Cohesive Design System - Modern Dark Theme */
+@import 'cohesive-design-system.css';
+
+/* Base styles and CSS reset */
+@import 'base.css';
+
+/* Component styles */
+/* @import 'header.css'; - OLD ANIMATED HEADER */
+@import 'header-clean.css'; /* NEW CLEAN MINIMAL HEADER */
+@import 'hero.css';
+@import 'about.css';
+@import 'gallery.css';
+@import 'footer.css';
+
+/* Page-specific styles */
+@import 'pages.css';
+
+/* Gallery fixes */
+@import 'gallery-fix.css';
+
+/* Hero split screen variant */
+@import 'hero-split.css';
+
+/* Enhanced design system */
+@import 'enhanced-design.css';
+
+/* Design fixes and color consistency */
+@import 'design-fixes.css';
+
+/* Responsive styles - must be last */
+@import 'responsive.css';
+
+/* TEMPORARY: Color fix override to make the design cohesive */
+@import 'color-fix-override.css';
+
+/* FINAL: Complete dark theme fix for all visibility issues */
+@import 'final-design-fix.css';
+
+/* CRITICAL: Cursor visibility fix for dark theme */
+@import 'cursor-visibility.css';
+
+/* CLEAN ANIMATIONS: Remove annoying effects, keep it professional */
+@import 'animations-simple.css';
+
+/* TOURNAMENT DATA: Tables, standings, and data-first design */
+@import 'tournament-data.css';
