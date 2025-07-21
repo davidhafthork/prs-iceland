@@ -1,0 +1,237 @@
+/* ========================================
+   COHESIVE DESIGN SYSTEM - PRS ICELAND
+   Modern, Professional, Unified
+   ======================================== */
+
+/* ========== COHESIVE COLOR PALETTE ========== */
+:root {
+    /* Primary Dark Theme - Monochromatic with accent */
+    --dark-900: #0A0B0E;      /* Pure black - main backgrounds */
+    --dark-800: #13151A;      /* Slightly lighter - sections */
+    --dark-700: #1C1F26;      /* Card backgrounds */
+    --dark-600: #252932;      /* Elevated surfaces */
+    --dark-500: #2E333E;      /* Borders, dividers */
+    
+    /* Grays - For text hierarchy */
+    --gray-100: #FFFFFF;      /* Pure white - headings */
+    --gray-200: #F0F1F3;      /* Body text on dark */
+    --gray-300: #D1D5DB;      /* Secondary text */
+    --gray-400: #9CA3AF;      /* Muted text */
+    --gray-500: #6B7280;      /* Disabled text */
+    --gray-600: #4B5563;      /* Very muted */
+    
+    /* Accent Color - Single cohesive accent */
+    --accent-primary: #3B82F6;     /* Bright blue - main accent */
+    --accent-hover: #2563EB;       /* Darker blue - hover state */
+    --accent-light: #60A5FA;       /* Light blue - highlights */
+    --accent-dark: #1E40AF;        /* Dark blue - pressed state */
+    --accent-subtle: #1E3A8A;      /* Very dark blue - subtle uses */
+    
+    /* Semantic Colors */
+    --success: #10B981;       /* Green - success states */
+    --warning: #F59E0B;       /* Amber - warnings */
+    --danger: #EF4444;        /* Red - errors/danger */
+    --info: #3B82F6;          /* Blue - information */
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, var(--dark-900) 0%, var(--dark-800) 100%);
+    --gradient-accent: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-dark) 100%);
+    --gradient-subtle: linear-gradient(180deg, rgba(59, 130, 246, 0.05) 0%, transparent 100%);
+    
+    /* Shadows - Subtle and cohesive */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.6);
+    --shadow-glow: 0 0 20px rgba(59, 130, 246, 0.3);
+    
+    /* Typography */
+    --font-display: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    
+    /* Spacing remains the same */
+    --space-xs: 0.5rem;
+    --space-sm: 1rem;
+    --space-md: 1.5rem;
+    --space-lg: 2rem;
+    --space-xl: 3rem;
+    --space-2xl: 4rem;
+    --space-3xl: 6rem;
+    
+    /* Transitions */
+    --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* Border Radius */
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --radius-xl: 1rem;
+    --radius-full: 9999px;
+}
+
+/* ========== GLOBAL STYLES ========== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--gray-200);
+    background: var(--dark-900);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ========== TYPOGRAPHY ========== */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--gray-100);
+}
+
+h1 { 
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin-bottom: var(--space-lg);
+}
+
+h2 { 
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: var(--space-md);
+}
+
+h3 { 
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    margin-bottom: var(--space-md);
+}
+
+p {
+    margin-bottom: var(--space-sm);
+    color: var(--gray-300);
+}
+
+/* ========== BUTTONS ========== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+    padding: 12px 28px;
+    font-weight: 600;
+    font-size: 1rem;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-base);
+    border: none;
+    text-decoration: none;
+    font-family: var(--font-body);
+}
+
+.btn-primary {
+    background: var(--accent-primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-lg);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--gray-100);
+    border: 2px solid var(--dark-500);
+}
+
+.btn-secondary:hover {
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+    background: rgba(59, 130, 246, 0.1);
+}
+
+/* ========== CARDS ========== */
+.card {
+    background: var(--dark-700);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    border: 1px solid var(--dark-500);
+    transition: all var(--transition-base);
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-xl);
+    border-color: var(--accent-primary);
+}
+
+/* ========== FORMS ========== */
+input,
+textarea,
+select {
+    width: 100%;
+    padding: 12px 16px;
+    background: var(--dark-600);
+    border: 1px solid var(--dark-500);
+    border-radius: var(--radius-md);
+    color: var(--gray-200);
+    font-family: var(--font-body);
+    transition: all var(--transition-fast);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* ========== CONTAINERS ========== */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-md);
+}
+
+.section {
+    padding: var(--space-3xl) 0;
+}
+
+/* ========== UTILITIES ========== */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.text-primary { color: var(--accent-primary); }
+.text-muted { color: var(--gray-400); }
+.text-white { color: var(--gray-100); }
+
+.bg-dark { background: var(--dark-900); }
+.bg-darker { background: var(--dark-800); }
+.bg-card { background: var(--dark-700); }
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+    :root {
+        --space-xs: 0.25rem;
+        --space-sm: 0.5rem;
+        --space-md: 1rem;
+        --space-lg: 1.5rem;
+        --space-xl: 2rem;
+        --space-2xl: 3rem;
+        --space-3xl: 4rem;
+    }
+    
+    .container {
+        padding: 0 var(--space-sm);
+    }
+}

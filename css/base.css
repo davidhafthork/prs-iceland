@@ -1,0 +1,77 @@
+/* Base Reset and Global Styles */
+
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* COHESIVE COLOR SCHEME - Modern Dark Theme */
+    --primary-color: #3B82F6;     /* Bright blue - main accent */
+    --dark-bg: #0A0B0E;           /* Pure black background */
+    --text-light: #F0F1F3;        /* Off-white for dark backgrounds */
+    --text-dark: #1C1F26;         /* Dark text for light backgrounds */
+    
+    /* Dark theme scale */
+    --dark-900: #0A0B0E;          /* Main background */
+    --dark-800: #13151A;          /* Section backgrounds */
+    --dark-700: #1C1F26;          /* Card backgrounds */
+    --dark-600: #252932;          /* Elevated surfaces */
+    --dark-500: #2E333E;          /* Borders */
+    
+    /* Layout variables */
+    --header-height: 80px;
+    --scroll-bar-w: 17px;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--text-light);
+    overflow-x: hidden;
+    background: var(--dark-bg);
+    padding-top: 80px; /* Account for fixed header */
+    opacity: 1; /* No fade in animation */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ensure no unwanted underlines on any links */
+a {
+    text-decoration: none;
+}
+
+/* Page load animation - DISABLED for instant loading
+@keyframes pageLoad {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+*/
+
+/* Secondary pages specific */
+body.secondary-page {
+    padding-top: var(--header-height);
+    background: var(--dark-800);
+}
+
+body.secondary-page.page-load {
+    animation: pageLoadSecondary 0.4s ease forwards;
+}
+
+@keyframes pageLoadSecondary {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

@@ -46,6 +46,3 @@
 
 /* TOURNAMENT DATA: Tables, standings, and data-first design */
 @import 'tournament-data.css';
-
-/* EXTRACTED: Tournament platform inline styles from index.html */
-@import 'tournament-platform-extracted.css';
