@@ -12,9 +12,9 @@
 @import 'base/reset.css';        /* Minimal reset */
 @import 'base/typography.css';   /* Text styles */
 
-/* Component layer - To be added */
+/* Component layer */
 /* @import 'components/buttons.css'; */
-/* @import 'components/header.css'; */
+@import 'components/header.css';  /* ✅ MIGRATED - Clean header component */
 /* @import 'components/cards.css'; */
 /* @import 'components/forms.css'; */
 
@@ -30,8 +30,8 @@
 
 /* 
    TEST NOTES:
-   1. This file currently only imports base styles
-   2. Components will be migrated one at a time
+   1. ✅ Base styles imported (variables, reset, typography)
+   2. ✅ Header component migrated from header-clean.css
    3. Use this to A/B test against main.css
    4. DO NOT delete main.css until fully tested
 */
