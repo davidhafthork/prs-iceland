@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS Audit - PRS Iceland</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <style>
+        body {
+            background: #0a0a0a;
+            color: #fff;
+            font-family: monospace;
+            padding: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        h1, h2, h3 { color: #8B7355; }
+        .audit-section {
+            background: #1a1a1a;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        .file-info {
+            background: #2a2a2a;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        .duplicate {
+            background: #3a2020;
+            border-left: 4px solid #B91C1C;
+        }
+        .warning {
+            color: #f59e0b;
+        }
+        pre {
+            overflow-x: auto;
+            font-size: 12px;
+            background: #000;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        summary {
+            cursor: pointer;
+            padding: 5px;
+            background: #333;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .stat-card {
+            background: #2a2a2a;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 2em;
+            color: #8B7355;
+        }
+    </style>
+</head>
+<body>
+    <h1>CSS Audit Report</h1>
+    <div id="loading">Analyzing CSS files...</div>
+    <div id="results" style="display: none;">
+        <div class="stats" id="stats"></div>
+        <div class="audit-section">
+            <h2>File Load Order Analysis</h2>
+            <div id="file-analysis"></div>
+        </div>
+        <div class="audit-section">
+            <h2>CSS Variables Analysis</h2>
+            <div id="variables-analysis"></div>
+        </div>
+        <div class="audit-section">
+            <h2>Duplicate Selectors</h2>
+            <div id="selectors-analysis"></div>
+        </div>
+        <div class="audit-section">
+            <h2>Color Usage Analysis</h2>
+            <div id="colors-analysis"></div>
+        </div>
+    </div>
+
+    <script>
+    async function auditCSS() {
+        const results = {
+            files: [],
+            variables: new Map(),
+            selectors: new Map(),
+            colors: new Map(),
+            stats: {
+                totalRules: 0,
+                totalSelectors: 0,
+                totalVariables: 0,
+                duplicateVariables: 0,
+                duplicateSelectors: 0
+            }
+        };
+
+        // Get all loaded stylesheets
+        const sheets = [...document.styleSheets];
+        
+        for (const sheet of sheets) {
+            try {
+                const fileInfo = {
+                    href: sheet.href || 'Inline Styles',
+                    rules: [],
+                    ruleCount: 0,
+                    variableCount: 0,
+                    selectorCount: 0
+                };
+
+                const rules = [...sheet.cssRules];
+                fileInfo.ruleCount = rules.length;
+                results.stats.totalRules += rules.length;
+
+                rules.forEach(rule => {
+                    if (rule.type === CSSRule.STYLE_RULE) {
+                        // Track selectors
+                        const selector = rule.selectorText;
+                        fileInfo.selectorCount++;
+                        results.stats.totalSelectors++;
+                        
+                        if (!results.selectors.has(selector)) {
+                            results.selectors.set(selector, []);
+                        }
+                        results.selectors.get(selector).push(sheet.href || 'inline');
+
+                        // Extract CSS variables
+                        const cssText = rule.cssText;
+                        const varDefinitions = cssText.match(/--[\w-]+:\s*[^;]+/g);
+                        if (varDefinitions) {
+                            varDefinitions.forEach(varDef => {
+                                const [name, value] = varDef.split(':').map(s => s.trim());
+                                fileInfo.variableCount++;
+                                
+                                if (!results.variables.has(name)) {
+                                    results.variables.set(name, []);
+                                }
+                                results.variables.get(name).push({
+                                    value,
+                                    source: sheet.href || 'inline',
+                                    selector: selector
+                                });
+                            });
+                        }
+
+                        // Extract color values
+                        const colorPatterns = [
+                            /#[0-9a-fA-F]{3,8}/g,
+                            /rgb\([^)]+\)/g,
+                            /rgba\([^)]+\)/g,
+                            /hsl\([^)]+\)/g,
+                            /hsla\([^)]+\)/g
+                        ];
+                        
+                        colorPatterns.forEach(pattern => {
+                            const matches = cssText.match(pattern);
+                            if (matches) {
+                                matches.forEach(color => {
+                                    if (!results.colors.has(color)) {
+                                        results.colors.set(color, []);
+                                    }
+                                    results.colors.get(color).push(sheet.href || 'inline');
+                                });
+                            }
+                        });
+                    }
+                });
+
+                results.files.push(fileInfo);
+            } catch (e) {
+                console.log('Could not access:', sheet.href, e);
+            }
+        }
+
+        // Calculate duplicates
+        results.variables.forEach(defs => {
+            if (defs.length > 1) results.stats.duplicateVariables++;
+        });
+        results.selectors.forEach(files => {
+            if (files.length > 1) results.stats.duplicateSelectors++;
+        });
+        results.stats.totalVariables = results.variables.size;
+
+        return results;
+    }
+
+    function displayResults(results) {
+        // Hide loading, show results
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('results').style.display = 'block';
+
+        // Display stats
+        const statsHtml = `
+            <div class="stat-card">
+                <div class="stat-number">${results.files.length}</div>
+                <div>CSS Files</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">${results.stats.totalRules}</div>
+                <div>Total Rules</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">${results.stats.totalSelectors}</div>
+                <div>Total Selectors</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">${results.stats.totalVariables}</div>
+                <div>CSS Variables</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number warning">${results.stats.duplicateVariables}</div>
+                <div>Duplicate Variables</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number warning">${results.stats.duplicateSelectors}</div>
+                <div>Duplicate Selectors</div>
+            </div>
+        `;
+        document.getElementById('stats').innerHTML = statsHtml;
+
+        // Display file analysis
+        let fileHtml = '';
+        results.files.forEach((file, index) => {
+            const fileName = file.href ? file.href.split('/').pop() : 'Inline Styles';
+            fileHtml += `
+                <div class="file-info">
+                    <h3>${index + 1}. ${fileName}</h3>
+                    <p>Rules: ${file.ruleCount} | Selectors: ${file.selectorCount} | Variables: ${file.variableCount}</p>
+                </div>
+            `;
+        });
+        document.getElementById('file-analysis').innerHTML = fileHtml;
+
+        // Display duplicate variables
+        let varHtml = '<h3>Duplicate CSS Variables (Need Consolidation)</h3>';
+        results.variables.forEach((defs, name) => {
+            if (defs.length > 1) {
+                varHtml += `
+                    <div class="file-info duplicate">
+                        <strong>${name}</strong> - ${defs.length} definitions
+                        <details>
+                            <summary>Show definitions</summary>
+                            <pre>${defs.map(d => `${d.source.split('/').pop()}: ${d.value}`).join('\n')}</pre>
+                        </details>
+                    </div>
+                `;
+            }
+        });
+        document.getElementById('variables-analysis').innerHTML = varHtml;
+
+        // Display duplicate selectors (top 20)
+        let selHtml = '<h3>Top Duplicate Selectors</h3>';
+        const dupSelectors = Array.from(results.selectors.entries())
+            .filter(([sel, files]) => files.length > 1)
+            .sort((a, b) => b[1].length - a[1].length)
+            .slice(0, 20);
+        
+        dupSelectors.forEach(([selector, files]) => {
+            selHtml += `
+                <div class="file-info">
+                    <strong>${selector}</strong> - ${files.length} occurrences
+                    <details>
+                        <summary>Show files</summary>
+                        <pre>${[...new Set(files)].map(f => f ? f.split('/').pop() : 'inline').join('\n')}</pre>
+                    </details>
+                </div>
+            `;
+        });
+        document.getElementById('selectors-analysis').innerHTML = selHtml;
+
+        // Display color analysis
+        let colorHtml = '<h3>Most Used Colors</h3>';
+        const topColors = Array.from(results.colors.entries())
+            .sort((a, b) => b[1].length - a[1].length)
+            .slice(0, 15);
+        
+        colorHtml += '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px;">';
+        topColors.forEach(([color, files]) => {
+            colorHtml += `
+                <div class="file-info" style="text-align: center;">
+                    <div style="background: ${color}; width: 50px; height: 50px; margin: 0 auto 10px; border: 1px solid #fff;"></div>
+                    <code>${color}</code>
+                    <div>${files.length} uses</div>
+                </div>
+            `;
+        });
+        colorHtml += '</div>';
+        document.getElementById('colors-analysis').innerHTML = colorHtml;
+    }
+
+    // Run audit when page loads
+    window.addEventListener('DOMContentLoaded', async () => {
+        const results = await auditCSS();
+        displayResults(results);
+        console.log('Full audit results:', results);
+    });
+    </script>
+</body>
+</html>
