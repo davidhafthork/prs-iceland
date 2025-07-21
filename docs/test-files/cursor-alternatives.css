@@ -1,0 +1,31 @@
+/* Alternative cursor designs for gallery - no arrows */
+
+/* Option 1: Motion blur effect with multiple dots */
+.gallery-cursor-motion {
+    /* Creates trailing dots when moving */
+}
+
+/* Option 2: Squeeze effect on the ring */
+.gallery-cursor.moving-left .gallery-cursor-ring {
+    transform: scale(1.2, 0.9) skewX(-10deg);
+}
+
+.gallery-cursor.moving-right .gallery-cursor-ring {
+    transform: scale(1.2, 0.9) skewX(10deg);
+}
+
+/* Option 3: Color intensity change */
+.gallery-cursor.moving-left .gallery-cursor-ring,
+.gallery-cursor.moving-right .gallery-cursor-ring {
+    border-color: #ff3300;
+    box-shadow: 0 0 20px rgba(255, 103, 22, 0.5);
+}
+
+/* Option 4: Ring morphing */
+.gallery-cursor.moving-left .gallery-cursor-ring {
+    border-radius: 40% 60% 60% 40%;
+}
+
+.gallery-cursor.moving-right .gallery-cursor-ring {
+    border-radius: 60% 40% 40% 60%;
+}

@@ -1,0 +1,183 @@
+/* =============================================
+   SIMPLIFIED CURSOR FIX - MAXIMUM VISIBILITY
+   CSS-only solution for immediate effect
+   ============================================= */
+
+/* Force white cursor outline on all elements */
+* {
+    cursor: auto;
+}
+
+/* MAXIMUM VISIBILITY - White cursor with glow */
+html, body {
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><defs><filter id="glow"><feGaussianBlur stdDeviation="3" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><circle cx="16" cy="16" r="10" fill="white" stroke="black" stroke-width="2" filter="url(%23glow)"/><circle cx="16" cy="16" r="3" fill="black"/></svg>') 16 16, auto !important;
+}
+
+/* Pointer cursor for interactive elements */
+a,
+button,
+input[type="button"],
+input[type="submit"],
+[role="button"],
+[onclick] {
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><defs><filter id="glow"><feGaussianBlur stdDeviation="3" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><path d="M16 4 L24 12 L18 12 L18 24 L14 24 L14 12 L8 12 Z" fill="white" stroke="black" stroke-width="2" filter="url(%23glow)"/></svg>') 16 4, pointer !important;
+}
+
+/* Text inputs get text cursor */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="url"],
+input[type="number"],
+textarea,
+[contenteditable="true"] {
+    cursor: text !important;
+}
+
+/* Gallery specific */
+.gallery-viewport {
+    cursor: grab !important;
+}
+
+.gallery-viewport.dragging {
+    cursor: grabbing !important;
+}
+
+/* Add visible focus indicators for keyboard navigation */
+*:focus {
+    outline: 2px solid rgba(59, 130, 246, 0.8) !important;
+    outline-offset: 2px !important;
+}
+
+/* Enhanced hover states for better visibility */
+a:hover,
+button:hover,
+[role="button"]:hover {
+    position: relative;
+    z-index: 1;
+}
+
+/* Add a pulsing indicator on clickable elements */
+@keyframes pulse-ring {
+    0% {
+        box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+    }
+}
+
+button:hover,
+.cta-button:hover,
+.btn-primary:hover {
+    animation: pulse-ring 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+}
+
+/* Alternative: Use system cursors with better contrast */
+@media (prefers-color-scheme: dark) {
+    * {
+        cursor: auto !important;
+        caret-color: white !important;
+    }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    html {
+        cursor: crosshair !important;
+    }
+    
+    a, button, [role="button"] {
+        cursor: pointer !important;
+        position: relative;
+    }
+    
+    a::before,
+    button::before {
+        content: '';
+        position: absolute;
+        inset: -4px;
+        border: 2px dashed rgba(255, 255, 255, 0.5);
+        pointer-events: none;
+        opacity: 0;
+    }
+    
+    a:hover::before,
+    button:hover::before {
+        opacity: 1;
+    }
+}
+
+/* Mobile/touch - hide custom cursors */
+@media (hover: none) and (pointer: coarse) {
+    * {
+        cursor: auto !important;
+    }
+}
+
+/* Debug mode - make all interactive elements obvious */
+body.debug-cursor a,
+body.debug-cursor button,
+body.debug-cursor input,
+body.debug-cursor select,
+body.debug-cursor [onclick],
+body.debug-cursor [role="button"] {
+    position: relative;
+}
+
+body.debug-cursor a::after,
+body.debug-cursor button::after,
+body.debug-cursor input::after,
+body.debug-cursor select::after,
+body.debug-cursor [onclick]::after,
+body.debug-cursor [role="button"]::after {
+    content: '👆';
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 16px;
+    pointer-events: none;
+    animation: bounce 1s ease-in-out infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-5px); }
+}
+
+/* Ensure nothing hides the cursor */
+* {
+    cursor: inherit;
+}
+
+*[style*="cursor: none"] {
+    cursor: auto !important;
+}
+
+/* Special handling for problem areas */
+.hero,
+.hero-content,
+.about-section,
+.gallery-section,
+header,
+nav,
+footer {
+    cursor: default !important;
+}
+
+/* Make sure cursor changes are instant */
+* {
+    transition: none !important;
+}
+
+/* Only animate non-cursor properties */
+a,
+button {
+    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease !important;
+}

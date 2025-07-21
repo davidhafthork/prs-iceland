@@ -1,0 +1,64 @@
+<!-- Add this script to any HTML page for immediate cursor visibility -->
+<script>
+// Immediate cursor visibility enhancement
+(function() {
+    // Create a style element for cursor enhancement
+    const cursorStyle = document.createElement('style');
+    cursorStyle.innerHTML = `
+        /* White cursor with black outline for maximum visibility */
+        * {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><g filter="url(%23shadow)"><path d="M4 4 L4 18 L8 14 L11 22 L14 20 L11 12 L18 12 Z" fill="white" stroke="black" stroke-width="2"/></g><defs><filter id="shadow"><feDropShadow dx="0" dy="0" stdDeviation="2" flood-color="white" flood-opacity="0.8"/></filter></defs></svg>') 4 4, auto !important;
+        }
+        
+        a, button, input[type="button"], input[type="submit"], [role="button"], [onclick] {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><g filter="url(%23shadow)"><path d="M12 6 L20 12 L16 12 L16 20 L8 20 L8 12 L4 12 Z" fill="white" stroke="black" stroke-width="2" transform="rotate(45 12 12)"/></g><defs><filter id="shadow"><feDropShadow dx="0" dy="0" stdDeviation="2" flood-color="white" flood-opacity="0.8"/></filter></defs></svg>') 12 12, pointer !important;
+        }
+        
+        input[type="text"], textarea {
+            cursor: text !important;
+            caret-color: white !important;
+        }
+        
+        /* Add glow to all interactive elements on hover */
+        a:hover, button:hover {
+            filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.6));
+        }
+    `;
+    document.head.appendChild(cursorStyle);
+    
+    // Optional: Add a cursor follower for even better visibility
+    if (window.matchMedia('(hover: hover)').matches) {
+        const follower = document.createElement('div');
+        follower.style.cssText = `
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border: 2px solid white;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 99999;
+            mix-blend-mode: difference;
+            transition: transform 0.1s ease;
+            transform: translate(-50%, -50%);
+        `;
+        document.body.appendChild(follower);
+        
+        let visible = false;
+        document.addEventListener('mousemove', (e) => {
+            if (!visible) {
+                follower.style.opacity = '1';
+                visible = true;
+            }
+            follower.style.left = e.clientX + 'px';
+            follower.style.top = e.clientY + 'px';
+        });
+        
+        document.addEventListener('mouseout', (e) => {
+            if (!e.relatedTarget) {
+                follower.style.opacity = '0';
+                visible = false;
+            }
+        });
+    }
+})();
+</script>

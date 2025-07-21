@@ -1,0 +1,32 @@
+/* Debug version - Add visual indicators for header state changes */
+
+/* Add a colored border to make state changes very obvious */
+#header-outer {
+    border-bottom: 3px solid transparent;
+}
+
+#header-outer.transparent {
+    border-bottom-color: #ff6716; /* Orange border when transparent */
+}
+
+#header-outer.scrolled {
+    border-bottom-color: #4CAF50; /* Green border when scrolled */
+}
+
+/* Make the transition more dramatic for testing */
+#header-outer {
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+#logo {
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Add a subtle scale effect to make the size change more visible */
+#header-outer.transparent #logo {
+    transform: scale(1.05);
+}
+
+#header-outer.scrolled #logo {
+    transform: scale(1);
+}

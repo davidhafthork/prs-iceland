@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="is" class="js">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <title>PRS Iceland</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <!-- Main CSS (includes all component styles and fixes) -->
+    <link rel="stylesheet" href="../css/main.css">
+    
+    <style>
+        /* Stack-based gallery - images never leave viewport */
+        .gallery-slider {
+            position: relative;
+            height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .gallery-cell {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            z-index: 0;
+        }
+        
+        .gallery-cell.active {
+            opacity: 1;
+            z-index: 10;
+        }
+        
+        .gallery-cell.prev {
+            transform: translateX(-150%);
+            opacity: 0.3;
+            z-index: 5;
+        }
+        
+        .gallery-cell.next {
+            transform: translateX(50%);
+            opacity: 0.3;
+            z-index: 5;
+        }
+        
+        .gallery-cell img {
+            display: block;
+            max-height: 600px;
+            max-width: 90vw;
+            height: auto;
+            width: auto;
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div id="header-outer" class="transparent">
+        <div class="container">
+            <div class="row">
+                <div class="logo-section">
+                    <a id="logo" href="#" data-supplied-ml="false">
+                        <img class="stnd logo-svg" width="1368" height="312" src="../images/psr-logo.svg" alt="PRS Iceland" loading="eager">
+                    </a>
+                </div>
+                
+                <nav>
+                    <ul>
+                        <li>
+                            <a href="#">Æfingar og mót</a>
+                            <ul class="sub-menu">
+                                <li><a href="arsyfirlit.html">Ársyfirlit</a></li>
+                                <li><a href="#">PRS mótaserían</a></li>
+                                <li><a href="#">PR22 mótaserían</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">Úrslit móta</a>
+                            <ul class="sub-menu">
+                                <li><a href="#">2024</a></li>
+                                <li><a href="#">2023</a></li>
+                                <li><a href="#">2022</a></li>
+                                <li><a href="#">2021</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Meðlimir</a></li>
+                        <li><a href="#">Samþykktir</a></li>
+                        <li><a href="#">Hafa samband</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Hero Section -->
+    <section class="hero hero-split">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <div>
+                <h1>PRS Iceland</h1>
+                <p>Precision Rifle Series Iceland</p>
+                <a href="#about" class="cta-button">
+                    <span>Skráning í samtökin</span>
+                    <svg width="20" height="25" viewBox="0 0 50 80">
+                        <polyline points="0, 0 45, 40 0, 80"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="about-container">
+            <div class="about-image">
+                <img src="https://prsiceland.falala.dev/wp-content/uploads/2024/08/prs-2.jpg" alt="PRS Iceland" loading="lazy">
+            </div>
+            <div class="about-content fade-in-scroll">
+                <h2>Samtökin</h2>
+                <p>PRS skotíþróttasamtök Íslands eru nú á sínu fjórða starfsári. Félagið hefur það að markmiði að halda mótaseríur og mót fyrir riffilskotfimi nákvæmnisriffla. Núna eru í gangi tvær mótaseríur, annars vegar PRS serían (Precision Rifle Series) sem er fyrir riffla með miðkveikt caliber og hins vegar PR22 (Precision Rifle .22lr) sem er fyrir riffla með randkveiktu .22lr kaliberi.</p>
+                <a href="#" class="cta-button">
+                    <span>Skráðu þig</span>
+                    <svg width="20" height="25" viewBox="0 0 50 80">
+                        <polyline points="0, 0 45, 40 0, 80"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+        <div class="gallery-header">
+            <h2>Myndir segja þúsund orð!</h2>
+        </div>
+        <div class="gallery-carousel">
+            <div class="gallery-viewport">
+                <div class="gallery-slider">
+                    <div class="gallery-cell active">
+                        <img src="https://prsiceland.falala.dev/wp-content/uploads/2024/08/prs-3-1024x566.jpg" alt="PRS Iceland Gallery" loading="eager">
+                    </div>
+                    <div class="gallery-cell">
+                        <img src="https://prsiceland.falala.dev/wp-content/uploads/2024/08/prs-2-1024x1024.jpg" alt="PRS Iceland Gallery" loading="lazy">
+                    </div>
+                    <div class="gallery-cell">
+                        <img src="https://prsiceland.falala.dev/wp-content/uploads/2024/08/prs-1-1024x682.jpg" alt="PRS Iceland Gallery" loading="lazy">
+                    </div>
+                    <div class="gallery-cell">
+                        <img src="https://prsiceland.wordpress.com/wp-content/uploads/2024/04/20240413_155533016_ios.jpg" alt="PRS Iceland Competition" loading="lazy">
+                    </div>
+                </div>
+            </div>
+            <div class="gallery-progress">
+                <div class="gallery-progress-bar" style="width: 25%;"></div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <p class="footer-address">Stekkjaseli 7<br>109 Reykjavík</p>
+                    <p class="footer-kt">Kt: 510321-0810</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 PRS Iceland. Öll réttindi áskilin.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Main JavaScript Module -->
+    <script type="module" src="../js/main.js"></script>
+    
+    <!-- Header Script -->
+    <script>
+        (function() {
+            const header = document.getElementById('header-outer');
+            if (!header) return;
+            
+            function updateHeader() {
+                if (window.pageYOffset > 50) {
+                    header.classList.add('scrolled');
+                    header.classList.remove('transparent');
+                } else {
+                    header.classList.remove('scrolled');
+                    header.classList.add('transparent');
+                }
+            }
+            
+            updateHeader();
+            window.addEventListener('scroll', updateHeader);
+        })();
+    </script>
+    
+    <!-- Stack Gallery - Images Never Leave Viewport -->
+    <script>
+        (function() {
+            const cells = document.querySelectorAll('.gallery-cell');
+            const progressBar = document.querySelector('.gallery-progress-bar');
+            const viewport = document.querySelector('.gallery-viewport');
+            
+            // Preload all images immediately
+            cells.forEach(cell => {
+                const img = cell.querySelector('img');
+                if (img) {
+                    img.loading = 'eager';
+                    img.decoding = 'sync';
+                    img.fetchpriority = 'high';
+                    new Image().src = img.src;
+                }
+            });
+            
+            let current = 0;
+            
+            function showSlide(index) {
+                cells.forEach((cell, i) => {
+                    cell.classList.remove('active', 'prev', 'next');
+                    
+                    if (i === index) {
+                        cell.classList.add('active');
+                    } else if (i === (index - 1 + cells.length) % cells.length) {
+                        cell.classList.add('prev');
+                    } else if (i === (index + 1) % cells.length) {
+                        cell.classList.add('next');
+                    }
+                });
+                
+                // Update progress
+                const percent = 100 / cells.length;
+                progressBar.style.width = `${percent}%`;
+                progressBar.style.transform = `translateX(${index * 100}%)`;
+            }
+            
+            // Mouse/touch handling
+            let startX = 0;
+            let isDragging = false;
+            
+            viewport.addEventListener('mousedown', e => {
+                isDragging = true;
+                startX = e.pageX;
+            });
+            
+            viewport.addEventListener('mouseup', e => {
+                if (!isDragging) return;
+                isDragging = false;
+                
+                const diff = e.pageX - startX;
+                if (Math.abs(diff) > 50) {
+                    if (diff > 0) {
+                        current = (current - 1 + cells.length) % cells.length;
+                    } else {
+                        current = (current + 1) % cells.length;
+                    }
+                    showSlide(current);
+                }
+            });
+            
+            viewport.addEventListener('touchstart', e => {
+                isDragging = true;
+                startX = e.touches[0].pageX;
+            });
+            
+            viewport.addEventListener('touchend', e => {
+                if (!isDragging) return;
+                isDragging = false;
+                
+                const diff = e.changedTouches[0].pageX - startX;
+                if (Math.abs(diff) > 50) {
+                    if (diff > 0) {
+                        current = (current - 1 + cells.length) % cells.length;
+                    } else {
+                        current = (current + 1) % cells.length;
+                    }
+                    showSlide(current);
+                }
+            });
+            
+            // Keyboard
+            document.addEventListener('keydown', e => {
+                if (e.key === 'ArrowLeft') {
+                    current = (current - 1 + cells.length) % cells.length;
+                    showSlide(current);
+                } else if (e.key === 'ArrowRight') {
+                    current = (current + 1) % cells.length;
+                    showSlide(current);
+                }
+            });
+            
+            // Simple cursor
+            viewport.style.cursor = 'grab';
+            viewport.addEventListener('mousedown', () => viewport.style.cursor = 'grabbing');
+            viewport.addEventListener('mouseup', () => viewport.style.cursor = 'grab');
+            
+            // Initialize
+            showSlide(0);
+        })();
+    </script>
+</body>
+</html>

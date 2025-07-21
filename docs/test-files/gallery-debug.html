@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery Debug</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <style>
+        body {
+            background: #1a1a1a;
+            color: white;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        .debug-panel {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.8);
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 300px;
+            z-index: 1000;
+        }
+        .debug-panel h3 {
+            margin-top: 0;
+            color: #ff6716;
+        }
+        .debug-info {
+            font-size: 12px;
+            line-height: 1.6;
+        }
+        .status-ok { color: #4CAF50; }
+        .status-error { color: #f44336; }
+        .debug-button {
+            background: #ff6716;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px 0;
+            display: block;
+            width: 100%;
+        }
+        .debug-button:hover {
+            background: #e55a0c;
+        }
+    </style>
+</head>
+<body>
+    <h1>Gallery Debug Test</h1>
+    
+    <div class="debug-panel">
+        <h3>Debug Info</h3>
+        <div id="debug-info" class="debug-info">
+            <p>Loading...</p>
+        </div>
+        <button class="debug-button" onclick="testGallery()">Test Gallery Functions</button>
+        <button class="debug-button" onclick="forceInitialize()">Force Initialize</button>
+        <button class="debug-button" onclick="simulateDrag()">Simulate Drag</button>
+    </div>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+        <div class="gallery-header visible">
+            <h2>Test Gallery</h2>
+        </div>
+        <div class="gallery-carousel">
+            <div class="gallery-viewport">
+                <div class="gallery-slider">
+                    <div class="gallery-cell">
+                        <img src="https://prsiceland.falala.dev/wp-content/uploads/2024/08/prs-3-1024x566.jpg" alt="PRS Iceland Gallery" width="1024" height="566">
+                    </div>
+                    <div class="gallery-cell is-selected">
+                        <img src="https://prsiceland.falala.dev/wp-content/uploads/2024/08/prs-2-1024x1024.jpg" alt="PRS Iceland Gallery" width="1024" height="1024">
+                    </div>
+                    <div class="gallery-cell">
+                        <img src="https://prsiceland.falala.dev/wp-content/uploads/2024/08/prs-1-1024x682.jpg" alt="PRS Iceland Gallery" width="1024" height="682">
+                    </div>
+                    <div class="gallery-cell">
+                        <img src="https://prsiceland.wordpress.com/wp-content/uploads/2024/04/20240413_155533016_ios.jpg" alt="PRS Iceland Competition">
+                    </div>
+                </div>
+            </div>
+            <div class="gallery-progress">
+                <div class="gallery-progress-bar" style="width: 25%; transform: translateX(100%);"></div>
+            </div>
+        </div>
+    </section>
+
+    <script type="module">
+        import { initGalleryCarousel } from '../js/gallery.js';
+        
+        window.galleryInstance = null;
+        
+        function updateDebugInfo() {
+            const viewport = document.querySelector('.gallery-viewport');
+            const slider = document.querySelector('.gallery-slider');
+            const cells = document.querySelectorAll('.gallery-cell');
+            const progressBar = document.querySelector('.gallery-progress-bar');
+            
+            const info = document.getElementById('debug-info');
+            
+            let html = '';
+            html += `<p>Viewport: <span class="${viewport ? 'status-ok' : 'status-error'}">${viewport ? 'Found' : 'Missing'}</span></p>`;
+            html += `<p>Slider: <span class="${slider ? 'status-ok' : 'status-error'}">${slider ? 'Found' : 'Missing'}</span></p>`;
+            html += `<p>Cells: <span class="${cells.length > 0 ? 'status-ok' : 'status-error'}">${cells.length} found</span></p>`;
+            html += `<p>Progress Bar: <span class="${progressBar ? 'status-ok' : 'status-error'}">${progressBar ? 'Found' : 'Missing'}</span></p>`;
+            
+            if (slider) {
+                const transform = window.getComputedStyle(slider).transform;
+                html += `<p>Transform: ${transform}</p>`;
+            }
+            
+            if (viewport) {
+                html += `<p>Cursor: ${window.getComputedStyle(viewport).cursor}</p>`;
+            }
+            
+            html += `<p>Gallery Instance: <span class="${window.galleryInstance ? 'status-ok' : 'status-error'}">${window.galleryInstance ? 'Initialized' : 'Not initialized'}</span></p>`;
+            
+            info.innerHTML = html;
+        }
+        
+        // Initialize gallery
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('DOM loaded, initializing gallery...');
+            window.galleryInstance = initGalleryCarousel();
+            updateDebugInfo();
+            
+            // Update debug info every second
+            setInterval(updateDebugInfo, 1000);
+        });
+        
+        // Test functions
+        window.testGallery = function() {
+            console.log('Testing gallery functions...');
+            const viewport = document.querySelector('.gallery-viewport');
+            const slider = document.querySelector('.gallery-slider');
+            const cells = document.querySelectorAll('.gallery-cell');
+            
+            console.log('Elements found:', {
+                viewport: !!viewport,
+                slider: !!slider,
+                cells: cells.length
+            });
+            
+            // Test cursor
+            if (viewport) {
+                const styles = window.getComputedStyle(viewport);
+                console.log('Viewport styles:', {
+                    cursor: styles.cursor,
+                    overflow: styles.overflow,
+                    userSelect: styles.userSelect
+                });
+            }
+            
+            // Test images
+            cells.forEach((cell, i) => {
+                const img = cell.querySelector('img');
+                console.log(`Cell ${i} image:`, {
+                    src: img?.src,
+                    width: img?.width,
+                    height: img?.height,
+                    naturalWidth: img?.naturalWidth,
+                    naturalHeight: img?.naturalHeight
+                });
+            });
+            
+            updateDebugInfo();
+        };
+        
+        window.forceInitialize = function() {
+            console.log('Force initializing gallery...');
+            if (window.galleryInstance) {
+                window.galleryInstance.destroy();
+            }
+            window.galleryInstance = initGalleryCarousel();
+            updateDebugInfo();
+        };
+        
+        window.simulateDrag = function() {
+            console.log('Simulating drag...');
+            const viewport = document.querySelector('.gallery-viewport');
+            if (!viewport) {
+                console.error('No viewport found');
+                return;
+            }
+            
+            // Simulate mousedown
+            const mouseDown = new MouseEvent('mousedown', {
+                clientX: 300,
+                clientY: 300,
+                bubbles: true
+            });
+            viewport.dispatchEvent(mouseDown);
+            
+            // Simulate mousemove
+            setTimeout(() => {
+                const mouseMove = new MouseEvent('mousemove', {
+                    clientX: 100,
+                    clientY: 300,
+                    bubbles: true
+                });
+                document.dispatchEvent(mouseMove);
+                
+                // Simulate mouseup
+                setTimeout(() => {
+                    const mouseUp = new MouseEvent('mouseup', {
+                        clientX: 100,
+                        clientY: 300,
+                        bubbles: true
+                    });
+                    document.dispatchEvent(mouseUp);
+                    console.log('Drag simulation complete');
+                }, 100);
+            }, 100);
+        };
+        
+        // Initial update
+        updateDebugInfo();
+    </script>
+</body>
+</html>

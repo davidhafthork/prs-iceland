@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="is" class="js">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <title>Google Sheets Integration Template - PRS Iceland</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Copy relevant styles from main site */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --primary-color: #ff6716;
+            --dark-bg: #1a1a1a;
+            --text-light: #ffffff;
+            --text-dark: #333333;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: #f5f5f5;
+            color: var(--text-dark);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--dark-bg);
+        }
+        
+        /* Data Integration Examples */
+        .example-section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .example-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+        
+        /* Integration Methods */
+        .method-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .method-card {
+            background: #f9f9f9;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .method-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .method-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--dark-bg);
+        }
+        
+        .method-card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .code-block {
+            background: #f4f4f4;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+        
+        .demo-button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .demo-button:hover {
+            background: #d14d08;
+            transform: translateY(-2px);
+        }
+        
+        /* Sample Data Display */
+        .data-display {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f8f8f8;
+            border-radius: 8px;
+            min-height: 100px;
+        }
+        
+        .loading {
+            text-align: center;
+            color: #666;
+        }
+        
+        .error {
+            color: #d32f2f;
+            background: rgba(244,67,54,0.1);
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+        
+        .success {
+            color: #388e3c;
+            background: rgba(76,175,80,0.1);
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Google Sheets Integration Guide</h1>
+        <p style="font-size: 1.1rem; color: #666; margin-bottom: 40px;">
+            Þetta er sýnidæmi um hvernig hægt er að sækja og birta gögn úr Google Sheets á vefsíðunni.
+        </p>
+        
+        <!-- Method 1: Direct Embed -->
+        <div class="example-section">
+            <h2>Aðferð 1: Direct Embed (Einfaldast)</h2>
+            <p>Þessi aðferð sýnir Google Sheet beint á síðunni með iframe.</p>
+            
+            <div class="code-block">
+&lt;iframe src="https://docs.google.com/spreadsheets/d/e/YOUR_SHEET_ID/pubhtml?widget=true&headers=false"
+        width="100%" height="600"&gt;&lt;/iframe&gt;
+            </div>
+            
+            <h3>Kostir:</h3>
+            <ul>
+                <li>Mjög einfalt að útfæra</li>
+                <li>Uppfærist sjálfkrafa</li>
+                <li>Enginn kóði nauðsynlegur</li>
+            </ul>
+            
+            <h3>Gallar:</h3>
+            <ul>
+                <li>Lítil stjórn á útliti</li>
+                <li>Getur litið út eins og "embed"</li>
+                <li>Ekki responsive</li>
+            </ul>
+            
+            <button class="demo-button" onclick="showEmbed()">Sýna Dæmi</button>
+            <div id="embedDemo" class="data-display" style="display: none;">
+                <iframe 
+                    src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSJ5WzDN2v2gU1y7Vp-l2G19iNDC8zA1uBNTbCx9Vv8Ph4A3zgE_-6k6Vh-3yib3X_47kzyqf-Gt0-V/pubhtml?gid=0&single=true&widget=true&headers=false"
+                    width="100%" 
+                    height="400"
+                    style="border: none; border-radius: 8px;">
+                </iframe>
+            </div>
+        </div>
+        
+        <!-- Method 2: CSV Export -->
+        <div class="example-section">
+            <h2>Aðferð 2: CSV Export (Mælt með)</h2>
+            <p>Sækir gögnin sem CSV og birtir í töflu sem passar við hönnun síðunnar.</p>
+            
+            <h3>Skref:</h3>
+            <ol>
+                <li>Birta Google Sheet (File → Publish to web)</li>
+                <li>Velja CSV format</li>
+                <li>Nota JavaScript til að sækja og birta gögnin</li>
+            </ol>
+            
+            <button class="demo-button" onclick="fetchCSVData()">Sækja Gögn</button>
+            <div id="csvDemo" class="data-display"></div>
+        </div>
+        
+        <!-- Method 3: Google Sheets API -->
+        <div class="example-section">
+            <h2>Aðferð 3: JSON Feed (Best fyrir flókin gögn)</h2>
+            <p>Notar Google Visualization API til að sækja gögn sem JSON.</p>
+            
+            <div class="code-block">
+// Sækja gögn með Google Visualization API
+const query = new google.visualization.Query(SHEET_URL);
+query.send(handleResponse);
+            </div>
+            
+            <button class="demo-button" onclick="fetchJSONData()">Sækja JSON</button>
+            <div id="jsonDemo" class="data-display"></div>
+        </div>
+        
+        <!-- Integration Options -->
+        <div class="example-section">
+            <h2>Hvaða aðferð á að nota?</h2>
+            
+            <div class="method-grid">
+                <div class="method-card">
+                    <h3>📊 Fyrir Mótaúrslit</h3>
+                    <p>Mælt með: <strong>CSV Export</strong></p>
+                    <p>Gefur fulla stjórn á framsetningu og hægt að raða/sía gögn.</p>
+                </div>
+                
+                <div class="method-card">
+                    <h3>📅 Fyrir Dagatal</h3>
+                    <p>Mælt með: <strong>JSON Feed</strong></p>
+                    <p>Auðvelt að vinna með dagsetningar og flokka viðburði.</p>
+                </div>
+                
+                <div class="method-card">
+                    <h3>📋 Fyrir Skjöl</h3>
+                    <p>Mælt með: <strong>Direct Embed</strong></p>
+                    <p>Fyrir flókin skjöl með formattingu sem á að halda.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Best Practices -->
+        <div class="example-section">
+            <h2>Bestu venjur</h2>
+            <ul>
+                <li><strong>Caching:</strong> Vista gögn í 5-10 mínútur til að minnka álag</li>
+                <li><strong>Error handling:</strong> Alltaf hafa fallback ef ekki tekst að sækja gögn</li>
+                <li><strong>Loading states:</strong> Sýna loading spinner á meðan gögn eru sótt</li>
+                <li><strong>Responsive:</strong> Passa að töflur virki vel á farsímum</li>
+            </ul>
+        </div>
+    </div>
+    
+    <script>
+        // Demo functions
+        function showEmbed() {
+            const demo = document.getElementById('embedDemo');
+            demo.style.display = demo.style.display === 'none' ? 'block' : 'none';
+        }
+        
+        async function fetchCSVData() {
+            const demo = document.getElementById('csvDemo');
+            demo.innerHTML = '<div class="loading">Sæki gögn...</div>';
+            
+            try {
+                // Simulate fetching CSV data
+                setTimeout(() => {
+                    demo.innerHTML = `
+                        <div class="success">✓ Gögn sótt!</div>
+                        <table style="width: 100%; margin-top: 15px; border-collapse: collapse;">
+                            <thead>
+                                <tr style="background: #f5f5f5;">
+                                    <th style="padding: 10px; text-align: left;">Dagsetning</th>
+                                    <th style="padding: 10px; text-align: left;">Viðburður</th>
+                                    <th style="padding: 10px; text-align: left;">Staðsetning</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="padding: 10px; border-bottom: 1px solid #eee;">15. janúar 2024</td>
+                                    <td style="padding: 10px; border-bottom: 1px solid #eee;">PRS Mót 1</td>
+                                    <td style="padding: 10px; border-bottom: 1px solid #eee;">Hafnarfjörður</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 10px; border-bottom: 1px solid #eee;">22. janúar 2024</td>
+                                    <td style="padding: 10px; border-bottom: 1px solid #eee;">Æfing</td>
+                                    <td style="padding: 10px; border-bottom: 1px solid #eee;">Hafnarfjörður</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    `;
+                }, 1000);
+            } catch (error) {
+                demo.innerHTML = '<div class="error">Villa við að sækja gögn</div>';
+            }
+        }
+        
+        async function fetchJSONData() {
+            const demo = document.getElementById('jsonDemo');
+            demo.innerHTML = '<div class="loading">Sæki JSON gögn...</div>';
+            
+            setTimeout(() => {
+                demo.innerHTML = `
+                    <div class="success">✓ JSON gögn sótt!</div>
+                    <pre style="background: #f5f5f5; padding: 15px; border-radius: 4px; overflow-x: auto; margin-top: 10px;">
+{
+  "events": [
+    {
+      "date": "2024-01-15",
+      "title": "PRS Mót 1",
+      "location": "Hafnarfjörður",
+      "type": "competition"
+    },
+    {
+      "date": "2024-01-22",
+      "title": "Æfing",
+      "location": "Hafnarfjörður",
+      "type": "training"
+    }
+  ]
+}</pre>
+                `;
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Header Diagnostic</title>
+    <meta charset="UTF-8">
+    <style>
+        body { 
+            margin: 0; 
+            font-family: Arial, sans-serif;
+            height: 300vh;
+            background: linear-gradient(to bottom, #333 0%, #333 50%, #fff 50%, #fff 100%);
+        }
+        
+        .diagnostic {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.9);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            z-index: 99999;
+            max-width: 350px;
+        }
+        
+        .diagnostic h3 {
+            margin: 0 0 10px 0;
+            color: #ff6716;
+        }
+        
+        .diagnostic table {
+            width: 100%;
+            font-size: 12px;
+        }
+        
+        .diagnostic td {
+            padding: 4px;
+        }
+        
+        .diagnostic .label {
+            font-weight: bold;
+            text-align: right;
+            padding-right: 10px;
+        }
+        
+        .diagnostic .value {
+            font-family: monospace;
+            color: #4CAF50;
+        }
+        
+        .diagnostic .error {
+            color: #f44336;
+        }
+        
+        .diagnostic .warning {
+            color: #ff9800;
+        }
+        
+        .instructions {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #555;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="diagnostic">
+        <h3>🔍 Header Diagnostic Tool</h3>
+        <table>
+            <tr>
+                <td class="label">Page Status:</td>
+                <td class="value" id="page-status">Loading...</td>
+            </tr>
+            <tr>
+                <td class="label">Scroll Position:</td>
+                <td class="value" id="scroll-pos">0px</td>
+            </tr>
+            <tr>
+                <td class="label">Header Element:</td>
+                <td class="value" id="header-found">Checking...</td>
+            </tr>
+            <tr>
+                <td class="label">Header Classes:</td>
+                <td class="value" id="header-classes">...</td>
+            </tr>
+            <tr>
+                <td class="label">Background:</td>
+                <td class="value" id="header-bg">...</td>
+            </tr>
+            <tr>
+                <td class="label">Padding:</td>
+                <td class="value" id="header-padding">...</td>
+            </tr>
+            <tr>
+                <td class="label">Logo Height:</td>
+                <td class="value" id="logo-height">...</td>
+            </tr>
+            <tr>
+                <td class="label">CSS Files:</td>
+                <td class="value" id="css-files">...</td>
+            </tr>
+            <tr>
+                <td class="label">JS Status:</td>
+                <td class="value" id="js-status">...</td>
+            </tr>
+        </table>
+        
+        <div class="instructions">
+            <strong>Instructions:</strong><br>
+            1. Open your index.html in the same browser<br>
+            2. Check if values update when scrolling<br>
+            3. Header should change at 50px scroll<br>
+            4. Look for any red error messages
+        </div>
+    </div>
+
+    <iframe id="test-frame" src="index.html" style="width: 100%; height: 100vh; border: none;"></iframe>
+
+    <script>
+        let iframe = document.getElementById('test-frame');
+        let checks = 0;
+        
+        function updateDiagnostic() {
+            try {
+                let iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                let iframeWin = iframe.contentWindow;
+                
+                // Check if iframe is loaded
+                if (!iframeDoc || !iframeDoc.getElementById) {
+                    document.getElementById('page-status').textContent = 'Loading...';
+                    document.getElementById('page-status').className = 'value warning';
+                    return;
+                }
+                
+                document.getElementById('page-status').textContent = 'Loaded';
+                document.getElementById('page-status').className = 'value';
+                
+                // Get header element
+                let header = iframeDoc.getElementById('header-outer');
+                if (!header) {
+                    document.getElementById('header-found').textContent = 'NOT FOUND';
+                    document.getElementById('header-found').className = 'value error';
+                    return;
+                }
+                
+                document.getElementById('header-found').textContent = 'Found ✓';
+                document.getElementById('header-found').className = 'value';
+                
+                // Update values
+                let scrollY = iframeWin.pageYOffset || iframeDoc.documentElement.scrollTop;
+                document.getElementById('scroll-pos').textContent = scrollY + 'px';
+                
+                document.getElementById('header-classes').textContent = header.className || 'none';
+                
+                let headerStyle = iframeWin.getComputedStyle(header);
+                document.getElementById('header-bg').textContent = headerStyle.backgroundColor;
+                document.getElementById('header-padding').textContent = headerStyle.paddingTop + ' / ' + headerStyle.paddingBottom;
+                
+                // Check logo
+                let logo = iframeDoc.getElementById('logo');
+                if (logo) {
+                    document.getElementById('logo-height').textContent = logo.offsetHeight + 'px';
+                } else {
+                    document.getElementById('logo-height').textContent = 'No logo';
+                    document.getElementById('logo-height').className = 'value error';
+                }
+                
+                // Check CSS files
+                let cssCount = iframeDoc.querySelectorAll('link[rel="stylesheet"]').length;
+                document.getElementById('css-files').textContent = cssCount + ' files loaded';
+                
+                // Check if scroll handler is working
+                if (scrollY > 50 && header.className.includes('transparent')) {
+                    document.getElementById('js-status').textContent = 'Scroll handler NOT working';
+                    document.getElementById('js-status').className = 'value error';
+                } else if (scrollY <= 50 && header.className.includes('scrolled')) {
+                    document.getElementById('js-status').textContent = 'Scroll handler NOT working';
+                    document.getElementById('js-status').className = 'value error';
+                } else {
+                    document.getElementById('js-status').textContent = 'Working ✓';
+                    document.getElementById('js-status').className = 'value';
+                }
+                
+            } catch (e) {
+                console.error('Diagnostic error:', e);
+                document.getElementById('page-status').textContent = 'Error: ' + e.message;
+                document.getElementById('page-status').className = 'value error';
+            }
+        }
+        
+        // Wait for iframe to load
+        iframe.onload = function() {
+            console.log('iFrame loaded');
+            
+            // Set up scroll listener on iframe
+            iframe.contentWindow.addEventListener('scroll', updateDiagnostic);
+            
+            // Update every 100ms
+            setInterval(updateDiagnostic, 100);
+            
+            // Initial update
+            updateDiagnostic();
+        };
+        
+        // Also update on main window load
+        window.onload = function() {
+            setTimeout(updateDiagnostic, 1000);
+        };
+    </script>
+</body>
+</html>

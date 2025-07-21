@@ -1,0 +1,90 @@
+/* Footer Styles */
+
+.site-footer {
+    background: #0f0f0f;
+    color: rgba(255, 255, 255, 0.7);
+    padding: 60px 0 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Subtle gradient overlay */
+.site-footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(255, 103, 22, 0.3) 50%, 
+        transparent 100%);
+}
+
+.footer-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 45px;
+}
+
+.footer-content {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.footer-info {
+    display: inline-block;
+    position: relative;
+}
+
+.footer-address {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 300;
+    letter-spacing: 0.5px;
+}
+
+.footer-kt {
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 400;
+    letter-spacing: 1px;
+    position: relative;
+    display: inline-block;
+    padding: 0 20px;
+}
+
+/* Decorative elements around KT */
+.footer-kt::before,
+.footer-kt::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 40px;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-50%);
+}
+
+.footer-kt::before {
+    left: -50px;
+}
+
+.footer-kt::after {
+    right: -50px;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer-bottom p {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.3);
+    letter-spacing: 0.5px;
+}

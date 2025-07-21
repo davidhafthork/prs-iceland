@@ -1,0 +1,40 @@
+/* Gallery Fix - Prevent Blank Images */
+
+/* Critical: Force eager loading on ALL gallery images */
+.gallery-cell img {
+    /* Override lazy loading */
+    loading: eager !important;
+    decoding: sync !important;
+    
+    /* Minimum dimensions to prevent collapse */
+    min-height: 400px;
+    min-width: 300px;
+    background: #2a2a2a;
+    
+    /* Keep images rendered */
+    transform: translateZ(0);
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+}
+
+/* Force browser to keep cells in memory */
+.gallery-cell {
+    transform: translateZ(0);
+    will-change: transform;
+    contain: layout;
+}
+
+/* Ensure smooth dragging */
+.gallery-slider {
+    will-change: transform;
+}
+
+/* Simple cursor */
+.gallery-viewport {
+    cursor: grab;
+}
+
+.gallery-viewport:active {
+    cursor: grabbing;
+}

@@ -1,0 +1,284 @@
+/* =============================================
+   FINAL DESIGN FIX - Complete Dark Theme Fix
+   ============================================= */
+
+/* Ensure CSS variables are properly defined */
+:root {
+    /* Core dark theme colors */
+    --dark-900: #0A0B0E !important;
+    --dark-800: #13151A !important;
+    --dark-700: #1C1F26 !important;
+    --dark-600: #252932 !important;
+    --dark-500: #2E333E !important;
+    
+    /* Text hierarchy for dark theme */
+    --gray-100: #FFFFFF !important;
+    --gray-200: #F0F1F3 !important;
+    --gray-300: #D1D5DB !important;
+    --gray-400: #9CA3AF !important;
+    --gray-500: #6B7280 !important;
+    
+    /* Primary accent */
+    --primary-color: #3B82F6 !important;
+    --accent-primary: #3B82F6 !important;
+    --accent-hover: #2563EB !important;
+    
+    /* Legacy variable fixes */
+    --dark-bg: #0A0B0E !important;
+    --text-light: #F0F1F3 !important;
+    --text-dark: #FFFFFF !important; /* For headings */
+}
+
+/* Global body styles */
+body {
+    background-color: var(--dark-900) !important;
+    color: var(--gray-200) !important;
+}
+
+/* Typography - ensure all text is visible */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--gray-100) !important;
+}
+
+p, li, span, div {
+    color: var(--gray-200) !important;
+}
+
+/* Links */
+a {
+    color: var(--accent-primary) !important;
+}
+
+a:hover {
+    color: var(--accent-hover) !important;
+}
+
+/* Section backgrounds */
+.hero {
+    background-color: var(--dark-900) !important;
+}
+
+.about-section {
+    background-color: var(--dark-800) !important;
+    color: var(--gray-200) !important;
+}
+
+.gallery-section {
+    background-color: var(--dark-900) !important;
+    color: var(--gray-200) !important;
+}
+
+.site-footer,
+footer {
+    background-color: var(--dark-900) !important;
+    border-top-color: var(--dark-500) !important;
+    color: var(--gray-200) !important;
+}
+
+/* Fix specific text elements */
+.hero-content h1,
+.hero-content h2,
+.hero-content h3 {
+    color: var(--gray-100) !important;
+}
+
+.hero-content p {
+    color: var(--gray-200) !important;
+}
+
+.about-content h2 {
+    color: var(--gray-100) !important;
+}
+
+.about-content p {
+    color: var(--gray-300) !important;
+}
+
+.gallery-header h2 {
+    color: var(--gray-100) !important;
+}
+
+/* Buttons */
+.cta-button,
+.btn-primary,
+button,
+input[type="submit"] {
+    background-color: var(--accent-primary) !important;
+    color: white !important;
+    border-color: var(--accent-primary) !important;
+}
+
+.cta-button:hover,
+.btn-primary:hover,
+button:hover,
+input[type="submit"]:hover {
+    background-color: var(--accent-hover) !important;
+    border-color: var(--accent-hover) !important;
+}
+
+/* Secondary buttons */
+.btn-secondary,
+.cta-secondary {
+    background-color: transparent !important;
+    color: var(--gray-200) !important;
+    border: 2px solid var(--dark-500) !important;
+}
+
+.btn-secondary:hover,
+.cta-secondary:hover {
+    border-color: var(--accent-primary) !important;
+    color: var(--accent-primary) !important;
+}
+
+/* Navigation */
+#header-outer {
+    background-color: rgba(10, 11, 14, 0.95) !important;
+    border-bottom-color: var(--dark-500) !important;
+}
+
+nav a,
+.nav-link {
+    color: var(--gray-300) !important;
+}
+
+nav a:hover,
+.nav-link:hover {
+    color: var(--gray-100) !important;
+}
+
+/* Cards and containers */
+.card,
+.series-card,
+.feature-item,
+.content-box {
+    background-color: var(--dark-700) !important;
+    border-color: var(--dark-500) !important;
+    color: var(--gray-200) !important;
+}
+
+.card h3,
+.series-card h3,
+.feature-item h3 {
+    color: var(--gray-100) !important;
+}
+
+/* Forms */
+input,
+textarea,
+select {
+    background-color: var(--dark-700) !important;
+    border-color: var(--dark-500) !important;
+    color: var(--gray-100) !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: var(--gray-500) !important;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: var(--accent-primary) !important;
+    outline: none !important;
+}
+
+/* Remove any white backgrounds */
+.white-bg,
+.bg-white,
+[style*="background: white"],
+[style*="background-color: white"],
+[style*="background: #fff"],
+[style*="background-color: #fff"],
+[style*="background: rgb(255, 255, 255)"],
+[style*="background-color: rgb(255, 255, 255)"] {
+    background-color: var(--dark-800) !important;
+}
+
+/* Ensure overlay text is visible */
+.overlay-text,
+.hero-overlay,
+[class*="overlay"] {
+    color: var(--gray-100) !important;
+}
+
+/* Gallery specific fixes */
+.gallery-cell {
+    background-color: var(--dark-700) !important;
+}
+
+.gallery-caption {
+    color: var(--gray-200) !important;
+}
+
+/* Stats and numbers */
+.stat-number,
+.number,
+[class*="stat-number"] {
+    color: var(--accent-primary) !important;
+}
+
+.stat-label,
+[class*="stat-label"] {
+    color: var(--gray-400) !important;
+}
+
+/* Ensure all sections have proper text contrast */
+section {
+    color: var(--gray-200) !important;
+}
+
+section h1,
+section h2,
+section h3,
+section h4,
+section h5,
+section h6 {
+    color: var(--gray-100) !important;
+}
+
+/* Fix any inline styles */
+[style*="color: #333"],
+[style*="color: #666"],
+[style*="color: #999"],
+[style*="color: rgb(51, 51, 51)"],
+[style*="color: rgb(102, 102, 102)"],
+[style*="color: rgb(153, 153, 153)"] {
+    color: var(--gray-200) !important;
+}
+
+/* Ensure animations don't hide content */
+[data-scroll],
+.fade-in-scroll,
+.fade-in,
+[class*="animate"],
+.about-content,
+.gallery-header,
+.hero-content {
+    opacity: 1 !important;
+}
+
+/* Ensure content is visible even before JS loads */
+.about-content h2,
+.about-content p,
+.about-content .cta-button,
+.gallery-header h2,
+.hero-content h1,
+.hero-content p,
+.hero-content .cta-button {
+    opacity: 1 !important;
+    transform: none !important;
+}
+
+/* Debug helper - add this class to any element to check visibility */
+.debug-visible {
+    border: 2px solid red !important;
+    background-color: rgba(255, 0, 0, 0.1) !important;
+}
+
+/* Smooth transitions */
+* {
+    transition-property: color, background-color, border-color;
+    transition-duration: 0.3s;
+    transition-timing-function: ease;
+}

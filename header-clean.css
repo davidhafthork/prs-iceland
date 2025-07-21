@@ -1,0 +1,317 @@
+/* =============================================
+   CLEAN MINIMAL HEADER - No Annoying Animations
+   Professional, Modern, Elegant
+   ============================================= */
+
+/* ==========================================================================
+   Header Container - Clean and Minimal
+   ========================================================================== */
+#header-outer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10000;
+    /* Single consistent style - no transformations */
+    background: rgba(10, 11, 14, 0.98);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 16px 0; /* Consistent compact padding */
+    /* Remove all animations */
+    transition: none !important;
+}
+
+/* Remove all state changes - header stays consistent */
+#header-outer.transparent,
+#header-outer.scrolled,
+#header-outer.static {
+    background: rgba(10, 11, 14, 0.98) !important;
+    backdrop-filter: blur(20px) saturate(180%) !important;
+    padding: 16px 0 !important;
+    box-shadow: none !important;
+}
+
+/* Container */
+#header-outer .container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 45px;
+}
+
+#header-outer .row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* ==========================================================================
+   Logo - Fixed Small Size, No Scaling
+   ========================================================================== */
+#logo {
+    position: relative;
+    display: inline-block;
+    height: 48px !important; /* Fixed small height */
+    /* No transitions or animations */
+    transition: none !important;
+}
+
+/* Logo stays same size always */
+#header-outer.scrolled #logo,
+#header-outer.static #logo,
+#header-outer.transparent #logo {
+    height: 48px !important;
+}
+
+#logo img {
+    height: 100%;
+    width: auto;
+    display: block;
+    object-fit: contain;
+    /* Keep logo white always for dark header */
+    filter: brightness(0) invert(1) !important;
+    /* No transitions */
+    transition: none !important;
+}
+
+/* Remove all logo state changes */
+#header-outer.transparent #logo img.logo-svg,
+#header-outer.scrolled #logo img.logo-svg,
+#header-outer.static #logo img.logo-svg {
+    filter: brightness(0) invert(1) !important;
+}
+
+/* ==========================================================================
+   Navigation - Clean and Minimal
+   ========================================================================== */
+nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    position: relative;
+}
+
+/* Navigation Links - Consistent Style */
+nav ul li a {
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.3px;
+    color: rgba(255, 255, 255, 0.7) !important;
+    text-decoration: none;
+    padding: 8px 0;
+    position: relative;
+    /* Smooth color transitions only */
+    transition: color 0.2s ease;
+}
+
+/* Remove all state-based color changes */
+#header-outer.transparent nav ul li a,
+#header-outer.scrolled nav ul li a,
+#header-outer.static nav ul li a {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Hover - Simple color change */
+nav ul li a:hover {
+    color: rgba(255, 255, 255, 1) !important;
+}
+
+/* Clean underline indicator */
+nav > ul > li > a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--accent-primary, #3B82F6);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.2s ease;
+}
+
+nav > ul > li > a:hover::after,
+nav > ul > li > a.current-page::after {
+    transform: scaleX(1);
+}
+
+/* Current page */
+nav ul li a.current-page {
+    color: rgba(255, 255, 255, 1) !important;
+}
+
+/* Dropdown indicator */
+nav > ul > li:has(.sub-menu) > a::after {
+    display: none; /* Remove dropdown arrows for cleaner look */
+}
+
+/* ==========================================================================
+   Dropdown Menu - Clean Dark Theme
+   ========================================================================== */
+nav ul li .sub-menu {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(28, 31, 38, 0.98);
+    backdrop-filter: blur(20px);
+    min-width: 200px;
+    padding: 12px 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    margin-top: 16px;
+    /* Simple fade transition */
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+/* Show dropdown */
+nav ul li:hover .sub-menu {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+/* Dropdown items */
+nav ul li .sub-menu li {
+    display: block;
+}
+
+nav ul li .sub-menu li a {
+    color: rgba(255, 255, 255, 0.7) !important;
+    padding: 10px 20px;
+    display: block;
+    font-size: 13px;
+    font-weight: 400;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+}
+
+nav ul li .sub-menu li a:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 1) !important;
+    padding-left: 24px;
+}
+
+/* ==========================================================================
+   Mobile Menu Toggle
+   ========================================================================== */
+.mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.mobile-menu-toggle span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.8);
+    transition: all 0.3s ease;
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+@media (max-width: 1024px) {
+    nav ul {
+        gap: 24px;
+    }
+    
+    nav ul li a {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 768px) {
+    .mobile-menu-toggle {
+        display: flex;
+    }
+    
+    nav ul {
+        position: fixed;
+        top: 65px;
+        left: 0;
+        right: 0;
+        background: rgba(10, 11, 14, 0.98);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        padding: 20px;
+        gap: 16px;
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+    }
+    
+    nav ul.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    nav ul li {
+        width: 100%;
+    }
+    
+    nav ul li a {
+        display: block;
+        padding: 12px 0;
+        text-align: center;
+    }
+    
+    nav ul li .sub-menu {
+        position: static;
+        transform: none;
+        margin-top: 8px;
+        width: 100%;
+    }
+}
+
+/* ==========================================================================
+   Performance Optimizations
+   ========================================================================== */
+#header-outer {
+    will-change: auto !important; /* Remove will-change */
+    -webkit-transform: translateZ(0); /* Force GPU but no animations */
+    transform: translateZ(0);
+}
+
+/* Disable all header animations globally */
+#header-outer *,
+#header-outer *::before,
+#header-outer *::after {
+    animation: none !important;
+    transition-property: color, background-color, opacity, visibility, transform !important;
+    transition-duration: 0.2s !important;
+}
+
+/* ==========================================================================
+   Dark Theme Consistency
+   ========================================================================== */
+/* Ensure header works with the dark theme */
+body {
+    /* Add padding to account for fixed header */
+    padding-top: 80px;
+}
+
+/* Smooth scroll padding for anchor links */
+html {
+    scroll-padding-top: 90px;
+}
+
+/* Optional: Subtle shadow for depth */
+#header-outer {
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1),
+                0 4px 12px rgba(0, 0, 0, 0.3);
+}

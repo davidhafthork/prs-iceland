@@ -1,0 +1,322 @@
+/* ========================================
+   TACTICAL HEADER - Professional Navigation
+   ======================================== */
+
+/* Header Container */
+#header-outer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: rgba(10, 14, 26, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all var(--transition-base);
+    height: var(--header-height);
+}
+
+#header-outer.scrolled {
+    background: rgba(10, 14, 26, 0.98);
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Container */
+#header-outer .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    height: 100%;
+}
+
+#header-outer .row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    padding: 0 var(--space-lg);
+}
+
+/* Logo Section */
+.logo-section {
+    display: flex;
+    align-items: center;
+}
+
+#logo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    transition: transform var(--transition-base);
+}
+
+#logo:hover {
+    transform: translateX(5px);
+}
+
+/* NEW: Tactical Logo Design */
+.logo-icon {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--primary-color);
+    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+    position: relative;
+}
+
+.logo-icon::before {
+    content: '⊕';
+    font-size: 1.5rem;
+    color: var(--text-light);
+    font-weight: 300;
+}
+
+.logo-text {
+    font-family: var(--font-display, 'Bebas Neue', sans-serif);
+    font-size: 2rem;
+    letter-spacing: 0.05em;
+    color: var(--text-light);
+    text-transform: uppercase;
+}
+
+/* Navigation Menu */
+nav {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+nav > ul {
+    list-style: none;
+    display: flex;
+    gap: var(--space-xl);
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+nav > ul > li {
+    position: relative;
+}
+
+nav a {
+    font-weight: 500;
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+    color: var(--gray-300);
+    padding: var(--space-xs) 0;
+    position: relative;
+    transition: color var(--transition-base);
+    text-transform: uppercase;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary-color);
+    transition: width var(--transition-base);
+}
+
+nav a:hover {
+    color: var(--text-light);
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+/* Dropdown Menus */
+nav .sub-menu {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--gray-900);
+    min-width: 220px;
+    padding: var(--space-sm) 0;
+    border-radius: 4px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-50%) translateY(-10px);
+    transition: all var(--transition-base);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    margin-top: var(--space-sm);
+    list-style: none;
+}
+
+nav li:hover > .sub-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+nav .sub-menu li {
+    margin: 0;
+}
+
+nav .sub-menu a {
+    display: block;
+    padding: var(--space-xs) var(--space-md);
+    font-size: 0.9rem;
+    text-transform: none;
+    white-space: nowrap;
+}
+
+nav .sub-menu a:hover {
+    background: rgba(255, 255, 255, 0.05);
+    padding-left: calc(var(--space-md) + 5px);
+}
+
+nav .sub-menu a::after {
+    display: none;
+}
+
+/* CTA Button */
+.header-cta {
+    background: var(--primary-color);
+    color: var(--text-light);
+    padding: var(--space-xs) var(--space-md);
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    border: 2px solid var(--primary-color);
+    transition: all var(--transition-base);
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    margin-left: var(--space-lg);
+}
+
+.header-cta::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--dark-bg);
+    transition: left var(--transition-base);
+    z-index: -1;
+}
+
+.header-cta:hover {
+    color: var(--primary-color);
+}
+
+.header-cta:hover::before {
+    left: 0;
+}
+
+/* Mobile Menu Toggle */
+.mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    cursor: pointer;
+    padding: var(--space-xs);
+    margin-left: var(--space-md);
+}
+
+.mobile-menu-toggle span {
+    width: 24px;
+    height: 2px;
+    background: var(--text-light);
+    transition: all var(--transition-base);
+    display: block;
+}
+
+.mobile-menu-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+}
+
+.mobile-menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-menu-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    nav > ul {
+        gap: var(--space-lg);
+    }
+    
+    nav a {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 768px) {
+    #header-outer .row {
+        padding: 0 var(--space-md);
+    }
+    
+    nav {
+        position: fixed;
+        top: var(--header-height);
+        left: 0;
+        right: 0;
+        background: var(--dark-bg);
+        transform: translateX(-100%);
+        transition: transform var(--transition-base);
+        height: calc(100vh - var(--header-height));
+        overflow-y: auto;
+        padding: var(--space-lg);
+    }
+    
+    nav.mobile-active {
+        transform: translateX(0);
+    }
+    
+    nav > ul {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-md);
+    }
+    
+    nav .sub-menu {
+        position: static;
+        transform: none;
+        opacity: 1;
+        visibility: visible;
+        background: rgba(255, 255, 255, 0.02);
+        margin-top: var(--space-xs);
+        margin-left: var(--space-md);
+        box-shadow: none;
+        border: none;
+        border-left: 2px solid var(--primary-color);
+    }
+    
+    .header-cta {
+        display: none;
+    }
+    
+    .mobile-menu-toggle {
+        display: flex;
+    }
+}
+
+/* Remove old logo image styles */
+#logo img {
+    display: none;
+}
+
+/* Add text-based logo if image fails */
+#logo:not(:has(.logo-icon))::before {
+    content: 'PRS ICELAND';
+    font-family: var(--font-display, 'Bebas Neue', sans-serif);
+    font-size: 2rem;
+    letter-spacing: 0.05em;
+    color: var(--text-light);
+}

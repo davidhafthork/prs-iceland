@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="is">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRS Iceland - Color Test</title>
+    
+    <!-- Import the main CSS which now includes the color fix -->
+    <link rel="stylesheet" href="../css/main.css">
+    
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Additional override to ensure dark theme -->
+    <style>
+        /* This ensures the dark theme is applied */
+        body {
+            background: #0A0B0E !important;
+            color: #F0F1F3 !important;
+            font-family: 'Inter', sans-serif !important;
+        }
+        
+        /* Test sections to show the color scheme */
+        .test-section {
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        
+        .bg-primary { background: #0A0B0E !important; }
+        .bg-secondary { background: #13151A !important; }
+        .bg-elevated { background: #1C1F26 !important; }
+        
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 2rem auto;
+        }
+        
+        .color-card {
+            background: #1C1F26;
+            border: 1px solid #2E333E;
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .color-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border-color: #3B82F6;
+        }
+        
+        .color-swatch {
+            width: 100%;
+            height: 100px;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        
+        .color-name {
+            font-weight: 600;
+            color: #FFFFFF;
+            margin-bottom: 0.5rem;
+        }
+        
+        .color-code {
+            color: #9CA3AF;
+            font-size: 0.875rem;
+            font-family: monospace;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+        
+        .btn {
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: #3B82F6;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #2563EB;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(59, 130, 246, 0.4);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: #F0F1F3;
+            border: 2px solid #2E333E;
+        }
+        
+        .btn-secondary:hover {
+            border-color: #3B82F6;
+            color: #3B82F6;
+        }
+        
+        h1, h2, h3 {
+            color: #FFFFFF !important;
+        }
+        
+        p {
+            color: #D1D5DB !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Dark Background Section -->
+    <section class="test-section bg-primary">
+        <h1>PRS Iceland - Cohesive Design</h1>
+        <p>This page demonstrates the fixed color scheme - dark theme with blue accent</p>
+        
+        <div class="button-group">
+            <a href="#" class="btn btn-primary">Primary Button</a>
+            <a href="#" class="btn btn-secondary">Secondary Button</a>
+        </div>
+    </section>
+    
+    <!-- Secondary Background -->
+    <section class="test-section bg-secondary">
+        <h2>Color Palette</h2>
+        <p>All colors work together harmoniously</p>
+        
+        <div class="color-grid">
+            <!-- Dark Colors -->
+            <div class="color-card">
+                <div class="color-swatch" style="background: #0A0B0E"></div>
+                <div class="color-name">Primary Dark</div>
+                <div class="color-code">#0A0B0E</div>
+            </div>
+            
+            <div class="color-card">
+                <div class="color-swatch" style="background: #13151A"></div>
+                <div class="color-name">Secondary Dark</div>
+                <div class="color-code">#13151A</div>
+            </div>
+            
+            <div class="color-card">
+                <div class="color-swatch" style="background: #1C1F26"></div>
+                <div class="color-name">Elevated</div>
+                <div class="color-code">#1C1F26</div>
+            </div>
+            
+            <!-- Accent Colors -->
+            <div class="color-card">
+                <div class="color-swatch" style="background: #3B82F6"></div>
+                <div class="color-name">Primary Blue</div>
+                <div class="color-code">#3B82F6</div>
+            </div>
+            
+            <div class="color-card">
+                <div class="color-swatch" style="background: #2563EB"></div>
+                <div class="color-name">Blue Hover</div>
+                <div class="color-code">#2563EB</div>
+            </div>
+            
+            <div class="color-card">
+                <div class="color-swatch" style="background: #EF4444"></div>
+                <div class="color-name">Danger Red</div>
+                <div class="color-code">#EF4444</div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Elevated Background -->
+    <section class="test-section bg-elevated">
+        <h2>Design Elements</h2>
+        <p>Clean, modern, and professional</p>
+        
+        <div style="max-width: 600px; margin: 2rem auto;">
+            <div style="background: #252932; border: 1px solid #2E333E; border-radius: 8px; padding: 2rem;">
+                <h3 style="margin-bottom: 1rem;">Card Example</h3>
+                <p style="margin-bottom: 1.5rem;">This is how cards look with proper elevation and borders</p>
+                <a href="#" style="color: #3B82F6;">Learn more →</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Test existing elements -->
+    <section class="hero" style="min-height: 400px; display: flex; align-items: center; justify-content: center;">
+        <div class="hero-content" style="text-align: center;">
+            <h1>Hero Section Test</h1>
+            <p>The hero should have a dark background with proper text contrast</p>
+            <a href="#" class="cta-button btn btn-primary">CTA Button</a>
+        </div>
+    </section>
+    
+    <section class="about-section" style="padding: 4rem 2rem;">
+        <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+            <h2>About Section</h2>
+            <p>This section should have the secondary dark background (#13151A)</p>
+        </div>
+    </section>
+    
+    <footer style="padding: 2rem; text-align: center; border-top: 1px solid #2E333E;">
+        <p>Footer with proper dark theme colors</p>
+    </footer>
+</body>
+</html>

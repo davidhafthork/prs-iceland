@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery Fix Test - Direct Implementation</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <style>
+        /* Override any problematic styles */
+        .gallery-cell::before {
+            display: none !important;
+        }
+        
+        .gallery-viewport {
+            cursor: grab !important;
+            user-select: none !important;
+        }
+        
+        .gallery-viewport.grabbing {
+            cursor: grabbing !important;
+        }
+        
+        .debug-info {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 12px;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div class="debug-info" id="debug">
+        <div>Status: <span id="status">Loading...</span></div>
+        <div>Position: <span id="position">0</span></div>
+        <div>Index: <span id="index">0</span></div>
+    </div>
+
+    <!-- Copy of gallery section from main site -->
+    <section class="gallery-section">
+        <div class="gallery-header visible">
+            <h2>Gallery Test - Direct Implementation</h2>
+        </div>
+        <div class="gallery-carousel">
+            <div class="gallery-viewport" id="viewport">
+                <div class="gallery-slider" id="slider">
+                    <div class="gallery-cell">
+                        <img src="https://prsiceland.falala.dev/wp-content/uploads/2024/08/prs-3-1024x566.jpg" alt="PRS Iceland Gallery" width="1024" height="566" loading="lazy">
+                    </div>
+                    <div class="gallery-cell is-selected">
+                        <img src="https://prsiceland.falala.dev/wp-content/uploads/2024/08/prs-2-1024x1024.jpg" alt="PRS Iceland Gallery" width="1024" height="1024" loading="lazy">
+                    </div>
+                    <div class="gallery-cell">
+                        <img src="https://prsiceland.falala.dev/wp-content/uploads/2024/08/prs-1-1024x682.jpg" alt="PRS Iceland Gallery" width="1024" height="682" loading="lazy">
+                    </div>
+                    <div class="gallery-cell">
+                        <img src="https://prsiceland.wordpress.com/wp-content/uploads/2024/04/20240413_155533016_ios.jpg" alt="PRS Iceland Competition" loading="lazy">
+                    </div>
+                </div>
+            </div>
+            <div class="gallery-progress">
+                <div class="gallery-progress-bar" id="progress" style="width: 25%; transform: translateX(100%);"></div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Direct implementation without modules
+        (function() {
+            console.log('Direct gallery implementation starting...');
+            
+            const viewport = document.getElementById('viewport');
+            const slider = document.getElementById('slider');
+            const cells = document.querySelectorAll('.gallery-cell');
+            const progress = document.getElementById('progress');
+            const statusEl = document.getElementById('status');
+            const positionEl = document.getElementById('position');
+            const indexEl = document.getElementById('index');
+            
+            if (!viewport || !slider || cells.length === 0) {
+                console.error('Missing gallery elements!');
+                statusEl.textContent = 'ERROR: Missing elements';
+                return;
+            }
+            
+            statusEl.textContent = 'Initializing...';
+            
+            // State
+            let currentIndex = 1;
+            let isDragging = false;
+            let startX = 0;
+            let currentX = 0;
+            
+            // Get slide width
+            function getSlideOffset(index) {
+                let offset = 0;
+                const viewportWidth = viewport.offsetWidth;
+                
+                for (let i = 0; i < index; i++) {
+                    offset += cells[i].offsetWidth + 10;
+                }
+                
+                // Center the current slide
+                const currentWidth = cells[index].offsetWidth;
+                const centerOffset = (viewportWidth - currentWidth) / 2;
+                
+                return -offset + centerOffset;
+            }
+            
+            // Update position
+            function updatePosition(animate = true) {
+                const offset = getSlideOffset(currentIndex);
+                
+                slider.style.transition = animate ? 'transform 0.3s ease' : 'none';
+                slider.style.transform = `translateX(${offset}px)`;
+                
+                // Update debug
+                positionEl.textContent = offset + 'px';
+                indexEl.textContent = currentIndex;
+                
+                // Update classes
+                cells.forEach((cell, i) => {
+                    cell.classList.toggle('is-selected', i === currentIndex);
+                });
+                
+                // Update progress
+                if (progress) {
+                    const percent = 100 / cells.length;
+                    progress.style.width = `${percent}%`;
+                    progress.style.transform = `translateX(${currentIndex * 100}%)`;
+                }
+            }
+            
+            // Mouse handlers
+            function handleMouseDown(e) {
+                isDragging = true;
+                startX = e.clientX;
+                viewport.classList.add('grabbing');
+                slider.style.transition = 'none';
+                statusEl.textContent = 'Dragging...';
+                e.preventDefault();
+            }
+            
+            function handleMouseMove(e) {
+                if (!isDragging) return;
+                
+                currentX = e.clientX;
+                const diff = currentX - startX;
+                const baseOffset = getSlideOffset(currentIndex);
+                
+                slider.style.transform = `translateX(${baseOffset + diff}px)`;
+                positionEl.textContent = (baseOffset + diff) + 'px';
+            }
+            
+            function handleMouseUp() {
+                if (!isDragging) return;
+                
+                isDragging = false;
+                viewport.classList.remove('grabbing');
+                
+                const diff = currentX - startX;
+                
+                if (Math.abs(diff) > 50) {
+                    if (diff > 0 && currentIndex > 0) {
+                        currentIndex--;
+                    } else if (diff < 0 && currentIndex < cells.length - 1) {
+                        currentIndex++;
+                    }
+                }
+                
+                updatePosition();
+                statusEl.textContent = 'Ready';
+            }
+            
+            // Add event listeners
+            viewport.addEventListener('mousedown', handleMouseDown);
+            document.addEventListener('mousemove', handleMouseMove);
+            document.addEventListener('mouseup', handleMouseUp);
+            
+            // Touch support
+            viewport.addEventListener('touchstart', (e) => {
+                const touch = e.touches[0];
+                startX = touch.clientX;
+                isDragging = true;
+                slider.style.transition = 'none';
+                statusEl.textContent = 'Touch dragging...';
+            });
+            
+            viewport.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                
+                const touch = e.touches[0];
+                currentX = touch.clientX;
+                const diff = currentX - startX;
+                const baseOffset = getSlideOffset(currentIndex);
+                
+                slider.style.transform = `translateX(${baseOffset + diff}px)`;
+            });
+            
+            viewport.addEventListener('touchend', () => {
+                handleMouseUp();
+            });
+            
+            // Keyboard
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft' && currentIndex > 0) {
+                    currentIndex--;
+                    updatePosition();
+                } else if (e.key === 'ArrowRight' && currentIndex < cells.length - 1) {
+                    currentIndex++;
+                    updatePosition();
+                }
+            });
+            
+            // Initialize
+            updatePosition(false);
+            statusEl.textContent = 'Ready';
+            
+            console.log('Direct gallery implementation complete!');
+            
+            // Auto-play
+            setInterval(() => {
+                if (!isDragging) {
+                    currentIndex = (currentIndex + 1) % cells.length;
+                    updatePosition();
+                }
+            }, 4000);
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,403 @@
+/* Enhanced Design System - PRS Iceland Premium Experience */
+
+/* =====================================================
+   ENHANCED TYPOGRAPHY SYSTEM
+   ===================================================== */
+:root {
+    /* Refined color palette */
+    --primary: #ff6716;
+    --primary-dark: #e55a0f;
+    --primary-light: #ff8a47;
+    --dark: #0a0a0a;
+    --dark-soft: #1a1a1a;
+    --gray-900: #111111;
+    --gray-800: #222222;
+    --gray-700: #333333;
+    --gray-400: #666666;
+    --gray-300: #999999;
+    --gray-100: #f5f5f5;
+    --white: #ffffff;
+    
+    /* Fluid typography scale */
+    --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+    --text-sm: clamp(0.875rem, 0.8rem + 0.375vw, 1rem);
+    --text-base: clamp(1rem, 0.95rem + 0.5vw, 1.125rem);
+    --text-lg: clamp(1.125rem, 1rem + 0.625vw, 1.25rem);
+    --text-xl: clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem);
+    --text-2xl: clamp(1.5rem, 1.3rem + 1vw, 2rem);
+    --text-3xl: clamp(2rem, 1.7rem + 1.5vw, 2.5rem);
+    --text-4xl: clamp(2.5rem, 2rem + 2.5vw, 3.5rem);
+    --text-5xl: clamp(3rem, 2.5rem + 2.5vw, 4.5rem);
+    
+    /* Spacing rhythm */
+    --space-xs: clamp(0.5rem, 0.45rem + 0.25vw, 0.75rem);
+    --space-sm: clamp(1rem, 0.9rem + 0.5vw, 1.5rem);
+    --space-md: clamp(1.5rem, 1.35rem + 0.75vw, 2.25rem);
+    --space-lg: clamp(2rem, 1.8rem + 1vw, 3rem);
+    --space-xl: clamp(3rem, 2.7rem + 1.5vw, 4.5rem);
+    --space-2xl: clamp(4rem, 3.6rem + 2vw, 6rem);
+    
+    /* Animation timing */
+    --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+    --ease-in-out-expo: cubic-bezier(0.87, 0, 0.13, 1);
+}
+
+/* =====================================================
+   LOADING SEQUENCE
+   ===================================================== */
+body {
+    opacity: 0;
+    animation: bodyReveal 0.8s var(--ease-out-expo) 0.2s forwards;
+}
+
+@keyframes bodyReveal {
+    to { opacity: 1; }
+}
+
+/* Stagger reveal for main sections */
+.hero, .about-section, .gallery-section, .site-footer {
+    opacity: 0;
+    animation: sectionReveal 1s var(--ease-out-expo) forwards;
+}
+
+.hero { animation-delay: 0.3s; }
+.about-section { animation-delay: 0.5s; }
+.gallery-section { animation-delay: 0.7s; }
+.site-footer { animation-delay: 0.9s; }
+
+@keyframes sectionReveal {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =====================================================
+   ENHANCED HERO SPLIT
+   ===================================================== */
+.hero.hero-split {
+    overflow: hidden;
+}
+
+/* Text side enhancements */
+.hero.hero-split .hero-content {
+    background: 
+        linear-gradient(135deg, var(--dark) 0%, var(--dark-soft) 100%),
+        var(--dark);
+}
+
+/* Animated gradient orb */
+.hero.hero-split .hero-content::before {
+    width: 150%;
+    height: 150%;
+    background: radial-gradient(
+        circle at 30% 50%, 
+        rgba(255, 103, 22, 0.15) 0%, 
+        transparent 35%
+    );
+    animation: orbFloat 20s ease-in-out infinite;
+}
+
+@keyframes orbFloat {
+    0%, 100% { 
+        transform: translate(0, 0) scale(1);
+        opacity: 0.3;
+    }
+    33% { 
+        transform: translate(-10%, -10%) scale(1.1);
+        opacity: 0.5;
+    }
+    66% { 
+        transform: translate(10%, 10%) scale(0.95);
+        opacity: 0.4;
+    }
+}
+
+/* Typography refinements */
+.hero.hero-split h1 {
+    font-size: var(--text-5xl);
+    letter-spacing: -0.02em;
+    line-height: 0.95;
+    margin-bottom: var(--space-md);
+}
+
+.hero.hero-split p {
+    font-size: var(--text-xl);
+    color: var(--gray-300);
+    font-weight: 300;
+    letter-spacing: 0.01em;
+}
+
+/* Enhanced CTA button */
+.hero-content .cta-button {
+    margin-top: var(--space-lg);
+    font-size: var(--text-base);
+    padding: 1.25rem 2.5rem;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255, 103, 22, 0.3);
+    background: rgba(255, 103, 22, 0.05);
+    backdrop-filter: blur(10px);
+}
+
+.hero-content .cta-button::before {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+}
+
+.hero-content .cta-button:hover {
+    border-color: transparent;
+    transform: translateY(-2px);
+    box-shadow: 
+        0 10px 30px rgba(255, 103, 22, 0.3),
+        0 20px 50px rgba(255, 103, 22, 0.1);
+}
+
+/* Image side enhancements */
+.hero.hero-split .hero-bg {
+    position: relative;
+}
+
+.hero.hero-split .hero-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+        linear-gradient(90deg, var(--dark-soft) 0%, transparent 5%),
+        linear-gradient(270deg, rgba(0,0,0,0.4) 0%, transparent 50%);
+    z-index: 1;
+}
+
+/* =====================================================
+   ENHANCED NAVIGATION
+   ===================================================== */
+#header-outer.scrolled {
+    backdrop-filter: blur(20px);
+    background: rgba(10, 10, 10, 0.95);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+#logo img {
+    transition: all 0.6s var(--ease-out-expo);
+}
+
+nav ul li a {
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    position: relative;
+}
+
+/* Animated underline */
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--primary);
+    transition: width 0.3s var(--ease-out-expo);
+}
+
+nav ul li:hover > a::after {
+    width: 100%;
+}
+
+/* =====================================================
+   MODERN CURSOR (Desktop only)
+   ===================================================== */
+@media (hover: hover) and (pointer: fine) {
+    body {
+        cursor: none;
+    }
+    
+    body::after {
+        content: '';
+        position: fixed;
+        width: 12px;
+        height: 12px;
+        background: var(--primary);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 10000;
+        transform: translate(-50%, -50%);
+        transition: transform 0.15s var(--ease-out-expo);
+        mix-blend-mode: difference;
+    }
+    
+    a, button {
+        cursor: none;
+    }
+    
+    a:hover ~ body::after,
+    button:hover ~ body::after {
+        transform: translate(-50%, -50%) scale(3);
+    }
+}
+
+/* =====================================================
+   ENHANCED ABOUT SECTION
+   ===================================================== */
+.about-section {
+    padding: var(--space-2xl) 0;
+}
+
+.about-container {
+    gap: var(--space-xl);
+}
+
+.about-image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.about-image::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, 
+        rgba(255, 103, 22, 0.2) 0%, 
+        transparent 60%);
+    opacity: 0;
+    transition: opacity 0.6s ease;
+}
+
+.about-image:hover::after {
+    opacity: 1;
+}
+
+.about-image img {
+    transition: transform 0.8s var(--ease-out-expo);
+}
+
+.about-image:hover img {
+    transform: scale(1.05);
+}
+
+.about-content h2 {
+    font-size: var(--text-4xl);
+    margin-bottom: var(--space-md);
+    letter-spacing: -0.02em;
+}
+
+.about-content p {
+    font-size: var(--text-lg);
+    line-height: 1.7;
+    color: var(--gray-700);
+}
+
+/* =====================================================
+   ENHANCED GALLERY
+   ===================================================== */
+.gallery-header h2 {
+    font-size: var(--text-3xl);
+    text-align: center;
+    margin-bottom: var(--space-xl);
+    position: relative;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.gallery-header h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: var(--primary);
+}
+
+.gallery-cell img {
+    border-radius: 8px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.gallery-progress {
+    height: 2px;
+    background: rgba(255, 103, 22, 0.1);
+    margin-top: var(--space-lg);
+}
+
+.gallery-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--primary-light));
+    transition: width 0.4s var(--ease-out-expo);
+}
+
+/* =====================================================
+   ENHANCED FOOTER
+   ===================================================== */
+.site-footer {
+    background: var(--dark);
+    padding: var(--space-xl) 0;
+}
+
+.footer-content {
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.footer-content:hover {
+    opacity: 1;
+}
+
+/* =====================================================
+   SCROLL REVEAL ENHANCEMENTS
+   ===================================================== */
+[data-scroll] {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s var(--ease-out-expo);
+}
+
+[data-scroll].in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Stagger children */
+[data-scroll-stagger] > * {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s var(--ease-out-expo);
+}
+
+[data-scroll-stagger].in-view > * {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+[data-scroll-stagger].in-view > *:nth-child(1) { transition-delay: 0.1s; }
+[data-scroll-stagger].in-view > *:nth-child(2) { transition-delay: 0.2s; }
+[data-scroll-stagger].in-view > *:nth-child(3) { transition-delay: 0.3s; }
+
+/* =====================================================
+   PERFORMANCE OPTIMIZATIONS
+   ===================================================== */
+img {
+    content-visibility: auto;
+}
+
+.hero-bg,
+.gallery-cell img,
+.about-image img {
+    will-change: transform;
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

@@ -1,0 +1,186 @@
+/* Cohesive Design Fix - Unified color scheme and smooth transitions */
+
+/* ==========================================================================
+   COLOR CONSISTENCY & SECTION FLOW
+   ========================================================================== */
+
+/* Keep page load animation */
+body {
+    /* Animation handled in base.css */
+}
+
+.hero, .about-section, .gallery-section, .site-footer {
+    opacity: 1 !important;
+    animation: none !important;
+}
+
+/* Smooth section backgrounds */
+.hero.hero-split {
+    background: var(--dark);
+}
+
+.about-section {
+    background: var(--dark-800);
+    position: relative;
+}
+
+/* Add subtle divider between hero and about */
+.about-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        var(--dark-500) 50%, 
+        transparent 100%);
+}
+
+.gallery-section {
+    background: var(--dark-900);
+    padding: 80px 0;
+}
+
+.site-footer {
+    background: var(--dark);
+    margin-top: 0;
+}
+
+/* ==========================================================================
+   ENHANCED SCROLL ANIMATIONS (SIMPLIFIED)
+   ========================================================================== */
+[data-scroll] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+}
+
+[data-scroll].in-view {
+    opacity: 1;
+    transform: none;
+}
+
+/* Simple fade for scroll elements */
+.fade-in-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease;
+}
+
+.fade-in-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ==========================================================================
+   HERO REFINEMENTS
+   ========================================================================== */
+.hero.hero-split .hero-content {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+}
+
+/* Soften the gradient orb */
+.hero.hero-split .hero-content::before {
+    background: radial-gradient(
+        circle at 70% 50%, 
+        rgba(255, 103, 22, 0.08) 0%, 
+        transparent 50%
+    );
+    animation: gentleFloat 15s ease-in-out infinite;
+}
+
+@keyframes gentleFloat {
+    0%, 100% { 
+        transform: translate(0, 0);
+        opacity: 0.5;
+    }
+    50% { 
+        transform: translate(-30px, -30px);
+        opacity: 0.7;
+    }
+}
+
+/* Better image side gradient */
+.hero.hero-split .hero-bg::before {
+    background: linear-gradient(90deg, #0a0a0a 0%, transparent 3%);
+}
+
+/* ==========================================================================
+   ABOUT SECTION REFINEMENTS
+   ========================================================================== */
+.about-content h2 {
+    color: var(--dark);
+}
+
+.about-content p {
+    color: #555555;
+    line-height: 1.8;
+}
+
+.about-content .cta-button {
+    background: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.about-content .cta-button:hover {
+    background: var(--primary-color);
+    color: white;
+}
+
+/* ==========================================================================
+   GALLERY REFINEMENTS
+   ========================================================================== */
+.gallery-header h2 {
+    color: var(--dark);
+    font-weight: 600;
+}
+
+.gallery-carousel {
+    background: transparent;
+}
+
+/* ==========================================================================
+   SMOOTH TRANSITIONS BETWEEN SECTIONS
+   ========================================================================== */
+section {
+    position: relative;
+    z-index: 1;
+}
+
+/* Remove all conflicting cursor styles */
+body::after {
+    display: none !important;
+}
+
+/* Hide default cursor on interactive elements */
+a, button, .cta-button, input, textarea, select {
+    cursor: none;
+}
+
+.custom-cursor {
+    opacity: 0.8;
+    mix-blend-mode: normal !important;
+}
+
+/* ==========================================================================
+   RESPONSIVE FIXES
+   ========================================================================== */
+@media (max-width: 768px) {
+    .hero.hero-split {
+        height: auto;
+        min-height: 100vh;
+    }
+    
+    .hero.hero-split .hero-content {
+        min-height: 50vh;
+        display: flex;
+        align-items: center;
+    }
+    
+    .hero.hero-split .hero-bg {
+        min-height: 50vh;
+    }
+}

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery Test - Fixed</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #1a1a1a;
+        }
+        .test-info {
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .test-info h1 {
+            color: #ff6716;
+        }
+        .test-info p {
+            color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-info">
+        <h1>Gallery Carousel Test - Fixed Version</h1>
+        <p>The carousel should now be draggable with your mouse. Try:</p>
+        <ul style="display: inline-block; text-align: left;">
+            <li>Click and drag left/right to navigate</li>
+            <li>Use arrow keys (← →) to navigate</li>
+            <li>Hover to see the grab cursor</li>
+            <li>The carousel auto-plays every 4 seconds</li>
+        </ul>
+    </div>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+        <div class="gallery-header visible">
+            <h2>Myndir segja þúsund orð!</h2>
+        </div>
+        <div class="gallery-carousel">
+            <div class="gallery-viewport">
+                <div class="gallery-slider">
+                    <div class="gallery-cell">
+                        <img src="https://prsiceland.falala.dev/wp-content/uploads/2024/08/prs-3-1024x566.jpg" alt="PRS Iceland Gallery" width="1024" height="566" loading="lazy">
+                    </div>
+                    <div class="gallery-cell is-selected">
+                        <img src="https://prsiceland.falala.dev/wp-content/uploads/2024/08/prs-2-1024x1024.jpg" alt="PRS Iceland Gallery" width="1024" height="1024" loading="lazy">
+                    </div>
+                    <div class="gallery-cell">
+                        <img src="https://prsiceland.falala.dev/wp-content/uploads/2024/08/prs-1-1024x682.jpg" alt="PRS Iceland Gallery" width="1024" height="682" loading="lazy">
+                    </div>
+                    <div class="gallery-cell">
+                        <img src="https://prsiceland.wordpress.com/wp-content/uploads/2024/04/20240413_155533016_ios.jpg" alt="PRS Iceland Competition" loading="lazy">
+                    </div>
+                </div>
+            </div>
+            <div class="gallery-progress">
+                <div class="gallery-progress-bar" style="width: 25%; transform: translateX(100%);"></div>
+            </div>
+        </div>
+    </section>
+
+    <script type="module">
+        import { initGalleryCarousel } from '../js/gallery.js';
+        
+        // Initialize gallery
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('Initializing gallery...');
+            const gallery = initGalleryCarousel();
+            console.log('Gallery initialized!');
+            
+            // Log any errors
+            window.addEventListener('error', (e) => {
+                console.error('Error:', e.message, e.filename, e.lineno, e.colno);
+            });
+        });
+    </script>
+</body>
+</html>

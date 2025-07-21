@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="is">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursor Visibility Test - PRS Iceland</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/main.css">
+    
+    <style>
+        .test-container {
+            max-width: 800px;
+            margin: 100px auto;
+            padding: 40px;
+            background: var(--dark-800);
+            border-radius: 8px;
+        }
+        
+        .test-grid {
+            display: grid;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .test-item {
+            padding: 20px;
+            background: var(--dark-700);
+            border-radius: 4px;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        
+        .cursor-options {
+            margin-top: 40px;
+            padding: 20px;
+            background: var(--dark-700);
+            border-radius: 4px;
+        }
+        
+        .cursor-option {
+            margin: 10px 0;
+        }
+        
+        .cursor-option button {
+            margin-left: 10px;
+            padding: 5px 15px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>Cursor Visibility Test</h1>
+        <p>The custom SVG cursors didn't work, so I've enhanced the hover effects instead. Move your cursor over the elements below to see the visual feedback.</p>
+        
+        <div class="test-grid">
+            <div class="test-item">
+                <h3>Enhanced Hover Effects</h3>
+                <p>All interactive elements now show a blue glow when you hover over them. This helps you track where your cursor is.</p>
+                <div class="button-group">
+                    <button class="cta-button">Primary Button</button>
+                    <button class="btn-secondary">Secondary Button</button>
+                </div>
+            </div>
+            
+            <div class="test-item">
+                <h3>Links</h3>
+                <p>Links show underlines on hover: <a href="#">Hover over this link</a> to see the effect. The underline helps indicate clickable text.</p>
+            </div>
+            
+            <div class="test-item">
+                <h3>Form Elements</h3>
+                <p>Input fields show blue borders on hover and have white text cursors:</p>
+                <input type="text" placeholder="Click here to type" style="width: 100%; margin-top: 10px;">
+                <textarea placeholder="Or type here" style="width: 100%; margin-top: 10px; min-height: 80px;"></textarea>
+            </div>
+            
+            <div class="test-item">
+                <h3>Gallery Cursor</h3>
+                <p>The gallery shows "Drag to scroll" on hover and uses grab/grabbing cursors.</p>
+            </div>
+        </div>
+        
+        <div class="cursor-options">
+            <h3>Try Different Cursor Styles</h3>
+            <p>If the default cursor is still hard to see, try these options:</p>
+            
+            <div class="cursor-option">
+                <span>Crosshair cursor (most visible):</span>
+                <button onclick="document.body.style.cursor = 'crosshair'">Try Crosshair</button>
+            </div>
+            
+            <div class="cursor-option">
+                <span>Default cursor:</span>
+                <button onclick="document.body.style.cursor = 'default'">Default</button>
+            </div>
+            
+            <div class="cursor-option">
+                <span>System cursor:</span>
+                <button onclick="document.body.style.cursor = 'auto'">Auto</button>
+            </div>
+            
+            <p style="margin-top: 20px; font-size: 14px; opacity: 0.7;">
+                Note: For best results, adjust your system cursor settings:<br>
+                • Windows: Settings → Ease of Access → Mouse pointer<br>
+                • macOS: System Preferences → Accessibility → Display → Pointer
+            </p>
+        </div>
+    </div>
+    
+    <script>
+        // Show cursor position for debugging
+        document.addEventListener('mousemove', (e) => {
+            const indicator = document.getElementById('cursor-indicator');
+            if (!indicator) {
+                const div = document.createElement('div');
+                div.id = 'cursor-indicator';
+                div.style.cssText = `
+                    position: fixed;
+                    bottom: 20px;
+                    right: 20px;
+                    background: rgba(0,0,0,0.8);
+                    color: white;
+                    padding: 10px;
+                    border-radius: 4px;
+                    font-size: 12px;
+                    pointer-events: none;
+                    z-index: 9999;
+                `;
+                document.body.appendChild(div);
+            }
+            document.getElementById('cursor-indicator').textContent = `Cursor: ${e.clientX}, ${e.clientY}`;
+        });
+    </script>
+</body>
+</html>

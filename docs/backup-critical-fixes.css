@@ -1,0 +1,75 @@
+/* Critical fixes for header and about section */
+
+/* HEADER FIXES - Ensure transitions work */
+#header-outer {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    z-index: 10000 !important;
+    transition: all 0.4s ease !important;
+}
+
+/* Force transparent state */
+#header-outer.transparent {
+    background: transparent !important;
+    background-color: transparent !important;
+    backdrop-filter: none !important;
+    box-shadow: none !important;
+    padding: 34px 0 !important;
+}
+
+/* Force scrolled state to be visible */
+#header-outer.scrolled {
+    background: rgba(255, 255, 255, 0.95) !important;
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(10px) !important;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1) !important;
+    padding: 20px 0 !important;
+}
+
+/* Logo size transitions */
+#header-outer.transparent #logo {
+    height: 80px !important;
+}
+
+#header-outer.scrolled #logo {
+    height: 60px !important;
+}
+
+/* ABOUT SECTION FIXES - Ensure text is visible */
+.about-section {
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+}
+
+.about-section * {
+    color: inherit !important;
+}
+
+.about-content,
+.about-content h2,
+.about-content p {
+    color: #333333 !important;
+}
+
+.about-content h2 {
+    color: #333333 !important;
+}
+
+.about-content p {
+    color: #666666 !important;
+}
+
+/* Ensure animations still work */
+.about-content h2,
+.about-content p {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.about-content.visible h2,
+.about-content.visible p {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}

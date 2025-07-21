@@ -1,0 +1,141 @@
+/* About Section Styles */
+
+/* ==========================================================================
+   Section Container
+   ========================================================================== */
+.about-section {
+    padding: 12vh 0 9vh;
+    position: relative;
+    background: var(--dark-800, #13151A);
+    color: var(--text-light, #F0F1F3);
+}
+
+.about-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 45px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 90px;
+    align-items: center;
+}
+
+/* ==========================================================================
+   Image Section
+   ========================================================================== */
+.about-image {
+    position: relative;
+    height: 600px;
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+.about-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.1);
+    transition: transform 0.6s ease;
+}
+
+.about-image:hover img {
+    transform: scale(1.05);
+}
+
+/* ==========================================================================
+   Content Section - Text Always Visible
+   ========================================================================== */
+.about-content h2 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+    color: var(--gray-100, #FFFFFF);
+    /* Text is visible by default */
+    opacity: 1;
+    transform: none;
+}
+
+.about-content p {
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 30px;
+    color: var(--gray-300, #D1D5DB);
+    max-width: 500px;
+    /* Text is visible by default */
+    opacity: 1;
+    transform: none;
+}
+
+/* Animation only when 'visible' class is added by JavaScript */
+.about-content.visible h2 {
+    animation: fadeInUp 0.8s ease both;
+}
+
+.about-content.visible p {
+    animation: fadeInUp 0.8s ease both;
+    animation-delay: 0.2s;
+}
+
+/* ==========================================================================
+   CTA Button - Always Visible
+   ========================================================================== */
+.about-content .cta-button {
+    background: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    color: white;
+    padding: 15px 30px;
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    /* Button is visible by default */
+    opacity: 1;
+    transform: none;
+}
+
+.about-content.visible .cta-button {
+    animation: fadeInUp 0.8s ease both;
+    animation-delay: 0.4s;
+}
+
+.about-content .cta-button:hover {
+    background: #d14d08;
+    border-color: #d14d08;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 103, 22, 0.3);
+}
+
+/* Button arrow */
+.about-content .cta-button svg {
+    width: 15px;
+    height: 20px;
+    transition: transform 0.3s ease;
+}
+
+.about-content .cta-button:hover svg {
+    transform: translateX(5px);
+}
+
+.about-content .cta-button svg polyline {
+    stroke: currentColor;
+    stroke-width: 2;
+    fill: none;
+}
+
+/* ==========================================================================
+   Animations
+   ========================================================================== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="is">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRS Iceland - Design Test</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../css/main.css">
+    
+    <style>
+        /* Quick test styles */
+        .test-section {
+            padding: 80px 0;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .test-card {
+            padding: 30px;
+            border-radius: 8px;
+            background: var(--dark-700);
+            border: 1px solid var(--dark-500);
+        }
+        
+        .color-swatch {
+            width: 100%;
+            height: 60px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <!-- Test Header -->
+    <div id="header-outer" style="padding: 20px;">
+        <nav style="display: flex; gap: 30px; justify-content: center;">
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Gallery</a>
+            <a href="#">Contact</a>
+        </nav>
+    </div>
+
+    <!-- Hero Test -->
+    <section class="hero" style="height: 400px; display: flex; align-items: center; justify-content: center;">
+        <div class="hero-content" style="text-align: center;">
+            <h1>PRS Iceland Design Test</h1>
+            <p>Testing the new cohesive dark theme design system</p>
+            <a href="#" class="cta-button">Primary Button</a>
+        </div>
+    </section>
+
+    <!-- About Test -->
+    <section class="about-section">
+        <div class="test-section">
+            <div class="about-content">
+                <h2>About Section Test</h2>
+                <p>This section tests the about section styling. All text should be clearly visible with proper contrast on the dark background. The heading should be white and the paragraph text should be a light gray.</p>
+                <a href="#" class="btn-secondary">Secondary Button</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Color Palette Test -->
+    <section class="gallery-section">
+        <div class="test-section">
+            <div class="gallery-header">
+                <h2>Color Palette & Elements Test</h2>
+            </div>
+            
+            <div class="test-grid">
+                <!-- Background Colors -->
+                <div class="test-card">
+                    <h3>Background Colors</h3>
+                    <div class="color-swatch" style="background: var(--dark-900); color: white;">
+                        Dark 900
+                    </div>
+                    <div class="color-swatch" style="background: var(--dark-800); color: white;">
+                        Dark 800
+                    </div>
+                    <div class="color-swatch" style="background: var(--dark-700); color: white;">
+                        Dark 700
+                    </div>
+                    <div class="color-swatch" style="background: var(--dark-600); color: white;">
+                        Dark 600
+                    </div>
+                </div>
+
+                <!-- Text Colors -->
+                <div class="test-card">
+                    <h3>Text Hierarchy</h3>
+                    <h1 style="font-size: 24px;">Heading (White)</h1>
+                    <p>Body text (Light Gray)</p>
+                    <p style="color: var(--gray-300);">Secondary text</p>
+                    <p style="color: var(--gray-400);">Muted text</p>
+                    <p style="color: var(--gray-500);">Disabled text</p>
+                </div>
+
+                <!-- Interactive Elements -->
+                <div class="test-card">
+                    <h3>Interactive Elements</h3>
+                    <button class="cta-button" style="margin: 10px 0;">Primary Button</button>
+                    <button class="btn-secondary" style="margin: 10px 0; display: block;">Secondary Button</button>
+                    <a href="#" style="display: block; margin: 10px 0;">Link Color</a>
+                    <input type="text" placeholder="Input field" style="width: 100%; padding: 10px; margin: 10px 0;">
+                </div>
+
+                <!-- Stats Example -->
+                <div class="test-card">
+                    <h3>Stats Example</h3>
+                    <div style="text-align: center; margin: 20px 0;">
+                        <div class="stat-number" style="font-size: 48px; font-weight: 700;">127</div>
+                        <div class="stat-label">Active Members</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Test -->
+    <footer class="site-footer" style="padding: 40px 0; text-align: center;">
+        <p>© 2024 PRS Iceland. All rights reserved.</p>
+        <p style="color: var(--gray-400);">Footer text should be visible on dark background</p>
+    </footer>
+
+    <script>
+        // Log the computed styles for debugging
+        console.log('Body background:', getComputedStyle(document.body).backgroundColor);
+        console.log('Body color:', getComputedStyle(document.body).color);
+        
+        // Check specific elements
+        const h2 = document.querySelector('h2');
+        if (h2) {
+            console.log('H2 color:', getComputedStyle(h2).color);
+        }
+        
+        const aboutSection = document.querySelector('.about-section');
+        if (aboutSection) {
+            console.log('About section background:', getComputedStyle(aboutSection).backgroundColor);
+        }
+    </script>
+</body>
+</html>

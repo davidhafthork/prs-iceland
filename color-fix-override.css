@@ -1,0 +1,276 @@
+/* ========================================
+   QUICK COLOR FIX - PRS ICELAND
+   Add this to quickly fix the color scheme
+   ======================================== */
+
+/* Override the mismatched colors with a cohesive scheme */
+:root {
+    /* Main colors - Dark theme with blue accent */
+    --primary-color: #3B82F6 !important;     /* Blue instead of orange/green */
+    --dark-bg: #0A0B0E !important;           /* Pure black, not navy */
+    --text-light: #F0F1F3 !important;        /* Proper off-white */
+    --text-dark: #1C1F26 !important;         /* Dark gray for light backgrounds */
+    
+    /* Additional dark theme colors */
+    --dark: #0A0B0E !important;              /* Main background */
+    --dark-800: #13151A !important;          /* Section backgrounds */
+    --dark-700: #1C1F26 !important;          /* Card backgrounds */
+    --dark-600: #252932 !important;          /* Elevated surfaces */
+    --dark-500: #2E333E !important;          /* Borders */
+    
+    /* Fix any green/tan/red references */
+    --accent-green: #3B82F6 !important;      /* Replace green with blue */
+    --accent-tan: #2563EB !important;        /* Replace tan with darker blue */
+    --accent-red: #EF4444 !important;        /* Keep red but make it cohesive */
+    
+    /* Gray scale for text */
+    --neutral-100: #FFFFFF !important;
+    --neutral-200: #F0F1F3 !important;
+    --neutral-300: #D1D5DB !important;
+    --neutral-400: #9CA3AF !important;
+    --neutral-500: #6B7280 !important;
+    --neutral-600: #4B5563 !important;
+    --neutral-700: #374151 !important;
+    --neutral-800: #1F2937 !important;
+    --neutral-900: #111827 !important;
+}
+
+/* Fix specific elements */
+body {
+    background: #0A0B0E !important;
+    color: #F0F1F3 !important;
+}
+
+/* Header fixes */
+#header-outer {
+    background: rgba(10, 11, 14, 0.9) !important;
+    border-bottom-color: #2E333E !important;
+}
+
+/* Button fixes */
+.cta-button,
+.btn-primary,
+a[class*="button"] {
+    background: #3B82F6 !important;
+    border-color: #3B82F6 !important;
+    color: white !important;
+}
+
+.cta-button:hover,
+.btn-primary:hover {
+    background: #2563EB !important;
+    border-color: #2563EB !important;
+    box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3) !important;
+}
+
+/* Secondary buttons */
+.btn-secondary,
+.cta-secondary {
+    background: transparent !important;
+    border: 2px solid #2E333E !important;
+    color: #F0F1F3 !important;
+}
+
+.btn-secondary:hover,
+.cta-secondary:hover {
+    border-color: #3B82F6 !important;
+    color: #3B82F6 !important;
+}
+
+/* Section backgrounds - Force dark theme */
+.hero {
+    background: linear-gradient(135deg, #0A0B0E 0%, #13151A 100%) !important;
+}
+
+.hero-bg {
+    opacity: 0.3 !important;
+    filter: grayscale(100%) !important;
+}
+
+.hero::before {
+    background: linear-gradient(135deg, 
+        rgba(10, 11, 14, 0.8) 0%, 
+        rgba(10, 11, 14, 0.4) 50%, 
+        rgba(10, 11, 14, 0.7) 100%) !important;
+}
+
+.about-section {
+    background: #13151A !important;
+}
+
+.gallery-section {
+    background: #0A0B0E !important;
+}
+
+footer,
+.site-footer {
+    background: #0A0B0E !important;
+    border-top: 1px solid #2E333E !important;
+}
+
+/* Override any white backgrounds */
+[style*="background: #fff"],
+[style*="background:#fff"],
+[style*="background-color: #fff"],
+[style*="background-color:#fff"],
+[style*="background: rgb(255, 255, 255)"],
+[style*="background-color: rgb(255, 255, 255)"],
+[style*="background: white"],
+[style*="background-color: white"] {
+    background: #13151A !important;
+}
+
+/* Card backgrounds */
+.card,
+.series-card,
+.feature-item {
+    background: #1C1F26 !important;
+    border-color: #2E333E !important;
+}
+
+/* Text color fixes */
+h1, h2, h3, h4, h5, h6 {
+    color: #FFFFFF !important;
+}
+
+p {
+    color: #D1D5DB !important;
+}
+
+/* Link colors */
+a {
+    color: #3B82F6 !important;
+}
+
+a:hover {
+    color: #60A5FA !important;
+}
+
+/* Navigation fixes */
+nav a {
+    color: #D1D5DB !important;
+}
+
+nav a:hover {
+    color: #FFFFFF !important;
+}
+
+nav a::after,
+nav a::before {
+    background: #3B82F6 !important;
+}
+
+/* Remove any tactical/military styling */
+.tactical-hex,
+.tactical-grid::after,
+[class*="tactical"] {
+    display: none !important;
+}
+
+/* Fix any remaining orange references */
+[style*="#ff6716"],
+[style*="#FF6716"],
+[style*="rgb(255, 103, 22)"] {
+    color: #3B82F6 !important;
+}
+
+/* Gallery fixes */
+.gallery-carousel {
+    background: transparent !important;
+}
+
+.gallery-progress-bar {
+    background: #3B82F6 !important;
+}
+
+/* Form elements */
+input,
+textarea,
+select {
+    background: #1C1F26 !important;
+    border-color: #2E333E !important;
+    color: #F0F1F3 !important;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: #3B82F6 !important;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+}
+
+/* Badges */
+.badge-new,
+.new-badge,
+.tactical-badge {
+    background: #EF4444 !important;
+    animation: pulse 2s ease-in-out infinite !important;
+}
+
+/* Smooth all transitions */
+* {
+    transition-duration: 0.3s !important;
+    transition-timing-function: ease !important;
+}
+
+/* Additional specific overrides */
+#about,
+.about,
+[class*="about"] {
+    background: #13151A !important;
+    color: #F0F1F3 !important;
+}
+
+.hero-content {
+    color: #F0F1F3 !important;
+}
+
+.hero-content h1,
+.hero-content h2,
+.hero-content h3 {
+    color: #FFFFFF !important;
+}
+
+.hero-content p {
+    color: #D1D5DB !important;
+}
+
+/* Stats styling */
+.stat-number,
+[class*="stat-number"] {
+    color: #3B82F6 !important;
+}
+
+.stat-label,
+[class*="stat-label"] {
+    color: #9CA3AF !important;
+}
+
+/* Feature icons */
+.feature-icon,
+[class*="icon"] {
+    background: rgba(59, 130, 246, 0.1) !important;
+    color: #3B82F6 !important;
+}
+
+/* Series cards */
+.series-card:hover {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Remove any remaining light theme artifacts */
+section {
+    background-color: inherit !important;
+}
+
+/* Ensure dark theme on all major containers */
+main,
+.main,
+#main,
+.content,
+#content,
+.wrapper,
+#wrapper {
+    background: #0A0B0E !important;
+    color: #F0F1F3 !important;
+}

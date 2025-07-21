@@ -1,0 +1,135 @@
+/* Split Screen Hero Variant - Add class "hero-split" to hero section */
+
+.hero.hero-split {
+    display: flex;
+    background: none;
+}
+
+.hero.hero-split::before {
+    display: none;
+}
+
+.hero.hero-split .hero-bg {
+    position: relative;
+    flex: 1;
+    height: 100%;
+    animation: none;
+    transform: none;
+    overflow: hidden;
+    /* Fix: Remove the dark blue background color */
+    background-color: #000;
+    /* Fix: Ensure image covers entire area */
+    background-size: cover;
+    background-position: center center;
+}
+
+/* Add subtle gradient overlay */
+.hero.hero-split .hero-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, 
+        rgba(0, 0, 0, 0.2) 0%, 
+        transparent 40%,
+        rgba(0, 0, 0, 0.4) 100%);
+    pointer-events: none;
+}
+
+/* Remove the zoom effect that might cause gaps */
+.hero.hero-split .hero-bg {
+    /* Remove these zoom animations that can cause gaps */
+    transition: none;
+}
+
+body.loaded .hero.hero-split .hero-bg {
+    background-size: cover;
+}
+
+.hero.hero-split .hero-content {
+    flex: 1;
+    background: #1a1a1a;
+    padding: 0 80px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Add visual interest to text side */
+.hero.hero-split .hero-content::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -30%;
+    width: 100%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(76, 175, 80, 0.05) 0%, transparent 50%);
+    animation: pulse 8s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.3; }
+    50% { transform: scale(1.1); opacity: 0.5; }
+}
+
+/* Add accent line - green to match your theme */
+.hero.hero-split .hero-content h1 {
+    position: relative;
+    padding-left: 30px;
+}
+
+.hero.hero-split .hero-content h1::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 60%;
+    background: #4CAF50;
+}
+
+.hero.hero-split .hero-content h1::after {
+    display: none;
+}
+
+/* Remove float animation */
+.hero-loaded .hero.hero-split .hero-content > div {
+    animation: none;
+}
+
+/* Make CTA buttons stand out more */
+.hero.hero-split .cta-button {
+    background: #4CAF50;
+    border-color: #4CAF50;
+}
+
+.hero.hero-split .cta-button:hover {
+    background: #45a049;
+    border-color: #45a049;
+}
+
+.hero.hero-split .cta-button[style*="background: transparent"] {
+    background: transparent !important;
+    border: 2px solid #4CAF50;
+}
+
+.hero.hero-split .cta-button[style*="background: transparent"]:hover {
+    background: rgba(76, 175, 80, 0.1) !important;
+    border-color: #4CAF50;
+}
+
+/* Mobile: Stack vertically */
+@media (max-width: 768px) {
+    .hero.hero-split {
+        flex-direction: column;
+    }
+    
+    .hero.hero-split .hero-content {
+        padding: 60px 40px;
+        order: 2;
+    }
+    
+    .hero.hero-split .hero-bg {
+        height: 50vh;
+        order: 1;
+    }
+}

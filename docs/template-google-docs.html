@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="is" class="js">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <title>TITLE HERE - PRS Iceland</title>
+    
+    <!-- Copy these from main site -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Simplified styles - copy full styles from arsyfirlit.html -->
+    <style>
+        a { text-decoration: none; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary-color: #ff6716;
+            --dark-bg: #1a1a1a;
+            --text-light: #ffffff;
+            --text-dark: #333333;
+        }
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: #f8f8f8;
+            color: var(--text-dark);
+            padding-top: 90px;
+            opacity: 0;
+            animation: pageLoad 0.4s ease forwards;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        
+        @keyframes pageLoad {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Basic header styles */
+        #header-outer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 10000;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            padding: 20px 0;
+        }
+        
+        #header-outer .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 45px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        #logo {
+            height: 60px;
+        }
+        
+        #logo img {
+            height: 100%;
+            width: auto;
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+        
+        nav a {
+            color: var(--text-dark);
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        nav a:hover {
+            color: var(--primary-color);
+        }
+        
+        .page-header {
+            background: var(--dark-bg);
+            color: var(--text-light);
+            padding: 120px 0 80px;
+            text-align: center;
+        }
+        .content-section {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .google-doc-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+        .doc-header {
+            background: var(--dark-bg);
+            color: white;
+            padding: 20px 30px;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        .google-doc-embed {
+            width: 100%;
+            height: 800px;
+            border: none;
+        }
+        
+        /* Footer Styles */
+        .site-footer {
+            background: #0f0f0f;
+            color: rgba(255, 255, 255, 0.7);
+            padding: 60px 0 30px;
+            position: relative;
+            overflow: hidden;
+            margin-top: 80px;
+        }
+        
+        .site-footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(255, 103, 22, 0.3) 50%, 
+                transparent 100%);
+        }
+        
+        .footer-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 45px;
+        }
+        
+        .footer-content {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .footer-info {
+            display: inline-block;
+            position: relative;
+        }
+        
+        .footer-address {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 300;
+        }
+        
+        .footer-kt {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.5);
+            font-weight: 400;
+            letter-spacing: 1px;
+            position: relative;
+            display: inline-block;
+            padding: 0 20px;
+        }
+        
+        .footer-kt::before,
+        .footer-kt::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 40px;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-50%);
+        }
+        
+        .footer-kt::before {
+            left: -50px;
+        }
+        
+        .footer-kt::after {
+            right: -50px;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .footer-bottom p {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.3);
+            letter-spacing: 0.5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Navigation -->
+    <div id="header-outer">
+        <div class="container">
+            <a id="logo" href="index.html">
+                <img src="https://prsiceland.falala.dev/wp-content/uploads/2024/08/psr-logo.png" alt="PRS Iceland">
+            </a>
+            
+            <nav>
+                <ul>
+                    <li><a href="index.html">Forsíða</a></li>
+                    <li><a href="#">Æfingar og mót</a></li>
+                    <li><a href="#">Úrslit móta</a></li>
+                    <li><a href="#">Meðlimir</a></li>
+                    <li><a href="#">Hafa samband</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    
+    <!-- Page Header -->
+    <div class="page-header">
+        <h1>YOUR PAGE TITLE</h1>
+        <p>YOUR PAGE DESCRIPTION</p>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="content-section">
+        
+        <!-- OPTION 1: Google Sheets Embed -->
+        <div class="google-doc-container">
+            <div class="doc-header">
+                📊 YOUR SHEET TITLE
+            </div>
+            <iframe 
+                class="google-doc-embed"
+                src="YOUR_PUBLISHED_GOOGLE_SHEET_URL?widget=true&headers=false">
+            </iframe>
+        </div>
+        
+        <!-- OPTION 2: Google Docs Embed -->
+        <!--
+        <div class="google-doc-container">
+            <div class="doc-header">
+                📄 YOUR DOCUMENT TITLE
+            </div>
+            <iframe 
+                class="google-doc-embed"
+                src="YOUR_PUBLISHED_GOOGLE_DOC_URL?embedded=true">
+            </iframe>
+        </div>
+        -->
+        
+        <!-- OPTION 3: Google Slides Embed -->
+        <!--
+        <div class="google-doc-container">
+            <div class="doc-header">
+                📊 YOUR PRESENTATION TITLE
+            </div>
+            <iframe 
+                class="google-doc-embed"
+                src="YOUR_PUBLISHED_GOOGLE_SLIDES_URL?start=false&loop=false&delayms=3000"
+                allowfullscreen="true">
+            </iframe>
+        </div>
+        -->
+        
+    </div>
+    
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <p class="footer-address">Stekkjaseli 7<br>109 Reykjavík</p>
+                    <p class="footer-kt">Kt: 510321-0810</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 PRS Iceland. Öll réttindi áskilin.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Add any custom JavaScript here
+        // For example: auto-refresh every 5 minutes
+        /*
+        setInterval(() => {
+            location.reload();
+        }, 5 * 60 * 1000); // 5 minutes
+        */
+        
+        // Smooth page transitions
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add smooth transition when clicking links
+            const links = document.querySelectorAll('a[href$=".html"]:not([target="_blank"])');
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Check if it's an internal link
+                    if (this.hostname === window.location.hostname) {
+                        e.preventDefault();
+                        const href = this.href;
+                        
+                        // Fade out
+                        document.body.style.opacity = '0';
+                        document.body.style.transform = 'translateY(-10px)';
+                        
+                        // Navigate after animation
+                        setTimeout(() => {
+                            window.location.href = href;
+                        }, 300);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
+<!-- 
+INSTRUCTIONS:
+1. Copy this file and rename it (e.g., "urslit-2024.html")
+2. Replace:
+   - TITLE HERE with your page title
+   - YOUR PAGE TITLE/DESCRIPTION in the header
+   - YOUR_PUBLISHED_GOOGLE_*_URL with your Google Doc/Sheet/Slides URL
+   - Choose which option (Sheets/Docs/Slides) you need
+
+3. To publish Google content:
+   - Open your Google Doc/Sheet/Slides
+   - File → Publish to web
+   - Copy the provided URL
+   - Paste it in the iframe src
+
+4. Navigation:
+   - The header navigation links back to the main site
+   - Update the navigation menu items if needed
+   - Consider adding the current page to the dropdown menus
+
+5. Optional customizations:
+   - Change the icon (📊 📄 📑 📈 📋)
+   - Adjust iframe height
+   - Add more content sections
+   - Style the header differently
+
+6. Link to this page from the main navigation in index.html
+-->

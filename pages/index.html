@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="is" class="js">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <title>PRS Iceland - Precision Rifle Series Tournament Platform</title>
+    
+    <!-- SEO and Schema Markup for Sports Events -->
+    <meta name="description" content="Official PRS Iceland tournament platform. Live standings, registration, match results and comprehensive competition data.">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SportsOrganization",
+        "name": "PRS Iceland",
+        "sport": "Precision Rifle Shooting",
+        "url": "https://prsiceland.is"
+    }
+    </script>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../css/main.css">
+    
+    <!-- Data-First Tournament Styles -->
+    <style>
+        /* Override font to match PRS research */
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        
+        /* Tournament Data Section */
+        .data-section {
+            background: #0a0a0a;
+            padding: 80px 0;
+            position: relative;
+        }
+        
+        .data-tabs {
+            display: flex;
+            gap: 2px;
+            margin-bottom: 40px;
+            background: #1a1a1a;
+            padding: 4px;
+            border-radius: 8px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .data-tab {
+            flex: 1;
+            padding: 12px 24px;
+            background: transparent;
+            border: none;
+            color: #888;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 4px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .data-tab:hover {
+            color: #fff;
+        }
+        
+        .data-tab.active {
+            background: #2a2a2a;
+            color: #fff;
+        }
+        
+        .data-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .data-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Standings Table */
+        .standings-table {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #1a1a1a;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+        
+        .standings-filters {
+            padding: 20px;
+            background: #222;
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .filter-group {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+        
+        .filter-group label {
+            color: #888;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .filter-group select {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th {
+            background: #222;
+            color: #888;
+            font-weight: 600;
+            text-align: left;
+            padding: 16px 20px;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid #333;
+        }
+        
+        th.numeric {
+            text-align: right;
+        }
+        
+        td {
+            padding: 16px 20px;
+            border-bottom: 1px solid #252525;
+            color: #ccc;
+            font-size: 15px;
+        }
+        
+        td.numeric {
+            text-align: right;
+            font-variant-numeric: tabular-nums;
+        }
+        
+        tr:hover {
+            background: #252525;
+        }
+        
+        .rank {
+            font-weight: 600;
+            color: #fff;
+        }
+        
+        .rank.gold { color: #FFD700; }
+        .rank.silver { color: #C0C0C0; }
+        .rank.bronze { color: #CD7F32; }
+        
+        .points {
+            font-weight: 600;
+            color: #4CAF50;
+        }
+        
+        /* Registration CTA */
+        .registration-banner {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            padding: 60px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .registration-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('../images/grid-pattern.svg') repeat;
+            opacity: 0.05;
+        }
+        
+        .registration-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .registration-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #fff;
+        }
+        
+        .registration-subtitle {
+            font-size: 18px;
+            color: #888;
+            margin-bottom: 32px;
+        }
+        
+        .registration-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-primary {
+            background: #4CAF50;
+            color: #fff;
+            padding: 16px 32px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-primary:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: #fff;
+            padding: 16px 32px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid #333;
+        }
+        
+        .btn-secondary:hover {
+            border-color: #555;
+            background: #1a1a1a;
+        }
+        
+        /* Latest News Section */
+        .news-section {
+            background: #0f0f0f;
+            padding: 80px 0;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #fff;
+        }
+        
+        .section-subtitle {
+            font-size: 18px;
+            color: #888;
+        }
+        
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 32px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .news-card {
+            background: #1a1a1a;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .news-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+        }
+        
+        .news-image {
+            position: relative;
+            padding-bottom: 56.25%;
+            overflow: hidden;
+        }
+        
+        .news-image img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .news-badge {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            background: rgba(76, 175, 80, 0.9);
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .news-content {
+            padding: 24px;
+        }
+        
+        .news-date {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        
+        .news-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #fff;
+            line-height: 1.4;
+        }
+        
+        .news-excerpt {
+            color: #888;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+        
+        .news-link {
+            color: #4CAF50;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: gap 0.3s ease;
+        }
+        
+        .news-link:hover {
+            gap: 10px;
+        }
+        
+        /* Enhanced Navigation */
+        nav ul li {
+            position: relative;
+        }
+        
+        nav ul li > a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #4CAF50;
+            transition: width 0.3s ease;
+        }
+        
+        nav ul li:hover > a::after {
+            width: 100%;
+        }
+        
+        nav .sub-menu {
+            min-width: 280px;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 8px 0;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+        }
+        
+        nav .sub-menu li a {
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        nav .sub-menu li a:hover {
+            background: #252525;
+        }
+        
+        .menu-badge {
+            background: #4CAF50;
+            color: #fff;
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+        
+        /* Fix gallery section */
+        .gallery-section {
+            background: #1a1a1a;
+            padding: 80px 0;
+        }
+        
+        .gallery-section .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-align: center !important;
+        }
+        
+        /* Force all children to respect centering */
+        .gallery-section * {
+            text-align: inherit;
+        }
+        
+        .gallery-header {
+            text-align: center !important;
+            margin-bottom: 60px;
+            width: 100% !important;
+            display: block !important;
+            position: relative !important;
+            left: 0 !important;
+            right: 0 !important;
+            transform: none !important;
+            float: none !important;
+            clear: both !important;
+        }
+        
+        .gallery-header h2 {
+            font-size: 36px !important;
+            font-weight: 700 !important;
+            color: #fff !important;
+            margin: 0 auto !important;
+            text-align: center !important;
+            display: block !important;
+            width: 100% !important;
+            position: relative !important;
+            left: 0 !important;
+            right: 0 !important;
+            transform: none !important;
+            padding: 0 !important;
+            opacity: 1 !important; /* Fix: Override opacity: 0 from gallery.css */
+            animation: none !important; /* Fix: Remove animation that might be causing issues */
+        }
+        
+        .gallery-carousel {
+            position: relative;
+        }
+        
+        .gallery-viewport {
+            position: relative;
+            height: 600px;
+            overflow: hidden;
+            margin: 0 auto;
+            cursor: grab;
+        }
+        
+        .gallery-viewport:active {
+            cursor: grabbing;
+        }
+        
+        /* Stack-based gallery styles */
+        .gallery-slider {
+            position: relative;
+            height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .gallery-cell {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            z-index: 0;
+        }
+        
+        .gallery-cell.active {
+            opacity: 1;
+            z-index: 10;
+            transform: translate(-50%, -50%);
+        }
+        
+        .gallery-cell.prev {
+            transform: translate(-150%, -50%);
+            opacity: 0.3;
+            z-index: 5;
+        }
+        
+        .gallery-cell.next {
+            transform: translate(50%, -50%);
+            opacity: 0.3;
+            z-index: 5;
+        }
+        
+        .gallery-cell img {
+            display: block;
+            max-height: 600px;
+            max-width: 90vw;
+            height: auto;
+            width: auto;
+            object-fit: contain;
+        }
+        
+        .gallery-progress {
+            position: relative;
+            max-width: 300px;
+            height: 2px;
+            margin: 40px auto 0;
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .gallery-progress-bar {
+            position: absolute;
+            height: 100%;
+            background: #4CAF50;
+            transition: transform 0.5s ease;
+        }
+        
+        /* Fix hero image display */
+        .hero.hero-split .hero-bg {
+            height: 100% !important;
+            transform: none !important;
+        }
+        
+        /* Responsive Tables */
+        @media (max-width: 768px) {
+            .standings-table {
+                border-radius: 0;
+            }
+            
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            
+            .news-grid {
+                grid-template-columns: 1fr;
+                padding: 0 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Enhanced Header with Data-First Navigation -->
+    <div id="header-outer" class="transparent">
+        <div class="container">
+            <div class="row">
+                <div class="logo-section">
+                    <a id="logo" href="#" data-supplied-ml="false">
+                        <img class="stnd logo-svg" width="1368" height="312" src="../images/psr-logo.svg" alt="PRS Iceland" loading="eager">
+                    </a>
+                </div>
+                
+                <nav>
+                    <ul>
+                        <li>
+                            <a href="#">Mótaserían</a>
+                            <ul class="sub-menu">
+                                <li><a href="#">2025 PRS Series <span class="menu-badge">NÚVERANDI</span></a></li>
+                                <li><a href="#">2025 PR22 Series</a></li>
+                                <li><a href="#">Skráning í mót</a></li>
+                                <li><a href="arsyfirlit.html">Ársyfirlit móta</a></li>
+                                <li><a href="#">Match Directors</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">Úrslit & Stig</a>
+                            <ul class="sub-menu">
+                                <li><a href="#">Live Standings</a></li>
+                                <li><a href="#">2024 Final Results</a></li>
+                                <li><a href="#">2023 Results</a></li>
+                                <li><a href="#">2022 Results</a></li>
+                                <li><a href="#">Historical Data</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">Félagatal</a>
+                            <ul class="sub-menu">
+                                <li><a href="#">Skráning í félagið</a></li>
+                                <li><a href="#">Félagsmenn</a></li>
+                                <li><a href="#">Réttindi og skyldur</a></li>
+                                <li><a href="#">Félagsgjöld</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">Um PRS</a>
+                            <ul class="sub-menu">
+                                <li><a href="#">Samþykktir</a></li>
+                                <li><a href="#">Stjórn félagsins</a></li>
+                                <li><a href="#">Saga PRS Iceland</a></li>
+                                <li><a href="#">International PRS</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Fréttir</a></li>
+                        <li><a href="#">Hafa samband</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Hero Section - Tournament Focus -->
+    <section class="hero hero-split" style="height: 100vh; min-height: 600px;">
+        <div class="hero-bg" style="background-image: url('https://prsiceland.falala.dev/wp-content/uploads/2024/08/prs-1.jpg'); background-size: cover; background-position: center; background-color: #000;"></div>
+        <div class="hero-content">
+            <div>
+                <h1>2025 PRS Iceland Series</h1>
+                <p>Precision Rifle Competition at its Finest</p>
+                <div style="display: flex; gap: 16px; margin-top: 32px;">
+                    <a href="#registration" class="cta-button">
+                        <span>Skrá í næsta mót</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="#standings" class="cta-button" style="background: transparent; border: 2px solid #4CAF50;">
+                        <span>Sjá stigastöðu</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Data-First: Live Tournament Data Section -->
+    <section id="standings" class="data-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Tournament Data Center</h2>
+                <p class="section-subtitle">Real-time standings and comprehensive competition data</p>
+            </div>
+            
+            <!-- Data Tabs -->
+            <div class="data-tabs">
+                <button class="data-tab active" data-tab="standings">Current Standings</button>
+                <button class="data-tab" data-tab="schedule">2025 Schedule</button>
+                <button class="data-tab" data-tab="results">Recent Results</button>
+            </div>
+            
+            <!-- Current Standings Tab -->
+            <div class="data-content active" id="standings-content">
+                <div class="standings-table">
+                    <div class="standings-filters">
+                        <div class="filter-group">
+                            <label>Division:</label>
+                            <select id="division-filter">
+                                <option value="all">All Divisions</option>
+                                <option value="open">Open</option>
+                                <option value="production">Production</option>
+                                <option value="tactical">Tactical</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Series:</label>
+                            <select id="series-filter">
+                                <option value="prs">PRS</option>
+                                <option value="pr22">PR22</option>
+                            </select>
+                        </div>
+                        <div style="margin-left: auto; color: #666; font-size: 14px;">
+                            <i class="fas fa-sync-alt"></i> Updated: <span id="last-update">5 minutes ago</span>
+                        </div>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width: 60px;">Rank</th>
+                                <th>Shooter</th>
+                                <th>Division</th>
+                                <th class="numeric">Match 1</th>
+                                <th class="numeric">Match 2</th>
+                                <th class="numeric">Match 3</th>
+                                <th class="numeric">Total Points</th>
+                                <th class="numeric">Avg %</th>
+                            </tr>
+                        </thead>
+                        <tbody id="standings-tbody">
+                            <!-- Data will be populated from Google Sheets -->
+                            <tr>
+                                <td class="rank gold">1</td>
+                                <td>Jón Gunnarsson</td>
+                                <td>Open</td>
+                                <td class="numeric">97.500</td>
+                                <td class="numeric">95.250</td>
+                                <td class="numeric">98.000</td>
+                                <td class="numeric points">290.750</td>
+                                <td class="numeric">96.92%</td>
+                            </tr>
+                            <tr>
+                                <td class="rank silver">2</td>
+                                <td>Ólafur Þórsson</td>
+                                <td>Open</td>
+                                <td class="numeric">94.000</td>
+                                <td class="numeric">96.500</td>
+                                <td class="numeric">94.750</td>
+                                <td class="numeric points">285.250</td>
+                                <td class="numeric">95.08%</td>
+                            </tr>
+                            <tr>
+                                <td class="rank bronze">3</td>
+                                <td>Guðrún Sigurðardóttir</td>
+                                <td>Production</td>
+                                <td class="numeric">92.750</td>
+                                <td class="numeric">93.000</td>
+                                <td class="numeric">95.500</td>
+                                <td class="numeric points">281.250</td>
+                                <td class="numeric">93.75%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Schedule Tab -->
+            <div class="data-content" id="schedule-content">
+                <div class="standings-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Match</th>
+                                <th>Location</th>
+                                <th>Series</th>
+                                <th>Status</th>
+                                <th class="numeric">Registered</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>15. mars 2025</td>
+                                <td>Spring Classic</td>
+                                <td>Akureyri Shooting Range</td>
+                                <td>PRS</td>
+                                <td><span class="menu-badge">Registration Open</span></td>
+                                <td class="numeric">24/60</td>
+                            </tr>
+                            <tr>
+                                <td>12. apríl 2025</td>
+                                <td>Northern Challenge</td>
+                                <td>Reykjavík Range</td>
+                                <td>PRS/PR22</td>
+                                <td>Upcoming</td>
+                                <td class="numeric">-/80</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Results Tab -->
+            <div class="data-content" id="results-content">
+                <div class="standings-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Match</th>
+                                <th>Date</th>
+                                <th>Winner</th>
+                                <th>Division</th>
+                                <th class="numeric">Score</th>
+                                <th>Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Winter Series Final</td>
+                                <td>20. janúar 2025</td>
+                                <td>Jón Gunnarsson</td>
+                                <td>Open</td>
+                                <td class="numeric">184/200</td>
+                                <td><a href="#" style="color: #4CAF50;">View Results</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Registration CTA Banner -->
+    <section id="registration" class="registration-banner">
+        <div class="container">
+            <div class="registration-content">
+                <h2 class="registration-title">Ready to Compete?</h2>
+                <p class="registration-subtitle">Join Iceland's premier precision rifle competition series</p>
+                <div class="registration-buttons">
+                    <a href="#" class="btn-primary">
+                        <i class="fas fa-user-plus"></i>
+                        Register for Next Match
+                    </a>
+                    <a href="#" class="btn-secondary">
+                        <i class="fas fa-calendar-alt"></i>
+                        View Full Schedule
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Latest News & Updates -->
+    <section class="news-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Latest News & Updates</h2>
+                <p class="section-subtitle">Stay informed about matches, results, and community updates</p>
+            </div>
+            
+            <div class="news-grid">
+                <article class="news-card">
+                    <div class="news-image">
+                        <picture>
+                            <source srcset="https://prsiceland.falala.dev/wp-content/uploads/2024/08/prs-3-1024x566.avif" type="image/avif">
+                            <source srcset="https://prsiceland.falala.dev/wp-content/uploads/2024/08/prs-3-1024x566.webp" type="image/webp">
+                            <img src="https://prsiceland.falala.dev/wp-content/uploads/2024/08/prs-3-1024x566.jpg" 
+                                 alt="Spring Classic Match Announcement" 
+                                 loading="lazy"
+                                 width="1024"
+                                 height="566">
+                        </picture>
+                        <span class="news-badge">Match Update</span>
+                    </div>
+                    <div class="news-content">
+                        <time class="news-date">January 28, 2025</time>
+                        <h3 class="news-title">Spring Classic Registration Now Open</h3>
+                        <p class="news-excerpt">Registration for the 2025 Spring Classic is now open. This year's match features 12 stages with challenging long-range targets...</p>
+                        <a href="#" class="news-link">Read more <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+                
+                <article class="news-card">
+                    <div class="news-image">
+                        <picture>
+                            <source srcset="https://prsiceland.falala.dev/wp-content/uploads/2024/08/prs-2-1024x1024.avif" type="image/avif">
+                            <source srcset="https://prsiceland.falala.dev/wp-content/uploads/2024/08/prs-2-1024x1024.webp" type="image/webp">
+                            <img src="https://prsiceland.falala.dev/wp-content/uploads/2024/08/prs-2-1024x1024.jpg" 
+                                 alt="Winter Series Final Results" 
+                                 loading="lazy"
+                                 width="1024"
+                                 height="1024">
+                        </picture>
+                        <span class="news-badge">Results</span>
+                    </div>
+                    <div class="news-content">
+                        <time class="news-date">January 22, 2025</time>
+                        <h3 class="news-title">Winter Series Final Results Posted</h3>
+                        <p class="news-excerpt">Congratulations to all competitors in the Winter Series Final. Full results and updated standings are now available...</p>
+                        <a href="#" class="news-link">View results <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+                
+                <article class="news-card">
+                    <div class="news-image">
+                        <picture>
+                            <source srcset="https://prsiceland.falala.dev/wp-content/uploads/2024/08/prs-1-1024x682.avif" type="image/avif">
+                            <source srcset="https://prsiceland.falala.dev/wp-content/uploads/2024/08/prs-1-1024x682.webp" type="image/webp">
+                            <img src="https://prsiceland.falala.dev/wp-content/uploads/2024/08/prs-1-1024x682.jpg" 
+                                 alt="Training Day Announcement" 
+                                 loading="lazy"
+                                 width="1024"
+                                 height="682">
+                        </picture>
+                        <span class="news-badge">Training</span>
+                    </div>
+                    <div class="news-content">
+                        <time class="news-date">January 18, 2025</time>
+                        <h3 class="news-title">Free Training Day for New Shooters</h3>
+                        <p class="news-excerpt">Join us for a free training session designed for shooters new to PRS competition. Learn the basics and meet the community...</p>
+                        <a href="#" class="news-link">Register now <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Enhanced About Section with Storytelling -->
+    <section id="about" class="about-section">
+        <div class="about-container">
+            <div class="about-content fade-in-scroll">
+                <h2>Building Iceland's Precision Rifle Community</h2>
+                <div class="about-stats" style="display: flex; gap: 40px; margin: 30px 0;">
+                    <div class="stat-item">
+                        <span class="stat-number" style="font-size: 48px; font-weight: 700; color: #4CAF50;">4</span>
+                        <span class="stat-label" style="display: block; color: #888;">Years Active</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" style="font-size: 48px; font-weight: 700; color: #4CAF50;">150+</span>
+                        <span class="stat-label" style="display: block; color: #888;">Active Members</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" style="font-size: 48px; font-weight: 700; color: #4CAF50;">24</span>
+                        <span class="stat-label" style="display: block; color: #888;">Annual Matches</span>
+                    </div>
+                </div>
+                <p>PRS Iceland has grown from a small group of enthusiasts to Iceland's premier precision rifle organization. We run two competitive series: the centerfire PRS Series and the rimfire PR22 Series, providing opportunities for shooters of all skill levels.</p>
+                <p>Our matches follow international PRS standards while embracing Iceland's unique shooting culture. From challenging mountain stages to precision work at extended distances, we test every aspect of marksmanship.</p>
+                <a href="#" class="cta-button">
+                    <span>Learn Our Story</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            <div class="about-image">
+                <picture>
+                    <source srcset="https://prsiceland.falala.dev/wp-content/uploads/2024/08/prs-2.avif" type="image/avif">
+                    <source srcset="https://prsiceland.falala.dev/wp-content/uploads/2024/08/prs-2.webp" type="image/webp">
+                    <img src="https://prsiceland.falala.dev/wp-content/uploads/2024/08/prs-2.jpg" 
+                         alt="PRS Iceland Competition" 
+                         loading="lazy"
+                         width="800"
+                         height="800">
+                </picture>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Gallery Section - Keep but enhance -->
+    <section class="gallery-section">
+        <div class="container">
+            <div class="gallery-header" style="text-align: center !important; width: 100% !important;">
+                <h2 style="text-align: center !important; margin: 0 auto !important; display: block !important; opacity: 1 !important; transform: none !important;">Competition in Action</h2>
+            </div>
+            <div class="gallery-carousel">
+                <div class="gallery-viewport">
+                <div class="gallery-slider">
+                    <div class="gallery-cell active">
+                        <img src="https://prsiceland.falala.dev/wp-content/uploads/2024/08/prs-3-1024x566.jpg" alt="PRS Iceland Gallery" loading="eager">
+                    </div>
+                    <div class="gallery-cell">
+                        <img src="https://prsiceland.falala.dev/wp-content/uploads/2024/08/prs-2-1024x1024.jpg" alt="PRS Iceland Gallery" loading="lazy">
+                    </div>
+                    <div class="gallery-cell">
+                        <img src="https://prsiceland.falala.dev/wp-content/uploads/2024/08/prs-1-1024x682.jpg" alt="PRS Iceland Gallery" loading="lazy">
+                    </div>
+                </div>
+                </div>
+                <div class="gallery-progress">
+                    <div class="gallery-progress-bar" style="width: 33.33%;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Enhanced Footer -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-content" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 40px;">
+                <div>
+                    <h4 style="color: #fff; margin-bottom: 16px;">Quick Links</h4>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 8px;"><a href="#" style="color: #888; text-decoration: none;">Match Registration</a></li>
+                        <li style="margin-bottom: 8px;"><a href="#" style="color: #888; text-decoration: none;">Current Standings</a></li>
+                        <li style="margin-bottom: 8px;"><a href="#" style="color: #888; text-decoration: none;">Member Portal</a></li>
+                        <li style="margin-bottom: 8px;"><a href="#" style="color: #888; text-decoration: none;">Match Directors</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: #fff; margin-bottom: 16px;">Connect</h4>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 8px;"><a href="#" style="color: #888; text-decoration: none;"><i class="fab fa-facebook" style="margin-right: 8px;"></i>Facebook</a></li>
+                        <li style="margin-bottom: 8px;"><a href="#" style="color: #888; text-decoration: none;"><i class="fab fa-instagram" style="margin-right: 8px;"></i>Instagram</a></li>
+                        <li style="margin-bottom: 8px;"><a href="#" style="color: #888; text-decoration: none;"><i class="far fa-envelope" style="margin-right: 8px;"></i>prs@prsiceland.is</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: #fff; margin-bottom: 16px;">Contact</h4>
+                    <div class="footer-info">
+                        <p class="footer-address">Stekkjaseli 7<br>109 Reykjavík</p>
+                        <p class="footer-kt">Kt: 510321-0810</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 PRS Iceland. All rights reserved. | <a href="#" style="color: #888;">Privacy Policy</a> | <a href="#" style="color: #888;">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Scripts -->
+    <script type="module" src="../js/main.js"></script>
+    
+    <!-- Tab Navigation -->
+    <script>
+        document.querySelectorAll('.data-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Remove active from all tabs and contents
+                document.querySelectorAll('.data-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.data-content').forEach(c => c.classList.remove('active'));
+                
+                // Add active to clicked tab and corresponding content
+                this.classList.add('active');
+                const contentId = this.getAttribute('data-tab') + '-content';
+                document.getElementById(contentId).classList.add('active');
+            });
+        });
+        
+        // Simulate real-time updates
+        function updateTimestamp() {
+            const minutes = Math.floor(Math.random() * 10) + 1;
+            document.getElementById('last-update').textContent = `${minutes} minutes ago`;
+        }
+        setInterval(updateTimestamp, 30000);
+    </script>
+    
+    <!-- Header Script -->
+    <script>
+        (function() {
+            const header = document.getElementById('header-outer');
+            if (!header) return;
+            
+            function updateHeader() {
+                if (window.pageYOffset > 50) {
+                    header.classList.add('scrolled');
+                    header.classList.remove('transparent');
+                } else {
+                    header.classList.remove('scrolled');
+                    header.classList.add('transparent');
+                }
+            }
+            
+            updateHeader();
+            window.addEventListener('scroll', updateHeader);
+            
+            // Enhanced dropdown with delay
+            const dropdowns = document.querySelectorAll('nav > ul > li');
+            let hoverTimeout;
+            
+            dropdowns.forEach(dropdown => {
+                dropdown.addEventListener('mouseenter', function() {
+                    clearTimeout(hoverTimeout);
+                    this.classList.add('hover');
+                });
+                
+                dropdown.addEventListener('mouseleave', function() {
+                    const elem = this;
+                    hoverTimeout = setTimeout(() => {
+                        elem.classList.remove('hover');
+                    }, 300);
+                });
+            });
+        })();
+    </script>
+    
+    <!-- Gallery Script (keep existing) -->
+    <script>
+        (function() {
+            const cells = document.querySelectorAll('.gallery-cell');
+            const progressBar = document.querySelector('.gallery-progress-bar');
+            const viewport = document.querySelector('.gallery-viewport');
+            
+            // Check if elements exist
+            if (!cells.length || !progressBar || !viewport) {
+                console.log('Gallery elements not found');
+                return;
+            }
+            
+            let current = 0;
+            
+            function showSlide(index) {
+                cells.forEach((cell, i) => {
+                    cell.classList.remove('active', 'prev', 'next');
+                    
+                    if (i === index) {
+                        cell.classList.add('active');
+                    } else if (i === (index - 1 + cells.length) % cells.length) {
+                        cell.classList.add('prev');
+                    } else if (i === (index + 1) % cells.length) {
+                        cell.classList.add('next');
+                    }
+                });
+                
+                const percent = 100 / cells.length;
+                progressBar.style.width = `${percent}%`;
+                progressBar.style.transform = `translateX(${index * 100}%)`;
+            }
+            
+            // Touch/mouse handling
+            let startX = 0;
+            let isDragging = false;
+            
+            viewport.addEventListener('mousedown', e => {
+                isDragging = true;
+                startX = e.pageX;
+                viewport.style.cursor = 'grabbing';
+            });
+            
+            viewport.addEventListener('mouseup', e => {
+                if (!isDragging) return;
+                isDragging = false;
+                viewport.style.cursor = 'grab';
+                
+                const diff = e.pageX - startX;
+                if (Math.abs(diff) > 50) {
+                    if (diff > 0) {
+                        current = (current - 1 + cells.length) % cells.length;
+                    } else {
+                        current = (current + 1) % cells.length;
+                    }
+                    showSlide(current);
+                }
+            });
+            
+            viewport.addEventListener('mouseleave', e => {
+                if (isDragging) {
+                    isDragging = false;
+                    viewport.style.cursor = 'grab';
+                }
+            });
+            
+            viewport.addEventListener('touchstart', e => {
+                isDragging = true;
+                startX = e.touches[0].pageX;
+            });
+            
+            viewport.addEventListener('touchend', e => {
+                if (!isDragging) return;
+                isDragging = false;
+                
+                const diff = e.changedTouches[0].pageX - startX;
+                if (Math.abs(diff) > 50) {
+                    if (diff > 0) {
+                        current = (current - 1 + cells.length) % cells.length;
+                    } else {
+                        current = (current + 1) % cells.length;
+                    }
+                    showSlide(current);
+                }
+            });
+            
+            // Auto-advance
+            setInterval(() => {
+                current = (current + 1) % cells.length;
+                showSlide(current);
+            }, 5000);
+            
+            showSlide(0);
+        })();
+    </script>
+    
+    <!-- Google Sheets Integration Script -->
+    <script>
+        // This would connect to your Google Sheets data
+        // Using Sheety or similar service as recommended in research
+        async function loadStandingsData() {
+            try {
+                // Example: const response = await fetch('https://api.sheety.co/YOUR_PROJECT_ID/standings');
+                // const data = await response.json();
+                // populateStandingsTable(data);
+                
+                console.log('Google Sheets integration ready for implementation');
+            } catch (error) {
+                console.error('Error loading standings:', error);
+            }
+        }
+        
+        // Call on page load
+        document.addEventListener('DOMContentLoaded', loadStandingsData);
+    </script>
+</body>
+</html>

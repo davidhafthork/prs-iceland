@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery Carousel - Standalone Test</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: #1a1a1a;
+            color: white;
+            font-family: Arial, sans-serif;
+            overflow-x: hidden;
+        }
+        
+        .info {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .info h1 {
+            color: #ff6716;
+            margin-bottom: 10px;
+        }
+        
+        /* Gallery Styles */
+        .gallery-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .gallery-viewport {
+            position: relative;
+            height: 500px;
+            overflow: hidden;
+            cursor: grab;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            user-select: none;
+        }
+        
+        .gallery-viewport.grabbing {
+            cursor: grabbing;
+        }
+        
+        .gallery-track {
+            display: flex;
+            height: 100%;
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-slide {
+            flex: 0 0 auto;
+            height: 100%;
+            margin-right: 20px;
+            position: relative;
+        }
+        
+        .gallery-slide img {
+            height: 100%;
+            width: auto;
+            display: block;
+            pointer-events: none;
+            border-radius: 8px;
+        }
+        
+        /* Navigation Dots */
+        .gallery-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .dot.active {
+            background: #ff6716;
+        }
+        
+        /* Navigation Buttons */
+        .gallery-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 15px;
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+        
+        .gallery-nav:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+        
+        .gallery-nav.prev {
+            left: 20px;
+        }
+        
+        .gallery-nav.next {
+            right: 20px;
+        }
+        
+        /* Instructions */
+        .instructions {
+            text-align: center;
+            margin-top: 20px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div class="info">
+        <h1>Gallery Carousel - Working Demo</h1>
+        <p>This is a standalone, working carousel implementation</p>
+    </div>
+    
+    <div class="gallery-container">
+        <div class="gallery-viewport" id="viewport">
+            <div class="gallery-track" id="track">
+                <div class="gallery-slide">
+                    <img src="https://prsiceland.falala.dev/wp-content/uploads/2024/08/prs-3-1024x566.jpg" alt="Slide 1">
+                </div>
+                <div class="gallery-slide">
+                    <img src="https://prsiceland.falala.dev/wp-content/uploads/2024/08/prs-2-1024x1024.jpg" alt="Slide 2">
+                </div>
+                <div class="gallery-slide">
+                    <img src="https://prsiceland.falala.dev/wp-content/uploads/2024/08/prs-1-1024x682.jpg" alt="Slide 3">
+                </div>
+                <div class="gallery-slide">
+                    <img src="https://prsiceland.wordpress.com/wp-content/uploads/2024/04/20240413_155533016_ios.jpg" alt="Slide 4">
+                </div>
+            </div>
+            
+            <button class="gallery-nav prev" onclick="carousel.prev()">‹</button>
+            <button class="gallery-nav next" onclick="carousel.next()">›</button>
+        </div>
+        
+        <div class="gallery-dots" id="dots"></div>
+    </div>
+    
+    <div class="instructions">
+        <p>🖱️ Click and drag to navigate | ⌨️ Use arrow keys | 📱 Swipe on mobile</p>
+    </div>
+    
+    <script>
+        class SimpleCarousel {
+            constructor() {
+                this.viewport = document.getElementById('viewport');
+                this.track = document.getElementById('track');
+                this.slides = this.track.querySelectorAll('.gallery-slide');
+                this.dotsContainer = document.getElementById('dots');
+                
+                this.currentIndex = 0;
+                this.startX = 0;
+                this.currentX = 0;
+                this.isDragging = false;
+                
+                this.init();
+            }
+            
+            init() {
+                // Create dots
+                this.slides.forEach((_, index) => {
+                    const dot = document.createElement('button');
+                    dot.className = 'dot';
+                    if (index === 0) dot.classList.add('active');
+                    dot.onclick = () => this.goToSlide(index);
+                    this.dotsContainer.appendChild(dot);
+                });
+                
+                // Mouse events
+                this.viewport.addEventListener('mousedown', this.handleStart.bind(this));
+                this.viewport.addEventListener('mousemove', this.handleMove.bind(this));
+                this.viewport.addEventListener('mouseup', this.handleEnd.bind(this));
+                this.viewport.addEventListener('mouseleave', this.handleEnd.bind(this));
+                
+                // Touch events
+                this.viewport.addEventListener('touchstart', this.handleStart.bind(this));
+                this.viewport.addEventListener('touchmove', this.handleMove.bind(this));
+                this.viewport.addEventListener('touchend', this.handleEnd.bind(this));
+                
+                // Keyboard
+                document.addEventListener('keydown', this.handleKeyboard.bind(this));
+                
+                // Initialize position
+                this.updatePosition(false);
+            }
+            
+            handleStart(e) {
+                this.isDragging = true;
+                this.viewport.classList.add('grabbing');
+                this.startX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+                this.track.style.transition = 'none';
+            }
+            
+            handleMove(e) {
+                if (!this.isDragging) return;
+                e.preventDefault();
+                
+                this.currentX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+                const diff = this.currentX - this.startX;
+                const currentTranslate = -(this.currentIndex * this.getSlideWidth()) + diff;
+                
+                this.track.style.transform = `translateX(${currentTranslate}px)`;
+            }
+            
+            handleEnd() {
+                if (!this.isDragging) return;
+                
+                this.isDragging = false;
+                this.viewport.classList.remove('grabbing');
+                
+                const diff = this.currentX - this.startX;
+                const threshold = this.getSlideWidth() / 4;
+                
+                if (diff > threshold && this.currentIndex > 0) {
+                    this.prev();
+                } else if (diff < -threshold && this.currentIndex < this.slides.length - 1) {
+                    this.next();
+                } else {
+                    this.updatePosition(true);
+                }
+            }
+            
+            handleKeyboard(e) {
+                if (e.key === 'ArrowLeft') this.prev();
+                if (e.key === 'ArrowRight') this.next();
+            }
+            
+            getSlideWidth() {
+                return this.slides[0].offsetWidth + 20; // width + margin
+            }
+            
+            goToSlide(index) {
+                this.currentIndex = Math.max(0, Math.min(index, this.slides.length - 1));
+                this.updatePosition(true);
+                this.updateDots();
+            }
+            
+            prev() {
+                if (this.currentIndex > 0) {
+                    this.goToSlide(this.currentIndex - 1);
+                }
+            }
+            
+            next() {
+                if (this.currentIndex < this.slides.length - 1) {
+                    this.goToSlide(this.currentIndex + 1);
+                }
+            }
+            
+            updatePosition(animate) {
+                const translateX = -(this.currentIndex * this.getSlideWidth());
+                this.track.style.transition = animate ? 'transform 0.3s ease' : 'none';
+                this.track.style.transform = `translateX(${translateX}px)`;
+            }
+            
+            updateDots() {
+                const dots = this.dotsContainer.querySelectorAll('.dot');
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === this.currentIndex);
+                });
+            }
+        }
+        
+        // Initialize carousel
+        const carousel = new SimpleCarousel();
+        
+        // Auto-play
+        setInterval(() => {
+            if (!carousel.isDragging) {
+                if (carousel.currentIndex === carousel.slides.length - 1) {
+                    carousel.goToSlide(0);
+                } else {
+                    carousel.next();
+                }
+            }
+        }, 4000);
+    </script>
+</body>
+</html>

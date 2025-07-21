@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="is" class="js">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <title>Ársyfirlit - PRS Iceland</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../css/main.css">
+    
+    <style>
+        /* Clean approach to hide Google Sheets controls */
+        .sheets-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+            overflow: hidden;
+            margin-top: 40px;
+            position: relative;
+            /* Set explicit height */
+            height: auto;
+        }
+        
+        /* Wrapper for the iframe to control overflow */
+        .sheets-embed-wrapper {
+            position: relative;
+            overflow: hidden;
+            height: 600px; /* Visible area */
+            background: white;
+        }
+        
+        .sheets-embed {
+            width: 100%;
+            height: 650px; /* Taller than wrapper to push controls out of view */
+            border: none;
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        
+        /* Ensure header stays on top */
+        .sheets-header {
+            position: relative;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div id="header-outer" class="static">
+        <div class="container">
+            <div class="row">
+                <div class="logo-section">
+                    <a id="logo" href="index.html" data-supplied-ml="false">
+                        <img class="stnd logo-svg" width="1368" height="312" src="../images/psr-logo.svg" alt="PRS Iceland" loading="eager">
+                    </a>
+                </div>
+                
+                <nav>
+                    <ul>
+                        <li>
+                            <a href="#">Æfingar og mót</a>
+                            <ul class="sub-menu">
+                                <li><a href="arsyfirlit.html" class="current-page">Ársyfirlit</a></li>
+                                <li><a href="#">PRS mótaserían</a></li>
+                                <li><a href="#">PR22 mótaserían</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">Úrslit móta</a>
+                            <ul class="sub-menu">
+                                <li><a href="#">2024</a></li>
+                                <li><a href="#">2023</a></li>
+                                <li><a href="#">2022</a></li>
+                                <li><a href="#">2021</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Meðlimir</a></li>
+                        <li><a href="#">Samþykktir</a></li>
+                        <li><a href="#">Hafa samband</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Page Header -->
+    <div class="page-header">
+        <h1>Ársyfirlit</h1>
+        <p>Yfirlit yfir æfingar og mót PRS Iceland</p>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="content-section">
+        <!-- Breadcrumb Navigation -->
+        <div class="breadcrumb">
+            <a href="index.html">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+                Forsíða
+            </a>
+            <span>/</span>
+            Ársyfirlit
+        </div>
+        
+        <!-- Direct Google Sheets Embed with elegant wrapper -->
+        <div class="sheets-container">
+            <div class="sheets-header">
+                <h3>📅 Æfingar og mót 2024</h3>
+                <div class="actions">
+                    <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vSJ5WzDN2v2gU1y7Vp-l2G19iNDC8zA1uBNTbCx9Vv8Ph4A3zgE_-6k6Vh-3yib3X_47kzyqf-Gt0-V/pubhtml?gid=0&single=true" 
+                       target="_blank" 
+                       class="action-link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                            <polyline points="15 3 21 3 21 9"></polyline>
+                            <line x1="10" y1="14" x2="21" y2="3"></line>
+                        </svg>
+                        Opna í Google Sheets
+                    </a>
+                    <a href="javascript:void(0)" 
+                       onclick="window.print()" 
+                       class="action-link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                            <rect x="6" y="14" width="12" height="8"></rect>
+                        </svg>
+                        Prenta
+                    </a>
+                </div>
+            </div>
+            <div class="sheets-embed-wrapper">
+                <iframe 
+                    class="sheets-embed"
+                    src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSJ5WzDN2v2gU1y7Vp-l2G19iNDC8zA1uBNTbCx9Vv8Ph4A3zgE_-6k6Vh-3yib3X_47kzyqf-Gt0-V/pubhtml?gid=0&single=true&widget=true&headers=false"
+                    loading="lazy">
+                </iframe>
+            </div>
+        </div>
+        
+        <!-- Additional Information -->
+        <div style="margin-top: 40px; text-align: center; color: #666;">
+            <p>Vantar þig frekari upplýsingar? 
+                <a href="index.html#" style="color: var(--primary-color); text-decoration: none;">Hafðu samband</a>
+            </p>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <p class="footer-address">Stekkjaseli 7<br>109 Reykjavík</p>
+                    <p class="footer-kt">Kt: 510321-0810</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 PRS Iceland. Öll réttindi áskilin.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- JavaScript Modules -->
+    <script type="module">
+        import { initPageTransitions } from '../js/page-transitions.js';
+        import { initSecondaryPage } from '../js/secondary-pages.js';
+        
+        // Initialize modules
+        document.addEventListener('DOMContentLoaded', function() {
+            initPageTransitions();
+            initSecondaryPage();
+        });
+    </script>
+</body>
+</html>

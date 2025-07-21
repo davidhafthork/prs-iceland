@@ -1,0 +1,260 @@
+/* Header and Navigation Styles */
+
+/* ==========================================================================
+   Header Container
+   ========================================================================== */
+#header-outer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10000;
+    transition: background-color 0.4s ease, 
+                padding 0.4s ease, 
+                box-shadow 0.4s ease,
+                backdrop-filter 0.4s ease;
+    will-change: background-color, padding;
+}
+
+/* Header States */
+#header-outer.transparent {
+    background-color: transparent;
+    padding: 34px 0;
+}
+
+#header-outer.scrolled,
+#header-outer.static {
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    padding: 20px 0;
+}
+
+/* Fallback for browsers without backdrop-filter support */
+@supports not (backdrop-filter: blur(10px)) {
+    #header-outer.scrolled,
+    #header-outer.static {
+        background-color: rgba(255, 255, 255, 0.98);
+    }
+}
+
+/* Container and Layout */
+#header-outer .container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 45px;
+}
+
+#header-outer .row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* ==========================================================================
+   Logo
+   ========================================================================== */
+#logo {
+    position: relative;
+    display: inline-block;
+    height: 80px;
+    transition: height 0.4s ease;
+    transform: translateZ(0); /* Force GPU acceleration */
+}
+
+#header-outer.scrolled #logo,
+#header-outer.static #logo {
+    height: 60px;
+}
+
+#logo img {
+    height: 100%;
+    width: auto;
+    display: block;
+    object-fit: contain;
+    transition: filter 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Logo color states - white when transparent, original when scrolled */
+#header-outer.transparent #logo img.logo-svg {
+    filter: brightness(0) invert(1);
+}
+
+#header-outer.scrolled #logo img.logo-svg,
+#header-outer.static #logo img.logo-svg {
+    filter: none;
+}
+
+/* ==========================================================================
+   Navigation
+   ========================================================================== */
+nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+nav ul li {
+    position: relative;
+}
+
+/* Navigation Links */
+nav ul li a {
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    transition: color 0.3s ease;
+    position: relative;
+    padding: 5px 0;
+    text-decoration: none;
+}
+
+/* Navigation text colors based on header state */
+#header-outer.transparent nav ul li a {
+    color: var(--text-light);
+}
+
+#header-outer.scrolled nav ul li a,
+#header-outer.static nav ul li a {
+    color: var(--text-dark);
+}
+
+/* Hover effects */
+#header-outer.transparent nav ul li a:hover {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+#header-outer.scrolled nav ul li a:hover,
+#header-outer.static nav ul li a:hover {
+    color: var(--primary-color);
+}
+
+/* Sliding underline on hover - only for top level items */
+nav > ul > li > a::before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.8);
+    transition: width 0.3s ease;
+}
+
+#header-outer.scrolled nav > ul > li > a::before,
+#header-outer.static nav > ul > li > a::before {
+    background: var(--primary-color);
+}
+
+nav > ul > li > a:hover::before {
+    width: 100%;
+}
+
+/* Dropdown indicator for menu items with submenus */
+nav > ul > li:has(.sub-menu) > a::after {
+    content: '\25BC';
+    font-size: 10px;
+    opacity: 0.5;
+    margin-left: 5px;
+}
+
+/* ==========================================================================
+   Dropdown Menu
+   ========================================================================== */
+nav ul li .sub-menu {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    background: #fff;
+    min-width: 220px;
+    padding: 8px 0;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+/* Adjust dropdown position when header is smaller */
+#header-outer.scrolled nav ul li .sub-menu,
+#header-outer.static nav ul li .sub-menu {
+    top: calc(100% + 5px);
+}
+
+/* Show dropdown on hover */
+nav ul li:hover .sub-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Align dropdown to right for last menu items */
+nav ul li:last-child .sub-menu,
+nav ul li:nth-last-child(2) .sub-menu {
+    left: auto;
+    right: 0;
+}
+
+/* Dropdown menu items */
+nav ul li .sub-menu li {
+    display: block;
+}
+
+nav ul li .sub-menu li a {
+    color: #333333; /* Always dark text in dropdowns */
+    padding: 14px 24px;
+    margin: 0 8px;
+    display: block;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: all 0.2s ease;
+    border-radius: 6px;
+}
+
+/* Extra specificity to ensure dark text in all header states */
+#header-outer.transparent nav ul li .sub-menu li a {
+    color: #333333;
+}
+
+nav ul li .sub-menu li a:hover {
+    background: rgba(255, 103, 22, 0.05);
+    color: #ff6716; /* Explicit orange color on hover */
+    padding-left: 28px;
+}
+
+/* Current page indicator */
+nav ul li a.current-page {
+    color: var(--primary-color);
+}
+
+/* ==========================================================================
+   Mobile Menu Toggle
+   ========================================================================== */
+.mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.mobile-menu-toggle span {
+    display: block;
+    width: 25px;
+    height: 2px;
+    background: var(--text-light);
+    transition: all 0.3s ease;
+}
+
+#header-outer.scrolled .mobile-menu-toggle span,
+#header-outer.static .mobile-menu-toggle span {
+    background: var(--text-dark);
+}

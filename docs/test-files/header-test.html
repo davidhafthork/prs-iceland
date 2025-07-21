@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Header Animation Test</title>
+    <style>
+        body {
+            margin: 0;
+            height: 200vh;
+            background: linear-gradient(to bottom, #333 50%, #fff 50%);
+        }
+        .test-info {
+            position: fixed;
+            top: 150px;
+            right: 20px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: monospace;
+            z-index: 9999;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-info">
+        <h3>Header Test Info</h3>
+        <p>Scroll Position: <span id="scroll">0</span>px</p>
+        <p>Header Classes: <span id="classes">loading...</span></p>
+        <p>Header Height: <span id="height">loading...</span></p>
+        <p>Logo Height: <span id="logo-height">loading...</span></p>
+        <p>Background: <span id="bg">loading...</span></p>
+    </div>
+
+    <iframe src="index.html" style="width: 100%; height: 100vh; border: none;"></iframe>
+
+    <script>
+        // Monitor the iframe's header
+        window.onload = function() {
+            const iframe = document.querySelector('iframe');
+            iframe.onload = function() {
+                const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                const iframeWin = iframe.contentWindow;
+                
+                function updateInfo() {
+                    const header = iframeDoc.getElementById('header-outer');
+                    const logo = iframeDoc.getElementById('logo');
+                    
+                    if (header && logo) {
+                        document.getElementById('scroll').textContent = iframeWin.scrollY;
+                        document.getElementById('classes').textContent = header.className;
+                        document.getElementById('height').textContent = header.offsetHeight + 'px';
+                        document.getElementById('logo-height').textContent = logo.offsetHeight + 'px';
+                        document.getElementById('bg').textContent = window.getComputedStyle(header).backgroundColor;
+                    }
+                }
+                
+                // Update on scroll
+                iframeWin.addEventListener('scroll', updateInfo);
+                
+                // Initial update
+                updateInfo();
+                
+                // Update every 100ms to catch any changes
+                setInterval(updateInfo, 100);
+            };
+        };
+    </script>
+</body>
+</html>

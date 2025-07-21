@@ -1,0 +1,269 @@
+/* =============================================
+   SIMPLIFIED ANIMATIONS - Remove Annoying Effects
+   Clean, minimal, professional
+   ============================================= */
+
+/* ==========================================================================
+   Global Animation Overrides
+   ========================================================================== */
+
+/* Disable all transform-based animations */
+* {
+    /* Keep color/opacity transitions but remove transform animations */
+    transition-property: color, background-color, border-color, opacity, visibility !important;
+    transition-duration: 0.2s !important;
+    transition-timing-function: ease !important;
+}
+
+/* Remove all keyframe animations */
+@keyframes * {
+    display: none !important;
+}
+
+/* ==========================================================================
+   Header - Already handled in header-clean.css
+   ========================================================================== */
+
+/* ==========================================================================
+   Hero Section - Simplify
+   ========================================================================== */
+.hero {
+    margin-top: -80px !important; /* Full height hero */
+    padding-top: 80px !important;
+}
+
+.hero-bg {
+    /* Remove parallax and scale animations */
+    transform: none !important;
+    animation: none !important;
+}
+
+.hero::before {
+    /* Simple fade in for overlay */
+    animation: none !important;
+    opacity: 1 !important;
+}
+
+.hero-content h1,
+.hero-content p,
+.hero-content .cta-button {
+    /* Remove slide up animations */
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+}
+
+/* Remove text glow animation */
+.hero-content h1::after {
+    display: none !important;
+}
+
+/* Simplify button hover */
+.cta-button,
+.btn-primary,
+.btn-secondary {
+    transition: background-color 0.2s ease, border-color 0.2s ease !important;
+}
+
+.cta-button::before,
+.btn-primary::before {
+    display: none !important; /* Remove expanding circle animation */
+}
+
+.cta-button:hover,
+.btn-primary:hover {
+    transform: none !important; /* No scale on hover */
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3) !important; /* Simple shadow */
+}
+
+/* ==========================================================================
+   About Section - Instant visibility
+   ========================================================================== */
+.about-content,
+.about-content h2,
+.about-content p,
+.about-content .cta-button {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+}
+
+.about-image img {
+    transform: none !important; /* Remove scale effect */
+}
+
+.about-image:hover img {
+    transform: none !important; /* No zoom on hover */
+    filter: brightness(1.05) !important; /* Subtle brightness instead */
+}
+
+/* ==========================================================================
+   Gallery - Smooth but not fancy
+   ========================================================================== */
+.gallery-header h2 {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+}
+
+.gallery-cell {
+    transition: opacity 0.3s ease !important; /* Keep opacity transition */
+}
+
+.gallery-cell img {
+    transform: none !important;
+    transition: filter 0.2s ease !important; /* Only filter transition */
+}
+
+.gallery-cell:hover img {
+    transform: none !important; /* No scale */
+    filter: brightness(1.1) !important;
+}
+
+/* Gallery navigation dots - simple */
+.gallery-dots button {
+    transition: background-color 0.2s ease !important;
+}
+
+/* ==========================================================================
+   Scroll Animations - Disable
+   ========================================================================== */
+[data-scroll],
+.fade-in-scroll,
+.fade-in,
+[class*="animate"] {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+}
+
+/* Disable AOS (Animate On Scroll) if present */
+[data-aos] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition-property: none !important;
+}
+
+/* ==========================================================================
+   Loading States - Simple
+   ========================================================================== */
+.loading,
+.spinner,
+[class*="load"] {
+    animation: none !important;
+}
+
+/* Simple loading indicator if needed */
+.loading::after {
+    content: '...';
+    animation: none !important;
+}
+
+/* ==========================================================================
+   Page Transitions - Instant
+   ========================================================================== */
+body {
+    animation: none !important;
+    opacity: 1 !important;
+}
+
+.page-transition {
+    display: none !important;
+}
+
+/* ==========================================================================
+   Mobile Menu - Simple
+   ========================================================================== */
+nav ul {
+    transition: transform 0.2s ease, opacity 0.2s ease !important;
+}
+
+.mobile-menu-toggle span {
+    transition: transform 0.2s ease !important;
+}
+
+/* ==========================================================================
+   Focus States - Keep for accessibility
+   ========================================================================== */
+*:focus {
+    /* Keep focus indicators but make them subtle */
+    outline: 2px solid rgba(59, 130, 246, 0.5) !important;
+    outline-offset: 2px !important;
+    transition: outline 0.1s ease !important;
+}
+
+/* ==========================================================================
+   Performance
+   ========================================================================== */
+* {
+    /* Remove GPU acceleration hints for elements that don't need it */
+    will-change: auto !important;
+}
+
+/* Only elements that actually transition */
+a, button, input, textarea {
+    will-change: color, background-color, border-color;
+}
+
+/* ==========================================================================
+   Optional: Subtle hover effects that aren't annoying
+   ========================================================================== */
+
+/* Links - simple underline */
+a {
+    text-decoration: none;
+    position: relative;
+}
+
+a:not(.cta-button):not(.btn-primary):not(.btn-secondary):hover {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+/* Cards - subtle shadow */
+.card,
+.series-card,
+.feature-item {
+    transition: box-shadow 0.2s ease !important;
+}
+
+.card:hover,
+.series-card:hover,
+.feature-item:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15) !important;
+    transform: none !important; /* No lift effect */
+}
+
+/* Images - subtle brightness */
+img {
+    transition: filter 0.2s ease !important;
+}
+
+img:hover {
+    filter: brightness(1.05);
+}
+
+/* Form inputs - subtle glow */
+input:focus,
+textarea:focus,
+select:focus {
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+}
+
+/* ==========================================================================
+   Debug mode to ensure no animations
+   ========================================================================== */
+body.no-animations * {
+    animation: none !important;
+    transition: none !important;
+}
+
+/* Re-enable critical animations */
+body:not(.no-animations) {
+    /* Only keep essential transitions */
+    a, button, input {
+        transition-property: color, background-color, border-color, opacity !important;
+        transition-duration: 0.2s !important;
+    }
+}

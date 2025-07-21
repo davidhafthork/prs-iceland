@@ -1,0 +1,251 @@
+/* Responsive Styles */
+
+/* Large screens */
+@media (max-width: 1300px) {
+    .gallery-carousel {
+        height: 400px;
+    }
+}
+
+/* Medium-large screens */
+@media (max-width: 1200px) {
+    .hero {
+        height: 90vh;
+        min-height: 550px;
+    }
+    
+    .hero-bg {
+        background-position: center center;
+    }
+    
+    .hero-content h1 {
+        font-size: 4rem;
+    }
+    
+    .hero-content p {
+        font-size: 1.2rem;
+    }
+}
+
+/* Tablets and small laptops */
+@media (max-width: 999px) {
+    /* Secondary pages */
+    body.secondary-page {
+        padding-top: 70px;
+    }
+    /* Header */
+    #header-outer .container {
+        padding: 0 25px;
+    }
+    
+    nav {
+        display: none;
+    }
+    
+    .mobile-menu-toggle {
+        display: flex;
+    }
+    
+    /* Hero */
+    .hero {
+        height: 80vh;
+        min-height: 500px;
+    }
+    
+    .hero-bg {
+        height: 110%;
+        transform: translate3d(0px, 0px, 0px) scale(1.05);
+    }
+    
+    /* Disable mouse parallax on touch devices */
+    .hero-content > div {
+        transform: none !important;
+    }
+    
+    .hero-content h1 {
+        font-size: 3.5rem;
+    }
+    
+    .hero-content p {
+        font-size: 1.15rem;
+        max-width: 500px;
+    }
+    
+    .hero-content {
+        padding: 0 30px;
+    }
+    
+    /* About */
+    .about-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .about-image {
+        height: 400px;
+    }
+    
+    /* Gallery */
+    .gallery-carousel {
+        height: 350px;
+    }
+    
+    /* Hero animations for tablets */
+    @keyframes heroImageReveal {
+        0% {
+            transform: translate3d(0, 0, 0) scale(1.15);
+            filter: brightness(0.3);
+        }
+        100% {
+            transform: translate3d(0, 0, 0) scale(1.05);
+            filter: brightness(1);
+        }
+    }
+}
+
+/* Mobile devices */
+@media (max-width: 690px) {
+    /* Site footer margin adjustment */
+    .site-footer {
+        margin-top: 60px;
+    }
+    /* Hero */
+    .hero {
+        height: 70vh;
+        min-height: 450px;
+    }
+    
+    .hero-bg {
+        background-position: 65% center;
+        height: 105%;
+        transform: translate3d(0px, 0px, 0px) scale(1);
+    }
+    
+    .hero-content h1 {
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+    }
+    
+    .hero-content p {
+        font-size: 1rem;
+        margin-bottom: 30px;
+    }
+    
+    .hero-content {
+        padding: 0 20px;
+    }
+    
+    /* CTA Button */
+    .cta-button {
+        padding: 15px 30px;
+        font-size: 14px;
+        gap: 10px;
+    }
+    
+    .cta-button svg {
+        width: 12px;
+        height: 16px;
+    }
+    
+    /* About */
+    .about-content h2,
+    .gallery-header h2 {
+        font-size: 2rem;
+    }
+    
+    .about-content .cta-button {
+        padding: 12px 25px;
+        font-size: 14px;
+    }
+    
+    .about-content .cta-button svg {
+        width: 12px;
+        height: 16px;
+    }
+    
+    /* Gallery */
+    .gallery-carousel {
+        height: 300px;
+    }
+    
+    .gallery-header h2 {
+        font-size: 2rem;
+    }
+    
+    .gallery-section {
+        padding-bottom: 60px;
+    }
+    
+    /* Footer */
+    .site-footer {
+        padding: 40px 0 20px;
+    }
+    
+    .footer-container {
+        padding: 0 25px;
+    }
+    
+    .footer-address {
+        font-size: 16px;
+    }
+    
+    .footer-kt {
+        font-size: 14px;
+    }
+    
+    .footer-kt::before,
+    .footer-kt::after {
+        width: 20px;
+    }
+    
+    .footer-kt::before {
+        left: -30px;
+    }
+    
+    .footer-kt::after {
+        right: -30px;
+    }
+    
+    /* Hero animations for mobile */
+    @keyframes heroImageReveal {
+        0% {
+            transform: translate3d(0, 0, 0) scale(1.1);
+            filter: brightness(0.3);
+        }
+        100% {
+            transform: translate3d(0, 0, 0) scale(1);
+            filter: brightness(1);
+        }
+    }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+    .hero {
+        height: 60vh;
+        min-height: 400px;
+    }
+    
+    .hero-bg {
+        background-position: 70% center;
+    }
+    
+    .hero-content h1 {
+        font-size: 2rem;
+        line-height: 1.2;
+    }
+    
+    .hero-content p {
+        font-size: 0.9rem;
+        max-width: 300px;
+    }
+    
+    .hero-content {
+        padding: 0 15px;
+    }
+    
+    .cta-button {
+        padding: 12px 25px;
+        font-size: 13px;
+    }
+}

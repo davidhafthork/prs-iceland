@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="is">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRS Iceland - Clean Design Test</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../css/main.css">
+    
+    <style>
+        /* Test sections */
+        .test-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 80px 20px;
+        }
+        
+        .test-section:nth-child(odd) {
+            background: var(--dark-900);
+        }
+        
+        .test-section:nth-child(even) {
+            background: var(--dark-800);
+        }
+        
+        .test-content h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .test-content p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header-outer">
+        <div class="container">
+            <div class="row">
+                <div id="logo">
+                    <img src="../images/psr-logo.svg" alt="PRS Iceland" class="logo-svg">
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#home" class="current-page">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li>
+                            <a href="#series">Series</a>
+                            <ul class="sub-menu">
+                                <li><a href="#">2024 Season</a></li>
+                                <li><a href="#">2023 Season</a></li>
+                                <li><a href="#">Archives</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#gallery">Gallery</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Test Sections -->
+    <section id="home" class="test-section">
+        <div class="test-content">
+            <h2>Clean, Professional Header</h2>
+            <p>No more annoying scaling animations. The logo stays small and elegant. Scroll down to see the consistent header behavior.</p>
+            <div class="button-group">
+                <a href="#" class="cta-button">Primary Button</a>
+                <a href="#" class="btn-secondary">Secondary Button</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="test-section">
+        <div class="test-content">
+            <h2>Instant Content Visibility</h2>
+            <p>All content appears immediately - no sliding, fading, or scaling animations. Just clean, instant presentation.</p>
+            <p>The header remains consistent as you scroll. No color changes, no size changes, just a solid, reliable navigation.</p>
+        </div>
+    </section>
+
+    <section id="series" class="test-section">
+        <div class="test-content">
+            <h2>Subtle Hover Effects</h2>
+            <p>Hover over the navigation links above. You'll see simple underlines and color changes - no bouncing or scaling.</p>
+            <div class="button-group">
+                <button class="cta-button">Hover for subtle shadow</button>
+                <button class="btn-secondary">Clean interactions</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="test-section">
+        <div class="test-content">
+            <h2>Professional Design</h2>
+            <p>The glassmorphism effect on the header provides a modern, sophisticated look without being distracting.</p>
+            <p>All animations are limited to 0.2s transitions for color and opacity only.</p>
+        </div>
+    </section>
+
+    <section id="contact" class="test-section">
+        <div class="test-content">
+            <h2>Better User Experience</h2>
+            <p>Users can focus on your content without being distracted by unnecessary motion.</p>
+            <p>The site feels faster and more professional.</p>
+            <div class="button-group">
+                <a href="#home" class="cta-button">Back to Top</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripts -->
+    <script type="module" src="../js/main.js"></script>
+    
+    <script>
+        // Simple demo of clean interactions
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,160 @@
+/* =============================================
+   CURSOR VISIBILITY FIX - SIMPLE & EFFECTIVE
+   Using standard cursors with enhanced visibility
+   ============================================= */
+
+/* Use standard system cursors - they work best */
+* {
+    cursor: auto;
+}
+
+/* For better visibility on dark backgrounds, we'll use CSS tricks instead of custom cursors */
+html, body {
+    cursor: default !important;
+}
+
+/* Interactive elements */
+a,
+button,
+input[type="button"],
+input[type="submit"],
+[role="button"],
+[onclick],
+.cta-button,
+.btn-primary,
+.btn-secondary {
+    cursor: pointer !important;
+}
+
+/* Text inputs */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+textarea {
+    cursor: text !important;
+    caret-color: white !important; /* White text cursor for inputs */
+}
+
+/* Gallery */
+.gallery-viewport {
+    cursor: grab !important;
+}
+
+.gallery-viewport.dragging {
+    cursor: grabbing !important;
+}
+
+/* 
+   VISIBILITY ENHANCEMENT TECHNIQUES
+   Since custom cursors aren't working, let's make interactive elements more obvious
+*/
+
+/* Add subtle glow to all interactive elements on hover */
+a, button, input[type="button"], input[type="submit"], .cta-button {
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+/* Hover state enhancements for better cursor visibility */
+a:hover,
+button:hover,
+input[type="button"]:hover,
+input[type="submit"]:hover,
+.cta-button:hover {
+    /* Add a subtle glow that helps locate the cursor */
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+    outline: 1px solid rgba(59, 130, 246, 0.5);
+    outline-offset: 2px;
+}
+
+/* Focus indicators for keyboard navigation */
+*:focus {
+    outline: 2px solid rgba(59, 130, 246, 0.8) !important;
+    outline-offset: 2px !important;
+}
+
+/* Make links more obvious on hover */
+a:not(.cta-button):not(.btn-primary):not(.btn-secondary) {
+    text-decoration: none;
+}
+
+a:not(.cta-button):not(.btn-primary):not(.btn-secondary):hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: var(--accent-primary);
+}
+
+/* Ensure form elements have visible borders */
+input, textarea, select {
+    border: 1px solid var(--dark-500) !important;
+}
+
+input:hover, textarea:hover, select:hover {
+    border-color: var(--accent-primary) !important;
+}
+
+/* Gallery cursor enhancement */
+.gallery-viewport {
+    position: relative;
+}
+
+/* Optional: Add instructional text on gallery hover */
+.gallery-viewport::after {
+    content: 'Drag to scroll';
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 12px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.gallery-viewport:hover::after {
+    opacity: 1;
+}
+
+.gallery-viewport.dragging::after {
+    opacity: 0;
+}
+
+/* Disable cursor changes on elements that shouldn't have them */
+div, section, article, header, footer, main, aside, nav {
+    cursor: default !important;
+}
+
+/* Help/info cursor for elements with titles */
+[title], [data-tooltip], abbr {
+    cursor: help !important;
+}
+
+/* Disabled state */
+[disabled], .disabled {
+    cursor: not-allowed !important;
+    opacity: 0.6;
+}
+
+/* Loading state */
+.loading, [aria-busy="true"] {
+    cursor: wait !important;
+}
+
+/* 
+   ALTERNATIVE: If you want to try crosshair cursor for better visibility
+   Uncomment the following lines:
+*/
+/*
+html, body {
+    cursor: crosshair !important;
+}
+
+a, button, input[type="button"], input[type="submit"] {
+    cursor: crosshair !important;
+}
+*/

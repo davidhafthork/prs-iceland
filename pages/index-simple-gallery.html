@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="is">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PRS Iceland - Simple Gallery Test</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/main.css">
+    
+    <style>
+        /* Simple gallery override */
+        .gallery-carousel {
+            position: relative;
+            overflow: hidden;
+            background: #1a1a1a;
+        }
+        
+        .gallery-viewport {
+            overflow: hidden;
+            cursor: grab;
+        }
+        
+        .gallery-viewport:active {
+            cursor: grabbing;
+        }
+        
+        .gallery-slider {
+            display: flex;
+            transition: transform 0.3s ease;
+            gap: 20px;
+            padding: 0 50%;
+        }
+        
+        .gallery-cell {
+            flex: 0 0 auto;
+            position: relative;
+        }
+        
+        .gallery-cell img {
+            display: block;
+            max-height: 600px;
+            width: auto;
+            height: auto;
+        }
+        
+        /* Force images to load */
+        .gallery-cell img {
+            opacity: 1 !important;
+            visibility: visible !important;
+            transform: translateZ(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Copy your header here -->
+    
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+        <div class="gallery-header">
+            <h2>Simple Gallery - No Blank Images</h2>
+        </div>
+        <div class="gallery-carousel">
+            <div class="gallery-viewport">
+                <div class="gallery-slider">
+                    <div class="gallery-cell">
+                        <img src="https://prsiceland.falala.dev/wp-content/uploads/2024/08/prs-3-1024x566.jpg" alt="Gallery 1">
+                    </div>
+                    <div class="gallery-cell">
+                        <img src="https://prsiceland.falala.dev/wp-content/uploads/2024/08/prs-2-1024x1024.jpg" alt="Gallery 2">
+                    </div>
+                    <div class="gallery-cell">
+                        <img src="https://prsiceland.falala.dev/wp-content/uploads/2024/08/prs-1-1024x682.jpg" alt="Gallery 3">
+                    </div>
+                    <div class="gallery-cell">
+                        <img src="https://prsiceland.wordpress.com/wp-content/uploads/2024/04/20240413_155533016_ios.jpg" alt="Gallery 4">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <script>
+        // Simple gallery - no modules, no complexity
+        (function() {
+            const slider = document.querySelector('.gallery-slider');
+            const cells = document.querySelectorAll('.gallery-cell');
+            const images = [
+                'https://prsiceland.falala.dev/wp-content/uploads/2024/08/prs-3-1024x566.jpg',
+                'https://prsiceland.falala.dev/wp-content/uploads/2024/08/prs-2-1024x1024.jpg', 
+                'https://prsiceland.falala.dev/wp-content/uploads/2024/08/prs-1-1024x682.jpg',
+                'https://prsiceland.wordpress.com/wp-content/uploads/2024/04/20240413_155533016_ios.jpg'
+            ];
+            
+            // Preload ALL images immediately
+            images.forEach(src => {
+                const img = new Image();
+                img.src = src;
+            });
+            
+            // Simple infinite scroll by duplicating cells
+            const firstClones = [];
+            const lastClones = [];
+            
+            // Add clones for smooth infinite scroll
+            cells.forEach(cell => {
+                const cloneBefore = cell.cloneNode(true);
+                const cloneAfter = cell.cloneNode(true);
+                firstClones.push(cloneBefore);
+                lastClones.push(cloneAfter);
+            });
+            
+            // Add clones to DOM
+            firstClones.forEach(clone => slider.appendChild(clone));
+            lastClones.reverse().forEach(clone => slider.insertBefore(clone, slider.firstChild));
+            
+            // Simple position tracking
+            let currentX = -cells.length * 1000; // Start in middle
+            slider.style.transform = `translateX(${currentX}px)`;
+            
+            // Simple drag
+            let isDragging = false;
+            let startX = 0;
+            let startTranslate = 0;
+            
+            slider.addEventListener('mousedown', e => {
+                isDragging = true;
+                startX = e.pageX;
+                startTranslate = currentX;
+                slider.style.transition = 'none';
+            });
+            
+            document.addEventListener('mousemove', e => {
+                if (!isDragging) return;
+                e.preventDefault();
+                currentX = startTranslate + (e.pageX - startX);
+                slider.style.transform = `translateX(${currentX}px)`;
+            });
+            
+            document.addEventListener('mouseup', () => {
+                if (!isDragging) return;
+                isDragging = false;
+                slider.style.transition = 'transform 0.3s ease';
+                
+                // Snap to nearest
+                const cellWidth = cells[0].offsetWidth + 20;
+                const nearest = Math.round(currentX / cellWidth) * cellWidth;
+                currentX = nearest;
+                slider.style.transform = `translateX(${currentX}px)`;
+            });
+            
+            // Touch support
+            slider.addEventListener('touchstart', e => {
+                isDragging = true;
+                startX = e.touches[0].pageX;
+                startTranslate = currentX;
+                slider.style.transition = 'none';
+            });
+            
+            slider.addEventListener('touchmove', e => {
+                if (!isDragging) return;
+                currentX = startTranslate + (e.touches[0].pageX - startX);
+                slider.style.transform = `translateX(${currentX}px)`;
+            });
+            
+            slider.addEventListener('touchend', () => {
+                if (!isDragging) return;
+                isDragging = false;
+                slider.style.transition = 'transform 0.3s ease';
+                
+                const cellWidth = cells[0].offsetWidth + 20;
+                const nearest = Math.round(currentX / cellWidth) * cellWidth;
+                currentX = nearest;
+                slider.style.transform = `translateX(${currentX}px)`;
+            });
+        })();
+    </script>
+</body>
+</html>

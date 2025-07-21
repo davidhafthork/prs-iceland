@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="is">
+<head>
+    <meta charset="UTF-8">
+    <title>Final Integration Test - PRS Iceland</title>
+    
+    <!-- Same CSS as main site -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/main.css">
+    
+    <style>
+        /* Test markers */
+        .test-marker {
+            position: fixed;
+            left: 10px;
+            background: #ff6716;
+            color: white;
+            padding: 5px 15px;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 99999;
+            border-radius: 20px;
+        }
+        
+        #scroll-marker {
+            top: 150px;
+        }
+        
+        #state-marker {
+            top: 190px;
+        }
+        
+        .spacer {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #666;
+        }
+        
+        .test-section {
+            padding: 80px 20px;
+            text-align: center;
+        }
+        
+        .test-section h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        
+        .test-section p {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 20px;
+        }
+        
+        .success { color: #4CAF50; }
+        .warning { color: #ff9800; }
+        .error { color: #f44336; }
+    </style>
+</head>
+<body>
+    <!-- Test Markers -->
+    <div class="test-marker" id="scroll-marker">Scroll: 0px</div>
+    <div class="test-marker" id="state-marker">State: Loading...</div>
+    
+    <!-- Same header as main site -->
+    <div id="header-outer" class="transparent">
+        <div class="container">
+            <div class="row">
+                <div class="logo-section">
+                    <a id="logo" href="#">
+                        <img class="stnd logo-svg" width="1368" height="312" src="../images/psr-logo.svg" alt="PRS Iceland">
+                    </a>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#">Test Link 1</a></li>
+                        <li><a href="#">Test Link 2</a></li>
+                        <li><a href="#">Test Link 3</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Test Content -->
+    <div class="spacer" style="background: #333; color: white;">
+        <div>
+            <h1>Scroll Down to Test Header</h1>
+            <p>Header should be transparent here</p>
+        </div>
+    </div>
+    
+    <div class="test-section about-section">
+        <div class="about-content">
+            <h2>Text Visibility Test</h2>
+            <p>This text should be clearly visible (dark on white background)</p>
+            <p class="success">✓ If you can read this, text colors are working</p>
+        </div>
+    </div>
+    
+    <div class="spacer">
+        <div>
+            <h2>Keep Scrolling...</h2>
+            <p>Header should turn white when you pass 50px</p>
+        </div>
+    </div>
+    
+    <!-- All scripts from main site -->
+    <script type="module" src="../js/main.js"></script>
+    
+    <!-- Same fallback script -->
+    <script>
+        (function() {
+            console.log('Test page: Fallback header script running...');
+            
+            function initHeaderFallback() {
+                const header = document.getElementById('header-outer');
+                const scrollMarker = document.getElementById('scroll-marker');
+                const stateMarker = document.getElementById('state-marker');
+                
+                if (!header) {
+                    stateMarker.textContent = 'ERROR: No header!';
+                    stateMarker.classList.add('error');
+                    return;
+                }
+                
+                function updateHeader() {
+                    const scrolled = window.pageYOffset > 50;
+                    
+                    // Update header
+                    if (scrolled) {
+                        header.classList.add('scrolled');
+                        header.classList.remove('transparent');
+                    } else {
+                        header.classList.remove('scrolled');
+                        header.classList.add('transparent');
+                    }
+                    
+                    // Update markers
+                    scrollMarker.textContent = `Scroll: ${Math.round(window.pageYOffset)}px`;
+                    stateMarker.textContent = `State: ${scrolled ? 'SCROLLED' : 'TRANSPARENT'}`;
+                    stateMarker.style.background = scrolled ? '#4CAF50' : '#ff6716';
+                }
+                
+                // Initial state
+                updateHeader();
+                
+                // Listen to scroll
+                let ticking = false;
+                window.addEventListener('scroll', function() {
+                    if (!ticking) {
+                        window.requestAnimationFrame(function() {
+                            updateHeader();
+                            ticking = false;
+                        });
+                        ticking = true;
+                    }
+                });
+                
+                console.log('Test page: Header initialized successfully');
+            }
+            
+            // Run on DOM ready
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initHeaderFallback);
+            } else {
+                initHeaderFallback();
+            }
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,215 @@
+/* =============================================
+   CURSOR VISIBILITY FIX - PRS ICELAND
+   Ensures cursor is always visible on dark backgrounds
+   ============================================= */
+
+/* Global cursor enhancement */
+* {
+    cursor: auto !important;
+}
+
+/* Root and body cursor with enhanced visibility */
+html,
+body {
+    cursor: auto !important;
+    /* Add a subtle white shadow to make cursor more visible */
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><defs><filter id="shadow"><feGaussianBlur in="SourceAlpha" stdDeviation="1"/><feOffset dx="0" dy="0" result="offsetblur"/><feFlood flood-color="rgba(255,255,255,0.5)"/><feComposite in2="offsetblur" operator="in"/><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><path d="M5.5 5.5 L5.5 20 L9 16.5 L12.5 24 L15 22.5 L11.5 15 L17.5 15 Z" fill="white" stroke="black" stroke-width="1" filter="url(%23shadow)"/></svg>') 0 0, auto !important;
+}
+
+/* Enhance default cursor states */
+a,
+button,
+input[type="button"],
+input[type="submit"],
+.cta-button,
+.btn-primary,
+.btn-secondary,
+[role="button"],
+[onclick],
+.clickable {
+    cursor: pointer !important;
+    position: relative;
+}
+
+/* Add hover glow effect to interactive elements */
+a::after,
+button::after,
+.cta-button::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+}
+
+a:hover::after,
+button:hover::after,
+.cta-button:hover::after {
+    opacity: 0.3;
+}
+
+/* Text cursor for inputs */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+textarea {
+    cursor: text !important;
+}
+
+/* Gallery specific cursors */
+.gallery-viewport {
+    cursor: grab !important;
+}
+
+.gallery-viewport.dragging {
+    cursor: grabbing !important;
+}
+
+/* Navigation links */
+nav a,
+.nav-link {
+    cursor: pointer !important;
+    position: relative;
+}
+
+/* Add visual feedback on hover for better cursor visibility */
+a:hover,
+button:hover,
+[role="button"]:hover,
+.clickable:hover {
+    outline: 1px solid rgba(255, 255, 255, 0.1);
+    outline-offset: 2px;
+}
+
+/* Ensure cursor is visible on all sections */
+section,
+.hero,
+.about-section,
+.gallery-section,
+.site-footer,
+footer {
+    cursor: auto !important;
+}
+
+/* Custom cursor for the entire page - Alternative approach */
+/* Uncomment this if the SVG cursor above doesn't work well */
+/*
+body {
+    cursor: crosshair !important;
+}
+
+body a,
+body button {
+    cursor: pointer !important;
+}
+*/
+
+/* Add a subtle cursor trail effect for better visibility */
+@media (hover: hover) {
+    body {
+        position: relative;
+    }
+    
+    /* Create a cursor follower div via JavaScript for even better visibility */
+    .cursor-follower {
+        width: 20px;
+        height: 20px;
+        border: 2px solid rgba(255, 255, 255, 0.5);
+        border-radius: 50%;
+        position: fixed;
+        pointer-events: none;
+        z-index: 9999;
+        transition: transform 0.1s ease-out;
+        mix-blend-mode: difference;
+    }
+}
+
+/* Ensure no elements hide the cursor */
+* {
+    cursor: inherit;
+}
+
+*[style*="cursor: none"] {
+    cursor: auto !important;
+}
+
+/* Debug mode - adds visible borders to all interactive elements */
+.debug-cursor a,
+.debug-cursor button,
+.debug-cursor input,
+.debug-cursor [onclick],
+.debug-cursor [role="button"] {
+    border: 2px solid rgba(255, 255, 0, 0.5) !important;
+}
+
+/* High contrast mode for accessibility */
+@media (prefers-contrast: high) {
+    * {
+        cursor: crosshair !important;
+    }
+    
+    a,
+    button,
+    input[type="button"],
+    input[type="submit"] {
+        cursor: pointer !important;
+        outline: 2px solid white !important;
+    }
+}
+
+/* Force cursor visibility on problematic elements */
+.hero-content,
+.about-content,
+.gallery-header,
+header,
+nav {
+    cursor: auto !important;
+}
+
+/* Ensure form elements have proper cursors */
+select {
+    cursor: pointer !important;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    cursor: pointer !important;
+}
+
+/* Disabled elements */
+[disabled],
+.disabled {
+    cursor: not-allowed !important;
+    opacity: 0.6;
+}
+
+/* Loading states */
+.loading,
+[data-loading="true"] {
+    cursor: wait !important;
+}
+
+/* Resize handles */
+.resizable {
+    cursor: ew-resize !important;
+}
+
+.resizable-vertical {
+    cursor: ns-resize !important;
+}
+
+/* Help cursor for tooltips */
+[title],
+[data-tooltip],
+.help {
+    cursor: help !important;
+}
