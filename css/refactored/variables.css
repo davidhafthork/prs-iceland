@@ -1,0 +1,149 @@
+/* ========================================
+   PRS ICELAND - TACTICAL COLOR SYSTEM
+   Refactored Variables for Professional Military Aesthetic
+   Phase 1: Color Variable Implementation
+   ======================================== */
+
+:root {
+    /* ========== BASE COLORS ========== */
+    /* Primary backgrounds for the tactical theme */
+    --color-primary-bg: #2C2C2C;      /* Tactical Charcoal - main background */
+    --color-secondary-bg: #1A1A1A;    /* Deep Black - section backgrounds */
+    --color-surface: #333333;         /* Dark Gray - card/elevated surfaces */
+    
+    /* ========== ACCENT COLORS ========== */
+    /* Tactical accent colors replacing the blue theme */
+    --color-accent-primary: #FF6B35;  /* Tactical Orange - replaces blue #3B82F6 */
+    --color-accent-hover: #E5602F;    /* Darker Orange - hover states */
+    --color-accent-light: #FF8A5B;    /* Light Orange - highlights */
+    --color-accent-dark: #CC5528;     /* Dark Orange - pressed states */
+    --color-accent-subtle: #994020;   /* Very Dark Orange - subtle uses */
+    
+    --color-accent-secondary: #D4BF91;/* Army Gold - winners/champions */
+    --color-success: #5D6532;         /* Army Green - replaces bright green */
+    --color-alert: #D2691E;           /* Burnt Orange - warnings */
+    
+    /* ========== TEXT COLORS ========== */
+    --color-text-primary: #FFFFFF;    /* White - headings */
+    --color-text-secondary: #B2B4B3;  /* Army Gray - body text */
+    --color-text-data: #F5F5F5;       /* Off-white - data/numbers */
+    --color-text-muted: #808080;      /* Muted Gray - disabled/secondary */
+    
+    /* ========== SEMANTIC COLORS ========== */
+    --color-danger: #B91C1C;          /* Target Red - errors/danger */
+    --color-warning: #D2691E;         /* Burnt Orange - warnings */
+    --color-info: #4A5F4E;            /* Ranger Green - information */
+    
+    /* ========== SURFACE VARIATIONS ========== */
+    /* Different elevation levels for cards and components */
+    --color-surface-1: #1A1A1A;       /* Lowest elevation */
+    --color-surface-2: #242424;       /* Low elevation */
+    --color-surface-3: #2C2C2C;       /* Medium elevation */
+    --color-surface-4: #333333;       /* High elevation */
+    --color-surface-5: #3D3D3D;       /* Highest elevation */
+    
+    /* ========== BORDER COLORS ========== */
+    --color-border-light: #404040;    /* Light borders */
+    --color-border-medium: #333333;   /* Medium borders */
+    --color-border-dark: #262626;     /* Dark borders */
+    --color-border-accent: #FF6B35;   /* Accent borders */
+    
+    /* ========== GRADIENTS ========== */
+    --gradient-primary: linear-gradient(135deg, var(--color-primary-bg) 0%, var(--color-secondary-bg) 100%);
+    --gradient-accent: linear-gradient(135deg, var(--color-accent-primary) 0%, var(--color-accent-dark) 100%);
+    --gradient-surface: linear-gradient(180deg, var(--color-surface-3) 0%, var(--color-surface-2) 100%);
+    --gradient-tactical: linear-gradient(135deg, #2C2C2C 0%, #1A1A1A 50%, #333333 100%);
+    
+    /* ========== SHADOWS ========== */
+    /* Tactical shadows - darker and more pronounced */
+    --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+    --shadow-sm: 0 2px 4px 0 rgba(0, 0, 0, 0.6);
+    --shadow-md: 0 4px 8px -1px rgba(0, 0, 0, 0.7);
+    --shadow-lg: 0 10px 20px -3px rgba(0, 0, 0, 0.8);
+    --shadow-xl: 0 20px 40px -5px rgba(0, 0, 0, 0.9);
+    --shadow-glow-orange: 0 0 20px rgba(255, 107, 53, 0.4);
+    --shadow-glow-gold: 0 0 20px rgba(212, 191, 145, 0.3);
+    
+    /* ========== OPACITY VALUES ========== */
+    --opacity-hover: 0.8;
+    --opacity-disabled: 0.5;
+    --opacity-overlay: 0.9;
+    --opacity-subtle: 0.1;
+    
+    /* ========== TRANSITION DURATIONS ========== */
+    --transition-fast: 150ms;
+    --transition-base: 300ms;
+    --transition-slow: 500ms;
+    
+    /* ========== Z-INDEX SCALE ========== */
+    --z-index-dropdown: 100;
+    --z-index-modal: 200;
+    --z-index-overlay: 300;
+    --z-index-toast: 400;
+    --z-index-tooltip: 500;
+}
+
+/* ========== LEGACY VARIABLE MAPPING ========== */
+/* Map old variable names to new tactical colors for compatibility */
+:root {
+    /* Map blue colors to tactical orange */
+    --accent-primary: var(--color-accent-primary);
+    --accent-hover: var(--color-accent-hover);
+    --accent-light: var(--color-accent-light);
+    --accent-dark: var(--color-accent-dark);
+    --accent-subtle: var(--color-accent-subtle);
+    
+    /* Map old dark theme colors */
+    --dark-900: var(--color-secondary-bg);
+    --dark-800: var(--color-surface-2);
+    --dark-700: var(--color-surface-3);
+    --dark-600: var(--color-surface-4);
+    --dark-500: var(--color-border-medium);
+    
+    /* Map gray scale */
+    --gray-100: var(--color-text-primary);
+    --gray-200: var(--color-text-data);
+    --gray-300: var(--color-text-secondary);
+    --gray-400: var(--color-text-muted);
+    
+    /* Map semantic colors */
+    --success: var(--color-success);
+    --warning: var(--color-warning);
+    --danger: var(--color-danger);
+    --info: var(--color-info);
+    
+    /* Map old primary color references */
+    --primary-color: var(--color-accent-primary);
+    --dark-bg: var(--color-secondary-bg);
+    --text-light: var(--color-text-data);
+    --text-dark: var(--color-surface-3);
+}
+
+/* ========== DOCUMENTATION ========== */
+/*
+ * COLOR USAGE GUIDE:
+ * 
+ * Backgrounds:
+ * - Main page background: var(--color-secondary-bg)
+ * - Section backgrounds: var(--color-primary-bg)
+ * - Card backgrounds: var(--color-surface)
+ * - Elevated components: var(--color-surface-4)
+ * 
+ * Text:
+ * - Headings: var(--color-text-primary)
+ * - Body text: var(--color-text-secondary)
+ * - Data/numbers: var(--color-text-data)
+ * - Muted/disabled: var(--color-text-muted)
+ * 
+ * Interactive:
+ * - Primary buttons: var(--color-accent-primary)
+ * - Hover states: var(--color-accent-hover)
+ * - Active/pressed: var(--color-accent-dark)
+ * - Links: var(--color-accent-primary)
+ * 
+ * Special:
+ * - Winners/champions: var(--color-accent-secondary)
+ * - Success states: var(--color-success)
+ * - Warnings: var(--color-alert)
+ * - Errors: var(--color-danger)
+ */
