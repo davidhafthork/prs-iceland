@@ -29,3 +29,8 @@ dist-ssr
 CLAUDE_*.md
 CLAUDE_*.txt
 NEXT_STEPS.md
+*.delete
+SESSION_*.md
+*_INSTRUCTIONS.md
+
+# IMPORTANT: Only /README.md and /docs/DEVELOPMENT.md are allowed documentation files

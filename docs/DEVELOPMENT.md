@@ -4,6 +4,14 @@
 
 **This is a PRODUCTION system for PRS Iceland**, not a demo or learning project. It manages real precision rifle competitions in Iceland.
 
+## Documentation Rules
+
+**IMPORTANT**: This project uses exactly TWO documentation files:
+1. `/README.md` - Public-facing project overview
+2. `/docs/DEVELOPMENT.md` - This file, containing all development information
+
+**DO NOT CREATE** additional documentation files. All development notes, guides, session summaries, or technical documentation must be added to THIS FILE. No exceptions.
+
 ## System State (Last Updated: July 2025)
 
 ### What's Deployed
@@ -109,6 +117,7 @@ npm run dev
 - `/src/components/MatchRegistrations.jsx` - Participant list
 - `/supabase/schema.sql` - Database structure
 - `/supabase/rls_policies.sql` - Row Level Security policies
+- `/supabase/SETUP.md` - Database setup instructions
 
 ### Environment
 ```bash
@@ -183,9 +192,31 @@ Before suggesting changes:
 2. Check if the feature already exists
 3. Consider if it truly helps match organizers
 4. Keep solutions simple and maintainable
+5. **NEVER create new documentation files** - use only README.md and DEVELOPMENT.md
 
 Never:
 - Add complex features "just because"
 - Make static content dynamic without good reason
 - Modify database schema without migration planning
 - Implement features not in the "What's Missing" list above
+- **Create any documentation files beyond README.md and DEVELOPMENT.md**
+
+## Common Issues & Solutions
+
+### Registration RLS Error
+If you get "new row violates row-level security policy":
+1. Check that RLS policies are properly set in Supabase
+2. Run the policies in `/supabase/rls_policies.sql`
+3. Or temporarily disable RLS for development: `ALTER TABLE table_name DISABLE ROW LEVEL SECURITY;`
+
+## Development Log
+
+**Add session notes here instead of creating new files**
+
+### July 2025 - Registration Implementation
+- Implemented registration modal with form validation
+- Fixed RLS policies for public registration
+- Added participant display for matches
+- Created debug route at `/debug`
+- Updated header navigation with smooth scrolling
+- **Note**: All future session summaries should be added here, not in separate files
