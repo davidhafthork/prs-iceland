@@ -8,6 +8,7 @@ export { ctaContent } from './ctaContent';
 export { matchesContent } from './matchesContent';
 export { standingsContent } from './standingsContent';
 export { footerContent } from './footerContent';
+export { registrationContent } from './registrationContent';
 export { upcomingMatches, pastMatches } from './matches';
 export { currentStandings, divisionInfo } from './standings';
 

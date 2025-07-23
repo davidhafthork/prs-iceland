@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Calendar, MapPin, Users } from 'lucide-react';
 import { matchesApi } from '../lib/supabase';
+import RegistrationModal from './RegistrationModal';
 
 function UpcomingMatches() {
   const [matches, setMatches] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [selectedMatch, setSelectedMatch] = useState(null);
+  const [showRegistrationModal, setShowRegistrationModal] = useState(false);
 
   useEffect(() => {
     loadMatches();
@@ -119,6 +122,10 @@ function UpcomingMatches() {
                   <button 
                     className="w-full bg-orange-500 hover:bg-orange-600 text-white py-2 rounded-md font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                     disabled={match.registered >= match.capacity}
+                    onClick={() => {
+                      setSelectedMatch(match);
+                      setShowRegistrationModal(true);
+                    }}
                   >
                     {match.registered >= match.capacity ? 'Mót fullt' : 'Skrá í mót'}
                   </button>
@@ -141,6 +148,20 @@ function UpcomingMatches() {
           </div>
         </div>
       </div>
+
+      {showRegistrationModal && selectedMatch && (
+        <RegistrationModal
+          match={selectedMatch}
+          onClose={() => {
+            setShowRegistrationModal(false);
+            setSelectedMatch(null);
+          }}
+          onSuccess={() => {
+            // Reload matches to update registration count
+            loadMatches();
+          }}
+        />
+      )}
     </section>
   );
 }
