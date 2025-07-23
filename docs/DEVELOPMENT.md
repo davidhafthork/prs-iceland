@@ -24,6 +24,47 @@
 - ✏️ Edit/delete functionality
 - 🚀 Production deployment
 
+## Architecture Overview
+
+### Content-First Design
+
+This project uses a **content-first architecture** that separates content from presentation:
+
+```
+src/
+├── components/        # Pure presentation components
+├── data/             # All content as data
+│   ├── heroContent.js
+│   ├── matches.js    # Match data
+│   ├── standings.js  # Competition data
+│   └── ...           # Other content files
+├── config/           # Configuration
+│   ├── site.js       # Site metadata
+│   └── ui.js         # UI behavior config
+└── lib/
+    └── supabase.js   # Database operations
+```
+
+**Important**: The separation between static content (in `/data`) and dynamic data (from Supabase) is intentional. Don't change this.
+
+### Database Schema
+```sql
+competitors (id, name, email, division, city)
+matches (id, name, date, location, capacity, status)
+registrations (match_id, competitor_id, status)
+results (match_id, competitor_id, score, percentage, points)
+```
+
+### API Methods
+```javascript
+// From /src/lib/supabase.js
+matchesApi.getUpcoming()     // Get upcoming matches
+matchesApi.create()          // Create match (admin)
+standingsApi.getCurrent()    // Get current standings
+registrationApi.register()   // Register for match
+resultsApi.addResults()      // Add results (admin)
+```
+
 ## Development Rules
 
 ### 1. Keep It Simple
@@ -63,30 +104,69 @@ npm run dev
 - `/src/components/admin/*` - Admin interface
 - `/supabase/schema.sql` - Database structure
 
-### Database Schema
-```sql
-competitors (id, name, email, division, city)
-matches (id, name, date, location, capacity, status)
-registrations (match_id, competitor_id, status)
-results (match_id, competitor_id, score, percentage, points)
-```
-
-### API Methods
-```javascript
-// From /src/lib/supabase.js
-matchesApi.getUpcoming()     // Get upcoming matches
-matchesApi.create()          // Create match (admin)
-standingsApi.getCurrent()    // Get current standings
-registrationApi.register()   // Register for match
-resultsApi.addResults()      // Add results (admin)
-```
-
 ### Environment
 ```bash
 # .env.local (required)
 VITE_SUPABASE_URL=your_url
 VITE_SUPABASE_ANON_KEY=your_key
 ```
+
+## Content Management
+
+Static content lives in `/src/data/`:
+- Hero text, about descriptions, CTAs
+- Navigation configuration
+- Theme settings
+- Feature flags
+
+To update static content:
+1. Navigate to `/src/data/`
+2. Find the relevant content file
+3. Update the JavaScript object
+4. Changes appear instantly in dev mode
+
+### Customization Options
+
+**Theme** (`/src/config/ui.js`):
+```javascript
+export const themeConfig = {
+  colors: {
+    primary: 'orange-500',
+    background: 'zinc-950'
+  }
+}
+```
+
+**Feature Flags** (`/src/config/ui.js`):
+```javascript
+export const featureFlags = {
+  enableRegistration: true,
+  showUpcomingMatches: true
+}
+```
+
+## Deployment
+
+### Build Process
+```bash
+npm run build    # Creates optimized build in /dist
+npm run preview  # Test production build locally
+```
+
+### Deployment Checklist
+- [ ] Set up authentication for admin routes
+- [ ] Configure production environment variables
+- [ ] Enable RLS policies in Supabase
+- [ ] Set up proper CORS headers
+- [ ] Configure custom domain
+- [ ] Set up monitoring/logging
+
+### Future Enhancements
+
+The content-first architecture enables:
+- **CMS Integration**: Connect to Strapi, Contentful, etc.
+- **Internationalization**: Add English translations
+- **Member Portal**: Add authentication and user features
 
 ## For AI Assistants
 
