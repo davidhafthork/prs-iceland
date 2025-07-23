@@ -1,9 +1,9 @@
 export const ctaContent = {
   title: "Tilbúinn að keppa?",
-  description: "Vertu hluti af fremstu nákvæmnisskotfélagi Íslands",
+  description: "Vertu hluti af fremsta PRS félagi Íslands",
   buttons: {
     primary: {
-      text: "Gerast félagi",
+      text: "Gerast félagsmaður",
       icon: "Users",
       href: "#membership"
     },

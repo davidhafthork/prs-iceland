@@ -19,14 +19,14 @@ export const navigationConfig = {
       showInDesktop: true
     },
     { 
-      name: 'Félagatal', 
+      name: 'Meðlimir', 
       href: '#members',
       order: 3,
       showInMobile: true,
       showInDesktop: true
     },
     { 
-      name: 'Um PRS', 
+      name: 'Um PRS Iceland', 
       href: '#about',
       order: 4,
       showInMobile: true,
@@ -130,7 +130,7 @@ export const featureFlags = {
 export const seoConfig = {
   defaultTitle: 'PRS Iceland - Precision Rifle Series',
   titleTemplate: '%s | PRS Iceland',
-  description: 'Fremsta nákvæmnisskotfélag Íslands. Keppt á hæsta stigi í precision rifle shooting.',
+  description: 'Fremsta precision rifling félag Íslands.',
   keywords: ['PRS', 'precision rifle', 'shooting', 'Iceland', 'skotfimi', 'keppni'],
   openGraph: {
     type: 'website',

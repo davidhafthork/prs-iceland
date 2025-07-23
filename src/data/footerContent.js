@@ -1,5 +1,5 @@
 export const footerContent = {
-  description: "Fremsta nákvæmnisskotfélag Íslands",
+  description: "Fremsta PRS félag Íslands",
   sections: [
     {
       title: "Flýtileiðir",

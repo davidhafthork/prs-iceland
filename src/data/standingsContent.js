@@ -1,6 +1,6 @@
 export const standingsContent = {
   title: "Stigastaða",
-  subtitle: "2025 PRS Iceland Mótaseríu",
+  subtitle: "2025 PRS Iceland Mótasería",
   icon: "Trophy",
   tableHeaders: {
     rank: "Sæti",

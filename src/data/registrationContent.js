@@ -11,6 +11,11 @@ export const registrationContent = {
       placeholder: "netfang@example.com",
       icon: "Mail"
     },
+    phonenumber: {
+      label: "Sími",
+      placeholder: "1234567",
+      icon: "Mobile"
+    },
     division: {
       label: "Flokkur",
       placeholder: "Veldu flokk",

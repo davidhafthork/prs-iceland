@@ -3,7 +3,7 @@ export const heroContent = {
     line1: "Precision Rifle Series",
     line2: "Iceland"
   },
-  subtitle: "Keppt á hæsta stigi nákvæmnisskotfimi á Íslandi",
+  subtitle: "Keppt á hæsta stigi PRS á Íslandi",
   backgroundImage: "/images/prs-1-1024x682.jpg",
   cta: {
     primary: {

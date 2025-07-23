@@ -2,7 +2,7 @@
 export const siteConfig = {
   name: 'PRS Iceland',
   tagline: 'Precision Rifle Series Iceland',
-  description: 'Fremsta nákvæmnisskotfélag Íslands',
+  description: 'Fremsta PRS félag Íslands',
   email: 'prs@prsiceland.is',
   address: {
     street: 'Stekkjarseli 7',
@@ -25,8 +25,8 @@ export const siteConfig = {
 export const navigationItems = [
   { name: 'Mótaserían', href: '#matches' },
   { name: 'Úrslit & Stig', href: '#standings' },
-  { name: 'Félagatal', href: '#members' },
-  { name: 'Um PRS', href: '#about' }
+  { name: 'Meðlimir', href: '#members' },
+  { name: 'Um PRS Iceland', href: '#about' }
 ];
 
 // Hero images for different sections
