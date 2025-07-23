@@ -1,20 +1,103 @@
-import React from 'react';
-import { statsContent } from '../data/statsContent';
+import React, { useState, useEffect } from 'react';
+import { supabase } from '../lib/supabase';
 
 function Stats() {
+  const [stats, setStats] = useState({
+    competitors: 0,
+    upcomingMatches: 0,
+    completedMatches: 0,
+    totalRegistrations: 0
+  });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    loadStats();
+  }, []);
+
+  const loadStats = async () => {
+    try {
+      // Get competitor count
+      const { count: competitorCount } = await supabase
+        .from('competitors')
+        .select('*', { count: 'exact', head: true });
+
+      // Get upcoming matches count
+      const { count: upcomingCount } = await supabase
+        .from('matches')
+        .select('*', { count: 'exact', head: true })
+        .eq('status', 'upcoming');
+
+      // Get completed matches count for this year
+      const { count: completedCount } = await supabase
+        .from('matches')
+        .select('*', { count: 'exact', head: true })
+        .eq('status', 'completed')
+        .gte('date', new Date(new Date().getFullYear(), 0, 1).toISOString());
+
+      // Get total registrations for upcoming matches
+      const { count: registrationCount } = await supabase
+        .from('registrations')
+        .select('*', { count: 'exact', head: true })
+        .eq('status', 'confirmed');
+
+      setStats({
+        competitors: competitorCount || 0,
+        upcomingMatches: upcomingCount || 0,
+        completedMatches: completedCount || 0,
+        totalRegistrations: registrationCount || 0
+      });
+    } catch (error) {
+      console.error('Error loading stats:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <section className="py-20 bg-zinc-900">
+        <div className="container mx-auto px-4">
+          <div className="text-center text-zinc-400">Sæki tölfræði...</div>
+        </div>
+      </section>
+    );
+  }
+
   return (
-    <section className={statsContent.sectionClass}>
+    <section className="py-20 bg-zinc-900">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {statsContent.stats.map((stat, index) => (
-            <div key={index} className="bg-zinc-950 border border-zinc-800 p-6 rounded-lg">
-              <div className="text-4xl font-bold text-orange-500 mb-2">{stat.value}</div>
-              <div className="text-zinc-400">{stat.label}</div>
-              {stat.description && (
-                <div className="text-sm text-zinc-500 mt-1">{stat.description}</div>
-              )}
+          <div className="bg-zinc-950 border border-zinc-800 p-6 rounded-lg">
+            <div className="text-4xl font-bold text-orange-500 mb-2">
+              {stats.competitors}
             </div>
-          ))}
+            <div className="text-zinc-400">Skráðir keppendur</div>
+            <div className="text-sm text-zinc-500 mt-1">Virkir í mótaröðinni</div>
+          </div>
+
+          <div className="bg-zinc-950 border border-zinc-800 p-6 rounded-lg">
+            <div className="text-4xl font-bold text-orange-500 mb-2">
+              {stats.upcomingMatches}
+            </div>
+            <div className="text-zinc-400">Mót framundan</div>
+            <div className="text-sm text-zinc-500 mt-1">Næstu vikur og mánuði</div>
+          </div>
+
+          <div className="bg-zinc-950 border border-zinc-800 p-6 rounded-lg">
+            <div className="text-4xl font-bold text-orange-500 mb-2">
+              {stats.completedMatches}
+            </div>
+            <div className="text-zinc-400">Mót haldin</div>
+            <div className="text-sm text-zinc-500 mt-1">Það sem af er ári</div>
+          </div>
+
+          <div className="bg-zinc-950 border border-zinc-800 p-6 rounded-lg">
+            <div className="text-4xl font-bold text-orange-500 mb-2">
+              {stats.totalRegistrations}
+            </div>
+            <div className="text-zinc-400">Skráningar</div>
+            <div className="text-sm text-zinc-500 mt-1">Í komandi mót</div>
+          </div>
         </div>
       </div>
     </section>

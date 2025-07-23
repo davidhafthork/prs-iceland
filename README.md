@@ -162,6 +162,28 @@ The build output will be in the `dist/` directory, ready for deployment to any s
 - **Email**: prs@prsiceland.is
 - **Address**: Stekkjarseli 7, 109 Reykjavík
 
+## 📚 Project Documentation
+
+### For Developers/AI Assistants
+
+**⚠️ IMPORTANT**: Read `/docs/DEVELOPMENT.md` before making ANY changes.
+
+This is a PRODUCTION system. All development guidelines, current state, and pending features are documented there.
+
+### Current Status
+
+✅ **Working Features**:
+- Supabase database integration
+- Live competition data on homepage
+- Admin panel for match management
+- Automatic standings calculation
+
+🚧 **Pending Features**:
+- Authentication for admin access
+- Competitor registration form
+- Email notifications
+- Production deployment
+
 ## 🔮 Future Enhancements
 
 The content-first architecture enables:
