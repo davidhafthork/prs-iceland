@@ -16,10 +16,12 @@
 - ✅ Homepage shows live data (upcoming matches, standings, stats)
 - ✅ Admin panel at `/admin` for creating matches and entering results
 - ✅ Automatic standings calculation from match results
+- ✅ Registration form with modal interface
+- ✅ Participant list display for each match
+- ✅ Smooth scroll navigation
 
 ### What's Missing
 - 🔐 Authentication (admin panel is unprotected)
-- 📝 Registration form (the "Skrá í mót" button doesn't work yet)
 - 📧 Email notifications
 - ✏️ Edit/delete functionality
 - 🚀 Production deployment
@@ -98,11 +100,15 @@ npm run dev
 - `/` - Main website
 - `/admin` - Admin dashboard (unprotected)
 - `/test` - Database connection tester
+- `/debug` - Registration and data debug panel
 
 ### Key Files
 - `/src/lib/supabase.js` - All database operations
 - `/src/components/admin/*` - Admin interface
+- `/src/components/RegistrationModal.jsx` - Registration form
+- `/src/components/MatchRegistrations.jsx` - Participant list
 - `/supabase/schema.sql` - Database structure
+- `/supabase/rls_policies.sql` - Row Level Security policies
 
 ### Environment
 ```bash
@@ -156,10 +162,12 @@ npm run preview  # Test production build locally
 ### Deployment Checklist
 - [ ] Set up authentication for admin routes
 - [ ] Configure production environment variables
-- [ ] Enable RLS policies in Supabase
+- [x] Enable RLS policies in Supabase (basic policies done)
 - [ ] Set up proper CORS headers
 - [ ] Configure custom domain
 - [ ] Set up monitoring/logging
+- [ ] Add email notifications for registrations
+- [ ] Implement proper error tracking
 
 ### Future Enhancements
 

@@ -10,6 +10,28 @@ function Header() {
   const desktopItems = navItems.filter(item => item.showInDesktop);
   const mobileItems = navItems.filter(item => item.showInMobile);
 
+  // Smooth scroll handler
+  const handleSmoothScroll = (e, href) => {
+    // Only handle hash links
+    if (href.startsWith('#')) {
+      e.preventDefault();
+      const element = document.querySelector(href);
+      if (element) {
+        // Get the header height for offset
+        const headerHeight = 64; // h-16 = 4rem = 64px
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+      // Close mobile menu if open
+      setMobileMenuOpen(false);
+    }
+  };
+
   return (
     <>
       <header className="fixed top-0 w-full z-50 bg-zinc-950/90 backdrop-blur-md border-b border-zinc-800">
@@ -33,6 +55,7 @@ function Header() {
                     <a 
                       href={item.href} 
                       className="hover:text-orange-500 transition-colors"
+                      onClick={(e) => handleSmoothScroll(e, item.href)}
                     >
                       {item.name}
                     </a>
@@ -47,6 +70,7 @@ function Header() {
                 <a 
                   href={navigationConfig.cta.href}
                   className="bg-orange-500 hover:bg-orange-600 px-6 py-2 rounded-md font-medium transition-colors"
+                  onClick={(e) => handleSmoothScroll(e, navigationConfig.cta.href)}
                 >
                   {navigationConfig.cta.text}
                 </a>
@@ -74,7 +98,7 @@ function Header() {
                   <a 
                     href={item.href} 
                     className="text-lg"
-                    onClick={() => setMobileMenuOpen(false)}
+                    onClick={(e) => handleSmoothScroll(e, item.href)}
                   >
                     {item.name}
                   </a>
@@ -85,6 +109,7 @@ function Header() {
                   <a 
                     href={navigationConfig.cta.href}
                     className="block w-full bg-orange-500 hover:bg-orange-600 px-6 py-3 rounded-md font-medium text-center"
+                    onClick={(e) => handleSmoothScroll(e, navigationConfig.cta.href)}
                   >
                     {navigationConfig.cta.text}
                   </a>

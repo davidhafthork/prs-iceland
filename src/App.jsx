@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import AdminDashboard from './pages/AdminDashboard';
 import SupabaseTest from './pages/SupabaseTest';
+import RegistrationDebug from './pages/RegistrationDebug';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/test" element={<SupabaseTest />} />
+        <Route path="/debug" element={<RegistrationDebug />} />
       </Routes>
     </Router>
   );

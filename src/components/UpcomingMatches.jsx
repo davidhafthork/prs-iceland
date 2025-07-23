@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Calendar, MapPin, Users } from 'lucide-react';
 import { matchesApi } from '../lib/supabase';
 import RegistrationModal from './RegistrationModal';
+import MatchRegistrations from './MatchRegistrations';
 
 function UpcomingMatches() {
   const [matches, setMatches] = useState([]);
@@ -129,6 +130,7 @@ function UpcomingMatches() {
                   >
                     {match.registered >= match.capacity ? 'Mót fullt' : 'Skrá í mót'}
                   </button>
+                  <MatchRegistrations match={match} />
                 </div>
               ))
             )}

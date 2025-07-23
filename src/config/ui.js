@@ -37,7 +37,7 @@ export const navigationConfig = {
   // CTA button configuration
   cta: {
     text: 'Skrá í mót',
-    href: '#register',
+    href: '#matches',
     style: 'primary', // primary, secondary, outline
     showInMobile: false,
     showInDesktop: true

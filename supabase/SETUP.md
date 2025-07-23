@@ -25,6 +25,11 @@
    CREATE POLICY "Public read access" ON matches FOR SELECT USING (true);
    CREATE POLICY "Public read access" ON registrations FOR SELECT USING (true);
    CREATE POLICY "Public read access" ON results FOR SELECT USING (true);
+   
+   -- Registration policies (allow public to register)
+   CREATE POLICY "Public can register as competitor" ON competitors FOR INSERT WITH CHECK (true);
+   CREATE POLICY "Competitors can update own record" ON competitors FOR UPDATE USING (true) WITH CHECK (true);
+   CREATE POLICY "Public can register for matches" ON registrations FOR INSERT WITH CHECK (true);
    ```
 
 ## 2. Environment Variables

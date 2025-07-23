@@ -1,1 +1,11 @@
 @import "tailwindcss";
+
+/* Smooth scrolling for the entire page */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Ensure proper scroll offset for fixed header */
+[id] {
+  scroll-margin-top: 80px; /* Slightly more than header height for better spacing */
+}
