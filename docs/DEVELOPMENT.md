@@ -27,11 +27,14 @@
 - ✅ Registration form with modal interface
 - ✅ Participant list display for each match
 - ✅ Smooth scroll navigation
+- ✅ Edit/delete functionality for matches, registrations, and results
+  - Match management: Edit match details, delete upcoming matches
+  - Registration management: Change status, delete registrations
+  - Results management: Edit scores, delete results
 
 ### What's Missing
 - 🔐 Authentication (admin panel is unprotected)
 - 📧 Email notifications
-- ✏️ Edit/delete functionality
 - 🚀 Production deployment
 
 ## Architecture Overview
@@ -220,3 +223,80 @@ If you get "new row violates row-level security policy":
 - Created debug route at `/debug`
 - Updated header navigation with smooth scrolling
 - **Note**: All future session summaries should be added here, not in separate files
+
+### July 2025 - Edit/Delete Functionality Implementation
+- Extended Supabase API with full CRUD operations for matches, registrations, results, and competitors
+- Created AdminMatchList component for match management with inline editing
+- Added AdminRegistrationManager for managing match registrations (status changes, deletions)
+- Created AdminResultsManager for editing and deleting match results
+- Updated Admin Dashboard with new tabs for managing data
+- Key features:
+  - Matches: Edit details (name, date, location, capacity), delete upcoming matches only
+  - Registrations: Change status (confirmed/waitlist/cancelled), delete registrations
+  - Results: Edit scores/percentages/points, delete individual results
+  - All operations include confirmation dialogs and success/error messaging
+
+### July 2025 - Mobile Responsive Admin Panel
+- Made entire admin panel mobile-friendly with responsive design
+- Tab Navigation:
+  - Horizontal scroll on mobile with shortened labels
+  - Full labels on tablet and desktop
+  - Prevented text wrapping issues
+- Tables converted to card layouts on mobile:
+  - Results form: Stacked card layout with grid inputs
+  - Results manager: Card-based display with inline editing
+  - Registration manager: Flexible layout with proper spacing
+- Form improvements:
+  - Responsive padding and text sizes
+  - Touch-friendly button sizes (44px minimum)
+  - Proper input field spacing
+- Match list:
+  - Stacked layout for match details on mobile
+  - Grid inputs stack vertically on small screens
+- Key responsive breakpoints:
+  - Mobile: Default styles
+  - Tablet/Desktop: md: breakpoint (768px+)
+
+### July 2025 - Registration Management Bug Fix
+- Fixed delete and update operations for registrations not working due to missing RLS policies
+- Created `/supabase/rls_policies_registration_fix.sql` with:
+  - DELETE policy for registrations
+  - UPDATE policy for registrations
+- Added debugging console logs to help identify issues
+- **Action Required**: Run the new SQL file in Supabase to enable delete/update operations:
+  ```sql
+  -- Run in Supabase SQL editor after the main rls_policies.sql
+  -- Contents of /supabase/rls_policies_registration_fix.sql
+  ```
+
+### July 2025 - Results and Complete Edit/Delete Fix
+- Fixed "JSON object requested, multiple (or no) rows returned" error for results updates
+- Created comprehensive RLS policies file: `/supabase/rls_policies_complete_fix.sql`
+- Includes all missing UPDATE and DELETE policies for:
+  - Matches
+  - Registrations 
+  - Results
+  - Competitors
+- Added debugging to track ID issues
+- **Action Required**: Run the complete fix SQL in Supabase:
+  ```sql
+  -- Run the contents of /supabase/rls_policies_complete_fix.sql in Supabase SQL editor
+  -- This will fix all edit/delete operations across the admin panel
+  ```
+- **Important**: Check console logs to see if `competitor_id` is present in result objects
+
+### July 2025 - Clarified Manual vs Calculated Fields
+- Redesigned results entry to clearly distinguish between:
+  - **Manual Input**: Score (raw points from competition)
+  - **Auto-Calculated**: Percentage (score/max_score × 100)
+  - **Configurable**: Points (either manual or auto-calculated based on position)
+- Added max score setting per match (default 300)
+- Added toggle for manual vs automatic points calculation
+- Visual indicators:
+  - Required fields marked with orange asterisk
+  - Calculated fields shown with gray background and "(reiknað)" label
+  - Read-only fields have different styling
+- Points calculation options:
+  - **Automatic**: Based on final position (1st = 100p, 2nd = 95p, etc.)
+  - **Manual**: Admin can enter custom points
+- Added explanatory section showing what each field represents

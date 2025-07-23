@@ -5,6 +5,13 @@ import { createClient } from '@supabase/supabase-js'
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
 
+// Debug logging (remove in production)
+console.log('Supabase initialization:', {
+  url: supabaseUrl,
+  hasKey: !!supabaseAnonKey,
+  keyLength: supabaseAnonKey?.length
+})
+
 if (!supabaseUrl || !supabaseAnonKey) {
   throw new Error('Missing Supabase environment variables. Check your .env.local file.')
 }
@@ -56,6 +63,41 @@ export const matchesApi = {
     
     if (error) throw error
     return data
+  },
+
+  // Get all matches (for admin management)
+  async getAll() {
+    const { data, error } = await supabase
+      .from('matches')
+      .select('*')
+      .order('date', { ascending: false })
+    
+    if (error) throw error
+    return data
+  },
+
+  // Update a match (admin only)
+  async update(id, updates) {
+    const { data, error } = await supabase
+      .from('matches')
+      .update(updates)
+      .eq('id', id)
+      .select()
+      .single()
+    
+    if (error) throw error
+    return data
+  },
+
+  // Delete a match (admin only)
+  async delete(id) {
+    const { error } = await supabase
+      .from('matches')
+      .delete()
+      .eq('id', id)
+    
+    if (error) throw error
+    return true
   }
 }
 
@@ -126,6 +168,44 @@ export const registrationApi = {
     
     if (error) throw error
     return data
+  },
+
+  // Cancel a registration
+  async cancel(matchId, competitorId) {
+    const { error } = await supabase
+      .from('registrations')
+      .update({ status: 'cancelled' })
+      .eq('match_id', matchId)
+      .eq('competitor_id', competitorId)
+    
+    if (error) throw error
+    return true
+  },
+
+  // Delete a registration (admin only)
+  async delete(matchId, competitorId) {
+    const { error } = await supabase
+      .from('registrations')
+      .delete()
+      .eq('match_id', matchId)
+      .eq('competitor_id', competitorId)
+    
+    if (error) throw error
+    return true
+  },
+
+  // Update registration status (admin only)
+  async updateStatus(matchId, competitorId, status) {
+    const { data, error } = await supabase
+      .from('registrations')
+      .update({ status })
+      .eq('match_id', matchId)
+      .eq('competitor_id', competitorId)
+      .select()
+      .single()
+    
+    if (error) throw error
+    return data
   }
 }
 
@@ -146,5 +226,86 @@ export const resultsApi = {
       .eq('id', matchId)
     
     return data
+  },
+
+  // Get results for a match
+  async getForMatch(matchId) {
+    const { data, error } = await supabase
+      .from('results')
+      .select(`
+        *,
+        competitor:competitors (
+          name,
+          division
+        )
+      `)
+      .eq('match_id', matchId)
+      .order('score', { ascending: false })
+    
+    if (error) throw error
+    return data
+  },
+
+  // Update a result (admin only)
+  async update(matchId, competitorId, updates) {
+    const { data, error } = await supabase
+      .from('results')
+      .update(updates)
+      .eq('match_id', matchId)
+      .eq('competitor_id', competitorId)
+      .select()
+      .single()
+    
+    if (error) throw error
+    return data
+  },
+
+  // Delete a result (admin only)
+  async delete(matchId, competitorId) {
+    const { error } = await supabase
+      .from('results')
+      .delete()
+      .eq('match_id', matchId)
+      .eq('competitor_id', competitorId)
+    
+    if (error) throw error
+    return true
+  }
+}
+
+export const competitorsApi = {
+  // Get all competitors
+  async getAll() {
+    const { data, error } = await supabase
+      .from('competitors')
+      .select('*')
+      .order('name')
+    
+    if (error) throw error
+    return data
+  },
+
+  // Update competitor info
+  async update(id, updates) {
+    const { data, error } = await supabase
+      .from('competitors')
+      .update(updates)
+      .eq('id', id)
+      .select()
+      .single()
+    
+    if (error) throw error
+    return data
+  },
+
+  // Delete a competitor (admin only - careful with cascading)
+  async delete(id) {
+    const { error } = await supabase
+      .from('competitors')
+      .delete()
+      .eq('id', id)
+    
+    if (error) throw error
+    return true
   }
 }

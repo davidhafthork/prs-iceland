@@ -39,9 +39,9 @@ function AdminMatchForm() {
 
   return (
     <div className="max-w-2xl mx-auto">
-      <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-6">
-        <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
-          <Plus className="h-6 w-6" />
+      <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-4 md:p-6">
+        <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 flex items-center gap-2">
+          <Plus className="h-5 w-5 md:h-6 md:w-6" />
           Búa til nýtt mót
         </h2>
 
@@ -56,7 +56,7 @@ function AdminMatchForm() {
               value={formData.name}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-md focus:outline-none focus:border-orange-500"
+              className="w-full px-3 md:px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-md focus:outline-none focus:border-orange-500 text-sm md:text-base"
               placeholder="t.d. Vopnafjarðarmótið"
             />
           </div>
@@ -72,7 +72,7 @@ function AdminMatchForm() {
               value={formData.date}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-md focus:outline-none focus:border-orange-500"
+              className="w-full px-3 md:px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-md focus:outline-none focus:border-orange-500 text-sm md:text-base"
             />
           </div>
 
@@ -87,7 +87,7 @@ function AdminMatchForm() {
               value={formData.location}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-md focus:outline-none focus:border-orange-500"
+              className="w-full px-3 md:px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-md focus:outline-none focus:border-orange-500 text-sm md:text-base"
               placeholder="t.d. Skotsvæði Vopnafjarðar"
             />
           </div>
@@ -104,7 +104,7 @@ function AdminMatchForm() {
               onChange={handleChange}
               required
               min="1"
-              className="w-full px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-md focus:outline-none focus:border-orange-500"
+              className="w-full px-3 md:px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-md focus:outline-none focus:border-orange-500 text-sm md:text-base"
             />
           </div>
 
@@ -121,7 +121,7 @@ function AdminMatchForm() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-md font-medium transition-colors disabled:opacity-50"
+            className="w-full bg-orange-500 hover:bg-orange-600 text-white py-2.5 md:py-3 rounded-md font-medium transition-colors disabled:opacity-50 text-sm md:text-base"
           >
             {loading ? 'Vista...' : 'Búa til mót'}
           </button>
