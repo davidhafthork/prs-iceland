@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Trophy } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { standingsApi } from '../lib/supabase';
 
 function Standings() {
+  const { t } = useTranslation();
   const [standings, setStandings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -117,7 +119,7 @@ function Standings() {
           {standings.length > 10 && (
             <div className="p-4 bg-zinc-800/50 text-center">
               <button className="text-orange-500 hover:text-orange-400 font-medium">
-                Sjá heildarstigastöðu ({standings.length} keppendur) →
+                {t('standings.viewAll')} ({standings.length} {t('standings.competitors')}) →
               </button>
             </div>
           )}

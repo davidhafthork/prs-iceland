@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Calendar, MapPin, Users } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { matchesApi } from '../lib/supabase';
 import RegistrationModal from './RegistrationModal';
 import MatchRegistrations from './MatchRegistrations';
 
 function UpcomingMatches() {
+  const { t, i18n } = useTranslation();
   const [matches, setMatches] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -22,7 +24,7 @@ function UpcomingMatches() {
       setMatches(data);
     } catch (err) {
       console.error('Error loading matches:', err);
-      setError('Gat ekki sótt upplýsingar um mót');
+      setError(t('matches.loadError'));
     } finally {
       setLoading(false);
     }
@@ -30,7 +32,8 @@ function UpcomingMatches() {
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
-    return date.toLocaleDateString('is-IS', { 
+    const locale = i18n.language === 'en' ? 'en-US' : 'is-IS';
+    return date.toLocaleDateString(locale, { 
       day: 'numeric', 
       month: 'long', 
       year: 'numeric' 
@@ -41,19 +44,19 @@ function UpcomingMatches() {
     if (match.registered >= match.capacity) {
       return (
         <span className="px-3 py-1 bg-red-900/50 text-red-400 rounded-full text-sm">
-          Fullt
+          {t('matches.status.full')}
         </span>
       );
     } else if (match.registration_status === 'filling') {
       return (
         <span className="px-3 py-1 bg-orange-900/50 text-orange-400 rounded-full text-sm">
-          Að fyllast
+          {t('matches.status.filling')}
         </span>
       );
     } else {
       return (
         <span className="px-3 py-1 bg-green-900/50 text-green-400 rounded-full text-sm">
-          Opið
+          {t('matches.status.open')}
         </span>
       );
     }
@@ -64,7 +67,7 @@ function UpcomingMatches() {
       <section id="matches" className="py-20">
         <div className="container mx-auto px-4">
           <div className="text-center">
-            <p className="text-zinc-400">Sæki upplýsingar um mót...</p>
+            <p className="text-zinc-400">{t('matches.loading')}</p>
           </div>
         </div>
       </section>
@@ -87,14 +90,14 @@ function UpcomingMatches() {
     <section id="matches" className="py-20">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold mb-4">Næstu mót</h2>
-          <p className="text-xl text-zinc-400">Skráðu þig í komandi keppnir</p>
+          <h2 className="text-4xl font-bold mb-4">{t('matches.title')}</h2>
+          <p className="text-xl text-zinc-400">{t('matches.subtitle')}</p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-8 mb-12">
           <div className="space-y-4">
             {matches.length === 0 ? (
-              <p className="text-zinc-400">Engin mót á dagskrá</p>
+              <p className="text-zinc-400">{t('matches.noMatches')}</p>
             ) : (
               matches.map((match) => (
                 <div key={match.id} className="bg-zinc-900 border border-zinc-800 rounded-lg p-6 hover:border-zinc-700 transition-colors">
@@ -112,7 +115,7 @@ function UpcomingMatches() {
                         </div>
                         <div className="flex items-center gap-2">
                           <Users className="h-4 w-4" />
-                          <span>{match.registered || 0}/{match.capacity} keppendur</span>
+                          <span>{match.registered || 0}/{match.capacity} {t('matches.competitors')}</span>
                         </div>
                       </div>
                     </div>
@@ -128,7 +131,7 @@ function UpcomingMatches() {
                       setShowRegistrationModal(true);
                     }}
                   >
-                    {match.registered >= match.capacity ? 'Mót fullt' : 'Skrá í mót'}
+                    {match.registered >= match.capacity ? t('matches.matchFull') : t('matches.register')}
                   </button>
                   <MatchRegistrations match={match} />
                 </div>
@@ -144,8 +147,8 @@ function UpcomingMatches() {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/50 to-transparent" />
             <div className="absolute bottom-0 left-0 right-0 p-6">
-              <p className="text-xl font-semibold mb-2">Ertu tilbúinn í áskorun?</p>
-              <p className="text-zinc-300">Skráðu þig í næsta mót og taktu þátt í spennandi keppni</p>
+              <p className="text-xl font-semibold mb-2">{t('matches.ctaBox.title')}</p>
+              <p className="text-zinc-300">{t('matches.ctaBox.description')}</p>
             </div>
           </div>
         </div>
