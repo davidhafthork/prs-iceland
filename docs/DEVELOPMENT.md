@@ -190,6 +190,13 @@ The content-first architecture enables:
 
 ## For AI Assistants
 
+### Core Principle: Fix Problems at Lowest Value Stage
+Always catch issues during planning, not after implementation:
+1. **Plan thoroughly** before coding
+2. **Validate approach** with small tests
+3. **Question assumptions** early
+4. **Review plans** before executing
+
 Before suggesting changes:
 1. Understand this is a real production system
 2. Check if the feature already exists
@@ -203,6 +210,13 @@ Never:
 - Modify database schema without migration planning
 - Implement features not in the "What's Missing" list above
 - **Create any documentation files beyond README.md and DEVELOPMENT.md**
+
+### Planning Templates
+Templates are available in `.claude/commands/`:
+- `prs-feature.md` - Feature planning structure
+- `prs-debug.md` - Debugging methodology
+
+Use these as guides when planning work to ensure thorough thinking before implementation.
 
 ## Common Issues & Solutions
 
