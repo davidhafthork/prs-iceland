@@ -300,3 +300,57 @@ If you get "new row violates row-level security policy":
   - **Automatic**: Based on final position (1st = 100p, 2nd = 95p, etc.)
   - **Manual**: Admin can enter custom points
 - Added explanatory section showing what each field represents
+
+### July 2025 - Admin Protection & Deployment Preparation
+- Added temporary password protection for admin routes
+  - Password: `prs-admin-2025` (MUST BE CHANGED!)
+  - Component: `/src/components/AdminProtection.jsx`
+  - Protects: `/admin` and `/debug` routes
+  - Uses sessionStorage for session persistence
+- Prepared for client review deployment
+
+## Client Review Deployment Guide
+
+### Quick Deployment to Vercel (Recommended)
+
+1. **Pre-deployment:**
+   ```bash
+   # Test build locally
+   npm run build
+   npm run preview
+   ```
+
+2. **Deploy to Vercel:**
+   - Go to [vercel.com](https://vercel.com)
+   - Sign in with GitHub (davidhafthork)
+   - Click "Add New Project"
+   - Import `davidhafthork/prs-iceland`
+   - Configure:
+     - Framework Preset: Vite
+     - Build Command: `npm run build`
+     - Output Directory: `dist`
+   - Add Environment Variables:
+     - `VITE_SUPABASE_URL` = (value from .env.local)
+     - `VITE_SUPABASE_ANON_KEY` = (value from .env.local)
+   - Deploy!
+
+3. **Alternative: Netlify**
+   - Similar process at [netlify.com](https://netlify.com)
+   - Also supports GitHub integration
+   - Free password protection with Netlify Identity
+
+4. **Share with Client:**
+   - Main site: `https://[project-name].vercel.app`
+   - Admin panel: `https://[project-name].vercel.app/admin`
+   - Password: Share separately via secure channel
+
+5. **Continuous Deployment:**
+   - Any push to GitHub automatically redeploys
+   - Preview deployments for pull requests
+
+### Security Considerations
+
+- **Temporary Admin Protection**: Current password protection is basic and temporary
+- **Don't commit passwords**: Never commit the actual password to Git
+- **Consider site-wide protection**: Use Vercel/Netlify's password protection during review
+- **Plan for proper auth**: Implement Supabase Auth before production launch
