@@ -55,7 +55,10 @@
     "loading": "Loading match information...",
     "noMatches": "No matches scheduled",
     "competitors": "competitors",
-    "matchFull": "Match full"
+    "matchFull": "Match full",
+    "viewRegistrations": "View registered competitors",
+    "loadingRegistrations": "Loading list...",
+    "noRegistrations": "No one registered yet"
   },
   "standings": {
     "title": "Standings",

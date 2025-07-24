@@ -55,7 +55,10 @@
     "loading": "Sæki upplýsingar um mót...",
     "noMatches": "Engin mót á dagskrá",
     "competitors": "keppendur",
-    "matchFull": "Mót fullt"
+    "matchFull": "Mót fullt",
+    "viewRegistrations": "Sjá skráða keppendur",
+    "loadingRegistrations": "Sæki lista...",
+    "noRegistrations": "Enginn skráður ennþá"
   },
   "standings": {
     "title": "Stigastaða",
