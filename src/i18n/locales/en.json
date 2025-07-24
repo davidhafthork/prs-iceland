@@ -1,0 +1,311 @@
+{
+  "nav": {
+    "matches": "Match Series",
+    "standings": "Results & Points",
+    "members": "Members",
+    "about": "About PRS Iceland",
+    "registerMatch": "Register for Match"
+  },
+  "hero": {
+    "title": {
+      "line1": "Precision Rifle Series",
+      "line2": "Iceland"
+    },
+    "subtitle": "Competing at the highest level of PRS in Iceland",
+    "registerNextMatch": "Register for next match",
+    "viewStandings": "View standings"
+  },
+  "about": {
+    "title": "About PRS Iceland",
+    "description": "Precision Rifle Series Iceland is the Icelandic version of the international PRS match series. We offer challenging and exciting competitions where shooters face various conditions.",
+    "features": {
+      "competitions": {
+        "title": "PRS Matches",
+        "description": "Competing at distances from 100-1000 meters"
+      },
+      "community": {
+        "title": "Strong Community",
+        "description": "Over 150 active members nationwide"
+      },
+      "recognition": {
+        "title": "International Recognition",
+        "description": "Part of the international PRS community"
+      },
+      "coverage": {
+        "title": "Nationwide Matches",
+        "description": "Competing on ranges across the country"
+      }
+    }
+  },
+  "matches": {
+    "title": "Upcoming Matches",
+    "subtitle": "Register for upcoming competitions",
+    "ctaBox": {
+      "title": "Ready for the challenge?",
+      "description": "Register for the next match and participate in exciting competition"
+    },
+    "status": {
+      "open": "Open",
+      "filling": "Filling up",
+      "full": "Fully booked"
+    },
+    "registerButton": "Register for match"
+  },
+  "standings": {
+    "title": "Standings",
+    "subtitle": "2025 PRS Iceland Match Series",
+    "tableHeaders": {
+      "rank": "Rank",
+      "name": "Competitor",
+      "division": "Division",
+      "points": "Points",
+      "percentage": "%"
+    },
+    "viewAll": "View full standings →"
+  },
+  "stats": {
+    "activeMembers": {
+      "value": "150+",
+      "label": "Active Members",
+      "description": "Registered competitors nationwide"
+    },
+    "matchesPerYear": {
+      "value": "24",
+      "label": "Matches per year",
+      "description": "Diverse matches year-round"
+    },
+    "yearsActive": {
+      "value": "4",
+      "label": "Years active",
+      "description": "Founded in 2021"
+    },
+    "divisions": {
+      "value": "3",
+      "label": "Match divisions",
+      "description": "Open, Production and Tactical"
+    }
+  },
+  "cta": {
+    "title": "Ready to compete?",
+    "description": "Be part of Iceland's premier PRS club",
+    "becomeMember": "Become a member",
+    "learnMore": "Learn more"
+  },
+  "footer": {
+    "description": "Iceland's premier PRS club",
+    "quickLinks": {
+      "title": "Quick Links",
+      "matchRegistration": "Match Registration",
+      "standings": "Standings",
+      "members": "Members",
+      "about": "About the club"
+    },
+    "contact": {
+      "title": "Contact",
+      "email": "prs@prsiceland.is",
+      "address1": "Stekkjarseli 7",
+      "address2": "109 Reykjavík"
+    },
+    "social": {
+      "title": "Follow us",
+      "facebook": "Facebook",
+      "instagram": "Instagram"
+    },
+    "copyright": "© 2025 PRS Iceland. All rights reserved."
+  },
+  "registration": {
+    "modalTitle": "Registration for",
+    "fields": {
+      "name": {
+        "label": "Name",
+        "placeholder": "Full name"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "email@example.com"
+      },
+      "phonenumber": {
+        "label": "Phone",
+        "placeholder": "1234567"
+      },
+      "division": {
+        "label": "Division",
+        "placeholder": "Select division",
+        "options": ["Open", "Production", "Tactical"]
+      },
+      "city": {
+        "label": "City/Municipality (optional)",
+        "placeholder": "e.g. Reykjavík"
+      }
+    },
+    "buttons": {
+      "cancel": "Cancel",
+      "submit": "Confirm registration",
+      "submitting": "Registering..."
+    },
+    "errors": {
+      "duplicate": "You are already registered for this match",
+      "emailExists": "Email is already registered for another competitor",
+      "general": "Registration error. Please try again."
+    }
+  },
+  "admin": {
+    "dashboard": {
+      "title": "PRS Iceland Dashboard",
+      "subtitle": "Manage matches and results",
+      "tabs": {
+        "create": "Create",
+        "manage": "Manage",
+        "results": "Results",
+        "edit": "Edit",
+        "createMatch": "Create match",
+        "manageMatches": "Manage matches",
+        "recordResults": "Record results",
+        "manageResults": "Manage results"
+      },
+      "notice": {
+        "title": "Notice",
+        "text": "This dashboard is still in development. Authentication and security features are missing before production use. All data is stored in the Supabase database and automatically updates on the website."
+      }
+    },
+    "matchForm": {
+      "title": "Create new match",
+      "fields": {
+        "name": {
+          "label": "Match name",
+          "placeholder": "e.g. Vopnafjörður Match"
+        },
+        "date": {
+          "label": "Date"
+        },
+        "location": {
+          "label": "Location",
+          "placeholder": "e.g. Vopnafjörður Shooting Range"
+        },
+        "capacity": {
+          "label": "Maximum competitors"
+        }
+      },
+      "buttons": {
+        "submit": "Create match",
+        "submitting": "Saving..."
+      },
+      "messages": {
+        "success": "Match created!",
+        "error": "Error creating match"
+      }
+    },
+    "matchList": {
+      "title": "All matches",
+      "loading": "Loading matches...",
+      "empty": "No matches registered",
+      "status": {
+        "upcoming": "Upcoming",
+        "ongoing": "Ongoing",
+        "completed": "Completed"
+      },
+      "fields": {
+        "maxCapacity": "Max",
+        "location": "Location",
+        "capacity": "Maximum capacity"
+      },
+      "buttons": {
+        "save": "Save",
+        "cancel": "Cancel",
+        "edit": "Edit match",
+        "delete": "Delete match"
+      },
+      "confirmDelete": "Are you sure you want to delete the match \"{{name}}\"? This will also delete all registrations.",
+      "messages": {
+        "updated": "Match updated!",
+        "deleted": "Match deleted!",
+        "loadError": "Error loading matches",
+        "updateError": "Error updating match",
+        "deleteError": "Error deleting match"
+      }
+    },
+    "registrations": {
+      "title": "Manage registrations",
+      "show": "Show",
+      "hide": "Hide",
+      "loading": "Loading registrations...",
+      "empty": "No registrations for this match",
+      "registered": "Registered",
+      "status": {
+        "confirmed": "Confirmed",
+        "waitlist": "Waitlist",
+        "cancelled": "Cancelled"
+      },
+      "buttons": {
+        "save": "Save changes",
+        "cancel": "Cancel",
+        "editStatus": "Edit status",
+        "delete": "Delete registration"
+      },
+      "confirmDelete": "Are you sure you want to delete registration for {{name}}?",
+      "messages": {
+        "statusUpdated": "Status updated!",
+        "deleted": "Registration deleted!",
+        "loadError": "Error loading registrations",
+        "updateError": "Error updating status",
+        "deleteError": "Error deleting registration"
+      }
+    },
+    "results": {
+      "title": "Record match results",
+      "selectMatch": "Select match",
+      "selectMatchOption": "-- Select match --",
+      "maxScore": "Maximum score in match",
+      "manualPoints": "Enter points manually (otherwise calculated by position)",
+      "competitors": "Competitors",
+      "autoCalculated": "Percentage calculated automatically",
+      "fields": {
+        "name": "Name",
+        "division": "Division",
+        "score": "Score",
+        "percentage": "Percentage",
+        "points": "Points",
+        "calculated": "(calculated)",
+        "byPosition": "(by position)",
+        "required": "*"
+      },
+      "explanation": {
+        "title": "Explanations:",
+        "score": "Score: Total competitor score in the match (manual)",
+        "percentage": "Percentage: Automatically calculated = (Score / Max Score) × 100",
+        "pointsManual": "Points: Entered manually",
+        "pointsAuto": "Points: Calculated by position (1st place = 100p, 2nd = 95p, etc.)"
+      },
+      "buttons": {
+        "save": "Save results",
+        "saving": "Saving results..."
+      },
+      "messages": {
+        "success": "Results saved!",
+        "error": "Error saving results"
+      }
+    }
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Operation successful",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "close": "Close",
+    "confirm": "Confirm",
+    "search": "Search",
+    "filter": "Filter",
+    "all": "All",
+    "none": "None",
+    "yes": "Yes",
+    "no": "No",
+    "auto": "Auto"
+  },
+  "seo": {
+    "defaultTitle": "PRS Iceland - Precision Rifle Series",
+    "description": "Iceland's premier precision rifling club."
+  }
+}
