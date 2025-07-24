@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { X, User, Mail, Target, MapPin } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { registrationApi } from '../lib/supabase';
 import { registrationContent } from '../data/registrationContent';
 
 function RegistrationModal({ match, onClose, onSuccess }) {
+  const { t, i18n } = useTranslation();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -27,11 +29,11 @@ function RegistrationModal({ match, onClose, onSuccess }) {
     } catch (err) {
       console.error('Registration error:', err);
       if (err.message?.includes('duplicate key')) {
-        setError(registrationContent.errors.duplicate);
+        setError(t('registration.errors.duplicate'));
       } else if (err.message?.includes('unique constraint')) {
-        setError(registrationContent.errors.emailExists);
+        setError(t('registration.errors.emailExists'));
       } else {
-        setError(registrationContent.errors.general);
+        setError(t('registration.errors.general'));
       }
     } finally {
       setLoading(false);
@@ -51,7 +53,7 @@ function RegistrationModal({ match, onClose, onSuccess }) {
       <div className="bg-zinc-900 border border-zinc-800 rounded-lg max-w-lg w-full max-h-[90vh] overflow-y-auto">
         <div className="p-6 border-b border-zinc-800">
           <div className="flex items-center justify-between">
-            <h2 className="text-2xl font-bold">{registrationContent.modalTitle} {match.name}</h2>
+            <h2 className="text-2xl font-bold">{t('registration.modalTitle')} {match.name}</h2>
             <button
               onClick={onClose}
               className="text-zinc-400 hover:text-zinc-300 transition-colors"
@@ -60,7 +62,7 @@ function RegistrationModal({ match, onClose, onSuccess }) {
             </button>
           </div>
           <p className="text-zinc-400 mt-2">
-            {new Date(match.date).toLocaleDateString('is-IS', { 
+            {new Date(match.date).toLocaleDateString(i18n.language === 'en' ? 'en-US' : 'is-IS', { 
               day: 'numeric', 
               month: 'long', 
               year: 'numeric' 
@@ -72,7 +74,7 @@ function RegistrationModal({ match, onClose, onSuccess }) {
           <div>
             <label className="block text-sm font-medium mb-2">
               <User className="inline h-4 w-4 mr-1" />
-              {registrationContent.fields.name.label}
+              {t('registration.fields.name.label')}
             </label>
             <input
               type="text"
@@ -81,14 +83,14 @@ function RegistrationModal({ match, onClose, onSuccess }) {
               onChange={handleChange}
               required
               className="w-full px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-md focus:outline-none focus:border-orange-500"
-              placeholder={registrationContent.fields.name.placeholder}
+              placeholder={t('registration.fields.name.placeholder')}
             />
           </div>
 
           <div>
             <label className="block text-sm font-medium mb-2">
               <Mail className="inline h-4 w-4 mr-1" />
-              {registrationContent.fields.email.label}
+              {t('registration.fields.email.label')}
             </label>
             <input
               type="email"
@@ -97,14 +99,14 @@ function RegistrationModal({ match, onClose, onSuccess }) {
               onChange={handleChange}
               required
               className="w-full px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-md focus:outline-none focus:border-orange-500"
-              placeholder={registrationContent.fields.email.placeholder}
+              placeholder={t('registration.fields.email.placeholder')}
             />
           </div>
 
           <div>
             <label className="block text-sm font-medium mb-2">
               <Target className="inline h-4 w-4 mr-1" />
-              {registrationContent.fields.division.label}
+              {t('registration.fields.division.label')}
             </label>
             <select
               name="division"
@@ -113,7 +115,7 @@ function RegistrationModal({ match, onClose, onSuccess }) {
               required
               className="w-full px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-md focus:outline-none focus:border-orange-500"
             >
-              <option value="">{registrationContent.fields.division.placeholder}</option>
+              <option value="">{t('registration.fields.division.placeholder')}</option>
               {divisions.map(div => (
                 <option key={div} value={div}>{div}</option>
               ))}
@@ -123,7 +125,7 @@ function RegistrationModal({ match, onClose, onSuccess }) {
           <div>
             <label className="block text-sm font-medium mb-2">
               <MapPin className="inline h-4 w-4 mr-1" />
-              {registrationContent.fields.city.label}
+              {t('registration.fields.city.label')}
             </label>
             <input
               type="text"
@@ -131,7 +133,7 @@ function RegistrationModal({ match, onClose, onSuccess }) {
               value={formData.city}
               onChange={handleChange}
               className="w-full px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-md focus:outline-none focus:border-orange-500"
-              placeholder={registrationContent.fields.city.placeholder}
+              placeholder={t('registration.fields.city.placeholder')}
             />
           </div>
 
@@ -147,14 +149,14 @@ function RegistrationModal({ match, onClose, onSuccess }) {
               onClick={onClose}
               className="flex-1 bg-zinc-800 hover:bg-zinc-700 text-white py-3 rounded-md font-medium transition-colors"
             >
-              {registrationContent.buttons.cancel}
+              {t('registration.buttons.cancel')}
             </button>
             <button
               type="submit"
               disabled={loading}
               className="flex-1 bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-md font-medium transition-colors disabled:opacity-50"
             >
-              {loading ? registrationContent.buttons.submitting : registrationContent.buttons.submit}
+              {loading ? t('registration.buttons.submitting') : t('registration.buttons.submit')}
             </button>
           </div>
         </form>

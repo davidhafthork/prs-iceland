@@ -1,6 +1,8 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 function Footer() {
+  const { t } = useTranslation();
   return (
     <footer className="py-12 bg-zinc-900 border-t border-zinc-800">
       <div className="container mx-auto px-4">
@@ -15,20 +17,20 @@ function Footer() {
               />
             </div>
             <p className="text-sm text-zinc-400">
-              Fremsta nákvæmnisskotfélag Íslands
+              {t('footer.description')}
             </p>
           </div>
           <div>
-            <h4 className="font-semibold mb-4">Flýtileiðir</h4>
+            <h4 className="font-semibold mb-4">{t('footer.quickLinks.title')}</h4>
             <ul className="space-y-2 text-sm text-zinc-400">
-              <li><a href="#matches" className="hover:text-zinc-50">Skráning í mót</a></li>
-              <li><a href="#standings" className="hover:text-zinc-50">Stigastaða</a></li>
-              <li><a href="#" className="hover:text-zinc-50">Félagatal</a></li>
-              <li><a href="#about" className="hover:text-zinc-50">Um félagið</a></li>
+              <li><a href="#matches" className="hover:text-zinc-50">{t('footer.quickLinks.matchRegistration')}</a></li>
+              <li><a href="#standings" className="hover:text-zinc-50">{t('footer.quickLinks.standings')}</a></li>
+              <li><a href="#" className="hover:text-zinc-50">{t('footer.quickLinks.members')}</a></li>
+              <li><a href="#about" className="hover:text-zinc-50">{t('footer.quickLinks.about')}</a></li>
             </ul>
           </div>
           <div>
-            <h4 className="font-semibold mb-4">Samband</h4>
+            <h4 className="font-semibold mb-4">{t('footer.contact.title')}</h4>
             <ul className="space-y-2 text-sm text-zinc-400">
               <li>prs@prsiceland.is</li>
               <li>Stekkjarseli 7</li>
@@ -36,7 +38,7 @@ function Footer() {
             </ul>
           </div>
           <div>
-            <h4 className="font-semibold mb-4">Fylgdu okkur</h4>
+            <h4 className="font-semibold mb-4">{t('footer.social.title')}</h4>
             <div className="flex space-x-4">
               <a 
                 href="https://www.facebook.com/prsiceland" 
@@ -58,7 +60,7 @@ function Footer() {
           </div>
         </div>
         <div className="mt-8 pt-8 border-t border-zinc-800 text-center text-sm text-zinc-400">
-          <p>&copy; 2025 PRS Iceland. Allur réttur áskilinn.</p>
+          <p>{t('footer.copyright')}</p>
         </div>
       </div>
     </footer>

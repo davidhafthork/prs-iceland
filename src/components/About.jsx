@@ -1,27 +1,30 @@
 import React from 'react';
 import { Target, Users, Award, MapPin } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 function About() {
+  const { t } = useTranslation();
+  
   const features = [
     {
       icon: Target,
-      title: 'Nákvæmnisskotkeppni',
-      description: 'Keppt á vegalengdum frá 100-1000 metrum með nákvæmum riffli'
+      titleKey: 'about.features.competitions.title',
+      descriptionKey: 'about.features.competitions.description'
     },
     {
       icon: Users,
-      title: 'Öflugt félag',
-      description: 'Yfir 150 virkir félagar úti um allt land'
+      titleKey: 'about.features.community.title',
+      descriptionKey: 'about.features.community.description'
     },
     {
       icon: Award,
-      title: 'Alþjóðleg viðurkenning',
-      description: 'Hluti af alþjóðlega PRS samfélginu'
+      titleKey: 'about.features.recognition.title',
+      descriptionKey: 'about.features.recognition.description'
     },
     {
       icon: MapPin,
-      title: 'Mót um allt land',
-      description: 'Keppt á völlunum beggja vegna landsins'
+      titleKey: 'about.features.coverage.title',
+      descriptionKey: 'about.features.coverage.description'
     }
   ];
 
@@ -30,11 +33,9 @@ function About() {
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div>
-            <h2 className="text-4xl font-bold mb-6">Um PRS Iceland</h2>
+            <h2 className="text-4xl font-bold mb-6">{t('about.title')}</h2>
             <p className="text-lg text-zinc-300 mb-8">
-              Precision Rifle Series Iceland er íslenska útgáfan af alþjóðlegu PRS mótaseríunni. 
-              Við bjóðum upp á krefjandi og skemmtilegar keppnir þar sem skotmenn takast á við 
-              mismunandi aðstæður og vegalengdir.
+              {t('about.description')}
             </p>
             
             <div className="grid sm:grid-cols-2 gap-6">
@@ -44,8 +45,8 @@ function About() {
                   <div key={index} className="flex gap-4">
                     <Icon className="h-8 w-8 text-orange-500 flex-shrink-0" />
                     <div>
-                      <h3 className="font-semibold mb-1">{feature.title}</h3>
-                      <p className="text-sm text-zinc-400">{feature.description}</p>
+                      <h3 className="font-semibold mb-1">{t(feature.titleKey)}</h3>
+                      <p className="text-sm text-zinc-400">{t(feature.descriptionKey)}</p>
                     </div>
                   </div>
                 );

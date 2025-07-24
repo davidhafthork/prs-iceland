@@ -47,9 +47,15 @@
     "status": {
       "open": "Opið",
       "filling": "Að fyllast",
-      "full": "Fullbókað"
+      "full": "Fullt"
     },
-    "registerButton": "Skrá í mót"
+    "registerButton": "Skrá í mót",
+    "register": "Skrá í mót",
+    "loadError": "Gat ekki sótt upplýsingar um mót",
+    "loading": "Sæki upplýsingar um mót...",
+    "noMatches": "Engin mót á dagskrá",
+    "competitors": "keppendur",
+    "matchFull": "Mót fullt"
   },
   "standings": {
     "title": "Stigastaða",
@@ -59,11 +65,33 @@
       "name": "Keppandi",
       "division": "Flokkur",
       "points": "Stig",
-      "percentage": "%"
+      "percentage": "%",
+      "matches": "Mót"
     },
-    "viewAll": "Sjá heildarstigastöðu →"
+    "viewAll": "Sjá heildarstigastöðu",
+    "loadError": "Gat ekki sótt stigastöðu",
+    "loading": "Sæki stigastöðu...",
+    "noData": "Engin stigastaða til",
+    "competitors": "keppendur"
   },
   "stats": {
+    "loading": "Sæki tölfræði...",
+    "registeredCompetitors": {
+      "label": "Skráðir keppendur",
+      "description": "Virkir í mótaröðinni"
+    },
+    "upcomingMatches": {
+      "label": "Mót framundan",
+      "description": "Næstu vikur og mánuði"
+    },
+    "completedMatches": {
+      "label": "Mót haldin",
+      "description": "Það sem af er ári"
+    },
+    "totalRegistrations": {
+      "label": "Skráningar",
+      "description": "Í komandi mót"
+    },
     "activeMembers": {
       "value": "150+",
       "label": "Virkir Félagar",
@@ -88,7 +116,7 @@
   "cta": {
     "title": "Tilbúinn að keppa?",
     "description": "Vertu hluti af fremsta PRS félagi Íslands",
-    "becomeMember": "Gerast félagsmaður",
+    "becomeMember": "Gerast félagi",
     "learnMore": "Fræðast meira"
   },
   "footer": {

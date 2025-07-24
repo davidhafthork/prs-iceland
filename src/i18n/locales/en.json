@@ -47,9 +47,15 @@
     "status": {
       "open": "Open",
       "filling": "Filling up",
-      "full": "Fully booked"
+      "full": "Full"
     },
-    "registerButton": "Register for match"
+    "registerButton": "Register for match",
+    "register": "Register for match",
+    "loadError": "Could not load match information",
+    "loading": "Loading match information...",
+    "noMatches": "No matches scheduled",
+    "competitors": "competitors",
+    "matchFull": "Match full"
   },
   "standings": {
     "title": "Standings",
@@ -59,11 +65,33 @@
       "name": "Competitor",
       "division": "Division",
       "points": "Points",
-      "percentage": "%"
+      "percentage": "%",
+      "matches": "Matches"
     },
-    "viewAll": "View full standings →"
+    "viewAll": "View full standings",
+    "loadError": "Could not load standings",
+    "loading": "Loading standings...",
+    "noData": "No standings available",
+    "competitors": "competitors"
   },
   "stats": {
+    "loading": "Loading statistics...",
+    "registeredCompetitors": {
+      "label": "Registered competitors",
+      "description": "Active in match series"
+    },
+    "upcomingMatches": {
+      "label": "Matches ahead",
+      "description": "Next weeks and months"
+    },
+    "completedMatches": {
+      "label": "Matches held",
+      "description": "So far this year"
+    },
+    "totalRegistrations": {
+      "label": "Registrations",
+      "description": "For upcoming matches"
+    },
     "activeMembers": {
       "value": "150+",
       "label": "Active Members",
