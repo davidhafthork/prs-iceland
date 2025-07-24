@@ -20,7 +20,7 @@ function Standings() {
       setStandings(data);
     } catch (err) {
       console.error('Error loading standings:', err);
-      setError('Gat ekki sótt stigastöðu');
+      setError(t('standings.loadError'));
     } finally {
       setLoading(false);
     }
@@ -31,7 +31,7 @@ function Standings() {
       <section id="standings" className="py-20">
         <div className="container mx-auto px-4">
           <div className="text-center">
-            <p className="text-zinc-400">Sæki stigastöðu...</p>
+            <p className="text-zinc-400">{t('standings.loading')}</p>
           </div>
         </div>
       </section>
@@ -56,9 +56,9 @@ function Standings() {
         <div className="text-center mb-12">
           <div className="flex items-center justify-center mb-4">
             <Trophy className="h-10 w-10 text-orange-500 mr-3" />
-            <h2 className="text-4xl font-bold">Stigastaða</h2>
+            <h2 className="text-4xl font-bold">{t('standings.title')}</h2>
           </div>
-          <p className="text-xl text-zinc-400">2025 PRS Iceland Mótaseríu</p>
+          <p className="text-xl text-zinc-400">{t('standings.subtitle')}</p>
         </div>
 
         <div className="max-w-4xl mx-auto bg-zinc-900 border border-zinc-800 rounded-lg overflow-hidden">
@@ -66,19 +66,19 @@ function Standings() {
             <table className="w-full">
               <thead>
                 <tr className="bg-zinc-800">
-                  <th className="text-left p-4">Sæti</th>
-                  <th className="text-left p-4">Keppandi</th>
-                  <th className="text-left p-4">Flokkur</th>
-                  <th className="text-right p-4">Stig</th>
-                  <th className="text-right p-4">%</th>
-                  <th className="text-right p-4">Mót</th>
+                  <th className="text-left p-4">{t('standings.tableHeaders.rank')}</th>
+                  <th className="text-left p-4">{t('standings.tableHeaders.name')}</th>
+                  <th className="text-left p-4">{t('standings.tableHeaders.division')}</th>
+                  <th className="text-right p-4">{t('standings.tableHeaders.points')}</th>
+                  <th className="text-right p-4">{t('standings.tableHeaders.percentage')}</th>
+                  <th className="text-right p-4">{t('standings.tableHeaders.matches')}</th>
                 </tr>
               </thead>
               <tbody>
                 {standings.length === 0 ? (
                   <tr>
                     <td colSpan="6" className="p-4 text-center text-zinc-400">
-                      Engin stigastaða til
+                      {t('standings.noData')}
                     </td>
                   </tr>
                 ) : (
