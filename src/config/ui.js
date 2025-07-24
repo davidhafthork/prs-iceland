@@ -6,6 +6,7 @@ export const navigationConfig = {
   items: [
     { 
       name: 'Mótaserían', 
+      i18nKey: 'nav.matches',
       href: '#matches',
       order: 1,
       showInMobile: true,
@@ -13,6 +14,7 @@ export const navigationConfig = {
     },
     { 
       name: 'Úrslit & Stig', 
+      i18nKey: 'nav.standings',
       href: '#standings',
       order: 2,
       showInMobile: true,
@@ -20,6 +22,7 @@ export const navigationConfig = {
     },
     { 
       name: 'Meðlimir', 
+      i18nKey: 'nav.members',
       href: '#members',
       order: 3,
       showInMobile: true,
@@ -27,6 +30,7 @@ export const navigationConfig = {
     },
     { 
       name: 'Um PRS Iceland', 
+      i18nKey: 'nav.about',
       href: '#about',
       order: 4,
       showInMobile: true,
@@ -37,6 +41,7 @@ export const navigationConfig = {
   // CTA button configuration
   cta: {
     text: 'Skrá í mót',
+    i18nKey: 'nav.registerMatch',
     href: '#matches',
     style: 'primary', // primary, secondary, outline
     showInMobile: false,

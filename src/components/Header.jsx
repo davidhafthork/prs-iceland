@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { Menu, X } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { navigationConfig } from '../config/ui';
+import LanguageToggle from './LanguageToggle';
 
 function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { t } = useTranslation();
 
   // Sort navigation items by order
   const navItems = [...navigationConfig.items].sort((a, b) => a.order - b.order);
@@ -57,25 +60,26 @@ function Header() {
                       className="hover:text-orange-500 transition-colors"
                       onClick={(e) => handleSmoothScroll(e, item.href)}
                     >
-                      {item.name}
+                      {t(item.i18nKey || item.name)}
                     </a>
                   </li>
                 ))}
               </ul>
             </nav>
 
-            {/* CTA Button */}
-            {navigationConfig.cta.showInDesktop && (
-              <div className="hidden lg:block">
+            {/* CTA Button & Language Toggle */}
+            <div className="hidden lg:flex items-center gap-4">
+              {navigationConfig.cta.showInDesktop && (
                 <a 
                   href={navigationConfig.cta.href}
                   className="bg-orange-500 hover:bg-orange-600 px-6 py-2 rounded-md font-medium transition-colors"
                   onClick={(e) => handleSmoothScroll(e, navigationConfig.cta.href)}
                 >
-                  {navigationConfig.cta.text}
+                  {t(navigationConfig.cta.i18nKey || navigationConfig.cta.text)}
                 </a>
-              </div>
-            )}
+              )}
+              <LanguageToggle />
+            </div>
 
             {/* Mobile menu button */}
             <button
@@ -111,10 +115,13 @@ function Header() {
                     className="block w-full bg-orange-500 hover:bg-orange-600 px-6 py-3 rounded-md font-medium text-center"
                     onClick={(e) => handleSmoothScroll(e, navigationConfig.cta.href)}
                   >
-                    {navigationConfig.cta.text}
+                    {t(navigationConfig.cta.i18nKey || navigationConfig.cta.text)}
                   </a>
                 </li>
               )}
+              <li className="pt-4">
+                <LanguageToggle />
+              </li>
             </ul>
           </nav>
         </div>

@@ -1,0 +1,311 @@
+{
+  "nav": {
+    "matches": "Mótaserían",
+    "standings": "Úrslit & Stig",
+    "members": "Meðlimir",
+    "about": "Um PRS Iceland",
+    "registerMatch": "Skrá í mót"
+  },
+  "hero": {
+    "title": {
+      "line1": "Precision Rifle Series",
+      "line2": "Iceland"
+    },
+    "subtitle": "Keppt á hæsta stigi PRS á Íslandi",
+    "registerNextMatch": "Skrá í næsta mót",
+    "viewStandings": "Sjá stigastöðu"
+  },
+  "about": {
+    "title": "Um PRS Iceland",
+    "description": "Precision Rifle Series Iceland er íslenska útgáfan af alþjóðlegu PRS mótaseríunni. Við bjóðum upp á krefjandi og skemmtilegar keppnir þar sem skotmenn takast á við mismunandi aðstæður.",
+    "features": {
+      "competitions": {
+        "title": "PRS mót",
+        "description": "Keppt á vegalengdum frá 100-1000 metrum"
+      },
+      "community": {
+        "title": "Öflugt félag",
+        "description": "Yfir 150 virkir félagsmenn úti um allt land"
+      },
+      "recognition": {
+        "title": "Alþjóðleg viðurkenning",
+        "description": "Hluti af alþjóðlega PRS samfélaginu"
+      },
+      "coverage": {
+        "title": "Mót um allt land",
+        "description": "Keppt á völlunum beggja vegna landsins"
+      }
+    }
+  },
+  "matches": {
+    "title": "Næstu mót",
+    "subtitle": "Skráðu þig í komandi keppnir",
+    "ctaBox": {
+      "title": "Ertu tilbúinn í áskorun?",
+      "description": "Skráðu þig í næsta mót og taktu þátt í spennandi keppni"
+    },
+    "status": {
+      "open": "Opið",
+      "filling": "Að fyllast",
+      "full": "Fullbókað"
+    },
+    "registerButton": "Skrá í mót"
+  },
+  "standings": {
+    "title": "Stigastaða",
+    "subtitle": "2025 PRS Iceland Mótasería",
+    "tableHeaders": {
+      "rank": "Sæti",
+      "name": "Keppandi",
+      "division": "Flokkur",
+      "points": "Stig",
+      "percentage": "%"
+    },
+    "viewAll": "Sjá heildarstigastöðu →"
+  },
+  "stats": {
+    "activeMembers": {
+      "value": "150+",
+      "label": "Virkir Félagar",
+      "description": "Skráðir keppendur um allt land"
+    },
+    "matchesPerYear": {
+      "value": "24",
+      "label": "Mót á ári",
+      "description": "Fjölbreytt mót allan ársins hring"
+    },
+    "yearsActive": {
+      "value": "4",
+      "label": "Ár starfsemi",
+      "description": "Stofnað árið 2021"
+    },
+    "divisions": {
+      "value": "3",
+      "label": "Mótaflokkar",
+      "description": "Open, Production og Tactical"
+    }
+  },
+  "cta": {
+    "title": "Tilbúinn að keppa?",
+    "description": "Vertu hluti af fremsta PRS félagi Íslands",
+    "becomeMember": "Gerast félagsmaður",
+    "learnMore": "Fræðast meira"
+  },
+  "footer": {
+    "description": "Fremsta PRS félag Íslands",
+    "quickLinks": {
+      "title": "Flýtileiðir",
+      "matchRegistration": "Skráning í mót",
+      "standings": "Stigastaða",
+      "members": "Félagatal",
+      "about": "Um félagið"
+    },
+    "contact": {
+      "title": "Samband",
+      "email": "prs@prsiceland.is",
+      "address1": "Stekkjarseli 7",
+      "address2": "109 Reykjavík"
+    },
+    "social": {
+      "title": "Fylgdu okkur",
+      "facebook": "Facebook",
+      "instagram": "Instagram"
+    },
+    "copyright": "© 2025 PRS Iceland. Allur réttur áskilinn."
+  },
+  "registration": {
+    "modalTitle": "Skráning í",
+    "fields": {
+      "name": {
+        "label": "Nafn",
+        "placeholder": "Fullt nafn"
+      },
+      "email": {
+        "label": "Netfang",
+        "placeholder": "netfang@example.com"
+      },
+      "phonenumber": {
+        "label": "Sími",
+        "placeholder": "1234567"
+      },
+      "division": {
+        "label": "Flokkur",
+        "placeholder": "Veldu flokk",
+        "options": ["Open", "Production", "Tactical"]
+      },
+      "city": {
+        "label": "Bær/Sveitarfélag (valfrjálst)",
+        "placeholder": "t.d. Reykjavík"
+      }
+    },
+    "buttons": {
+      "cancel": "Hætta við",
+      "submit": "Staðfesta skráningu",
+      "submitting": "Skrái..."
+    },
+    "errors": {
+      "duplicate": "Þú ert þegar skráð(ur) í þetta mót",
+      "emailExists": "Netfang er þegar skráð fyrir annan keppanda",
+      "general": "Villa við skráningu. Vinsamlegast reyndu aftur."
+    }
+  },
+  "admin": {
+    "dashboard": {
+      "title": "Stjórnborð PRS Iceland",
+      "subtitle": "Stjórna mótum og úrslitum",
+      "tabs": {
+        "create": "Búa til",
+        "manage": "Stjórna",
+        "results": "Úrslit",
+        "edit": "Breyta",
+        "createMatch": "Búa til mót",
+        "manageMatches": "Stjórna mótum",
+        "recordResults": "Skrá úrslit",
+        "manageResults": "Stjórna úrslitum"
+      },
+      "notice": {
+        "title": "Athugið",
+        "text": "Þetta stjórnborð er enn í þróun. Authentication og öryggisatriði vantar áður en það fer í notkun. Öll gögn eru geymd í Supabase gagnagrunninum og uppfærast sjálfkrafa á vefsíðunni."
+      }
+    },
+    "matchForm": {
+      "title": "Búa til nýtt mót",
+      "fields": {
+        "name": {
+          "label": "Nafn móts",
+          "placeholder": "t.d. Vopnafjarðarmótið"
+        },
+        "date": {
+          "label": "Dagsetning"
+        },
+        "location": {
+          "label": "Staðsetning",
+          "placeholder": "t.d. Skotsvæði Vopnafjarðar"
+        },
+        "capacity": {
+          "label": "Hámarksfjöldi keppenda"
+        }
+      },
+      "buttons": {
+        "submit": "Búa til mót",
+        "submitting": "Vista..."
+      },
+      "messages": {
+        "success": "Mót búið til!",
+        "error": "Villa við að búa til mót"
+      }
+    },
+    "matchList": {
+      "title": "Öll mót",
+      "loading": "Sæki mót...",
+      "empty": "Engin mót skráð",
+      "status": {
+        "upcoming": "Framundan",
+        "ongoing": "Í gangi",
+        "completed": "Lokið"
+      },
+      "fields": {
+        "maxCapacity": "Hámark",
+        "location": "Staðsetning",
+        "capacity": "Hámarksfjöldi"
+      },
+      "buttons": {
+        "save": "Vista",
+        "cancel": "Hætta við",
+        "edit": "Breyta móti",
+        "delete": "Eyða móti"
+      },
+      "confirmDelete": "Ertu viss um að þú viljir eyða mótinu \"{{name}}\"? Þetta mun einnig eyða öllum skráningum.",
+      "messages": {
+        "updated": "Mót uppfært!",
+        "deleted": "Móti eytt!",
+        "loadError": "Villa við að sækja mót",
+        "updateError": "Villa við að uppfæra mót",
+        "deleteError": "Villa við að eyða móti"
+      }
+    },
+    "registrations": {
+      "title": "Stjórna skráningum",
+      "show": "Sýna",
+      "hide": "Fela",
+      "loading": "Sæki skráningar...",
+      "empty": "Engar skráningar fyrir þetta mót",
+      "registered": "Skráðir",
+      "status": {
+        "confirmed": "Staðfest",
+        "waitlist": "Biðlisti",
+        "cancelled": "Afboðað"
+      },
+      "buttons": {
+        "save": "Vista breytingar",
+        "cancel": "Hætta við",
+        "editStatus": "Breyta stöðu",
+        "delete": "Eyða skráningu"
+      },
+      "confirmDelete": "Ertu viss um að þú viljir eyða skráningu fyrir {{name}}?",
+      "messages": {
+        "statusUpdated": "Staða uppfærð!",
+        "deleted": "Skráningu eytt!",
+        "loadError": "Villa við að sækja skráningar",
+        "updateError": "Villa við að uppfæra stöðu",
+        "deleteError": "Villa við að eyða skráningu"
+      }
+    },
+    "results": {
+      "title": "Skrá úrslit móts",
+      "selectMatch": "Veldu mót",
+      "selectMatchOption": "-- Veldu mót --",
+      "maxScore": "Hámarksstig í móti",
+      "manualPoints": "Slá inn punkta handvirkt (annars reiknað eftir sæti)",
+      "competitors": "Keppendur",
+      "autoCalculated": "Prósenta reiknuð sjálfkrafa",
+      "fields": {
+        "name": "Nafn",
+        "division": "Flokkur",
+        "score": "Stig",
+        "percentage": "Prósenta",
+        "points": "Punktar",
+        "calculated": "(reiknað)",
+        "byPosition": "(eftir sæti)",
+        "required": "*"
+      },
+      "explanation": {
+        "title": "Útskýringar:",
+        "score": "Stig: Heildarstig keppanda í mótinu (handvirt)",
+        "percentage": "Prósenta: Reiknað sjálfkrafa = (Stig / Hámarksstig) × 100",
+        "pointsManual": "Punktar: Slegið inn handvirkt",
+        "pointsAuto": "Punktar: Reiknað eftir sæti (1. sæti = 100p, 2. = 95p, o.s.frv.)"
+      },
+      "buttons": {
+        "save": "Vista úrslit",
+        "saving": "Vista úrslit..."
+      },
+      "messages": {
+        "success": "Úrslit vistuð!",
+        "error": "Villa við að vista úrslit"
+      }
+    }
+  },
+  "common": {
+    "loading": "Hleður...",
+    "error": "Villa",
+    "success": "Aðgerð tókst",
+    "save": "Vista",
+    "cancel": "Hætta við",
+    "delete": "Eyða",
+    "edit": "Breyta",
+    "close": "Loka",
+    "confirm": "Staðfesta",
+    "search": "Leita",
+    "filter": "Sía",
+    "all": "Allt",
+    "none": "Ekkert",
+    "yes": "Já",
+    "no": "Nei",
+    "auto": "Auto"
+  },
+  "seo": {
+    "defaultTitle": "PRS Iceland - Precision Rifle Series",
+    "description": "Fremsta precision rifling félag Íslands."
+  }
+}
